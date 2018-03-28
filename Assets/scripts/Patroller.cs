@@ -27,6 +27,7 @@ public class Patroller : MonoBehaviour
 		
 	}
 
+
     private void OnTriggerEnter(Collider other)
     {
 
