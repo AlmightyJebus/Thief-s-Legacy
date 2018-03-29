@@ -11,6 +11,8 @@ public class Patroller : MonoBehaviour
     public Transform pos4;
     public Transform pos5;
     public Transform pos6;
+    public Transform pos7;
+    public Transform pos8;
 
 
 
@@ -65,8 +67,16 @@ public class Patroller : MonoBehaviour
 
             if (other.tag == "6")
             {
+                agent.SetDestination(pos7.position);
+            }
+
+            if (other.tag == "7")
+            {
+                agent.SetDestination(pos8.position);
+            }
+        if (other.tag == "8")
+            {
                 agent.SetDestination(pos1.position);
             }
-        
     }
 }
