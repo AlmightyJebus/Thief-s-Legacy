@@ -78,6 +78,7 @@ public class EnemyFOV : MonoBehaviour
             if(hit.collider.tag == "Player")
             {
                 isSeen = true;
+                Gamecontroller.instance.Seen();
             }
 
             else
