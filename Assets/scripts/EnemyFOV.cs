@@ -1,71 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyFOV : MonoBehaviour
 {
     public bool isSeen;
     public float borderViewNegative = -23f;
     public float borderViewPositive = 23f;
-    public float viewLength = 3.3f;
-
-    void Update()
+    public float viewLength = 3;
+    
+    void FixedUpdate()
     {
 
         RaycastHit hit;
         RaycastHit hit2;
         RaycastHit hit3;
 
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
+        //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(borderViewNegative, Vector3.up);
         Quaternion spreadAnglePositive = Quaternion.AngleAxis(borderViewPositive, Vector3.up);
 
-        //Debug rayt
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * viewLength, Color.green);
-        Debug.DrawRay(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward) * viewLength, Color.red);
-        Debug.DrawRay(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward) * viewLength, Color.red);
-        
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward) * viewLength, out hit))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
         {
             if (hit.collider.tag == "Player")
             {
-                isSeen = true;
-            }
-
-            else
-            {
-                isSeen = false;
+                ReloadScene();
             }
         }
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward) * viewLength, out hit2))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength))
         {
             if (hit2.collider.tag == "Player")
             {
-                isSeen = true;
-            }
-
-            else
-            {
-                isSeen = false;
+                ReloadScene();
             }
         }
         
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward) * viewLength, out hit3))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
         {
             if (hit3.collider.tag == "Player")
             {
-                isSeen = true;
-            }
-
-            else
-            {
-                isSeen = false;
+                ReloadScene();
             }
         }
-        
     }
-
+    
+    public static void ReloadScene()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadSceneAsync(currentScene);
+    }
+    
     /*
     //vanha script, toimii truehen asti
     void Update()
@@ -80,7 +66,7 @@ public class EnemyFOV : MonoBehaviour
             if(hit.collider.tag == "Player")
             {
                 isSeen = true;
-                Gamecontroller.instance.Seen();
+                //Gamecontroller.instance.Seen();
             }
 
             else
