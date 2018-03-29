@@ -5,9 +5,8 @@ using UnityEngine;
 public class EnemyFOV : MonoBehaviour
 {
     public bool isSeen;
-
+    
     //toimii truehen asti
-    //muista luoda playerille collider (vaikka capsule + is trigger + laita tag playeriksi) ja viholliselle Raycaster!!!
     void Update()
     {
         RaycastHit hit;
