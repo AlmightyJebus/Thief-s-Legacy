@@ -7,7 +7,7 @@ public class EnemyFOV : MonoBehaviour
     public bool isSeen;
     public float borderViewNegative = -23f;
     public float borderViewPositive = 23f;
-    public float borderViewLength = 3.3f;
+    public float viewLength = 3.3f;
 
     void Update()
     {
@@ -20,11 +20,12 @@ public class EnemyFOV : MonoBehaviour
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(borderViewNegative, Vector3.up);
         Quaternion spreadAnglePositive = Quaternion.AngleAxis(borderViewPositive, Vector3.up);
 
-        Debug.DrawRay(transform.position, forward, Color.green);
-        Debug.DrawRay(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward) * borderViewLength, Color.red);
-        Debug.DrawRay(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward) * borderViewLength, Color.red);
+        //Debug rayt
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * viewLength, Color.green);
+        Debug.DrawRay(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward) * viewLength, Color.red);
+        Debug.DrawRay(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward) * viewLength, Color.red);
         
-        if (Physics.Raycast(transform.position, (forward), out hit))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward) * viewLength, out hit))
         {
             if (hit.collider.tag == "Player")
             {
@@ -36,8 +37,8 @@ public class EnemyFOV : MonoBehaviour
                 isSeen = false;
             }
         }
-        
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward) * borderViewLength, out hit2))
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward) * viewLength, out hit2))
         {
             if (hit2.collider.tag == "Player")
             {
@@ -49,8 +50,8 @@ public class EnemyFOV : MonoBehaviour
                 isSeen = false;
             }
         }
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward) * borderViewLength, out hit3))
+        
+        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward) * viewLength, out hit3))
         {
             if (hit3.collider.tag == "Player")
             {
@@ -62,6 +63,7 @@ public class EnemyFOV : MonoBehaviour
                 isSeen = false;
             }
         }
+        
     }
 
     /*
