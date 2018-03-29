@@ -9,8 +9,11 @@ public class Patroller : MonoBehaviour
     public Transform pos2;
     public Transform pos3;
     public Transform pos4;
-   
-    
+    public Transform pos5;
+    public Transform pos6;
+
+
+
 
     public NavMeshAgent agent;
     
@@ -35,11 +38,14 @@ public class Patroller : MonoBehaviour
             if (other.tag == "1")
             {
                 agent.SetDestination(pos2.position);
+            
+           
             }
 
             if (other.tag == "2")
             {
                 agent.SetDestination(pos3.position);
+            
             }
 
             if (other.tag == "3")
@@ -48,6 +54,16 @@ public class Patroller : MonoBehaviour
             }
 
             if (other.tag == "4")
+            {
+                agent.SetDestination(pos5.position);
+            }
+
+            if (other.tag == "5")
+            {
+                agent.SetDestination(pos6.position);
+            }
+
+            if (other.tag == "6")
             {
                 agent.SetDestination(pos1.position);
             }

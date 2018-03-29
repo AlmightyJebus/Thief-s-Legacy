@@ -69,4 +69,8 @@ public class Gamecontroller : MonoBehaviour
         winText.SetActive(true);
         gameOver = true;
     }
+    public void Seen()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

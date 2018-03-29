@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
 
     public float speed = 2f;
     public bool gameOn;
-    public Text winText;
+    public GameObject winText;
+    public GameObject loot;
     public Text loseText;
     
 
@@ -37,6 +39,10 @@ public class PlayerMovement : MonoBehaviour {
             {
                 transform.position += Vector3.back * speed * Time.deltaTime;
             }
+            if (Input.GetKey(KeyCode.R))
+                {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
         else
         {
@@ -52,21 +58,24 @@ public class PlayerMovement : MonoBehaviour {
 
         if (other.gameObject.CompareTag("Loot"))
         {
-           
-            other.gameObject.SetActive(false);
-            //Gamecontroller.instance.Win();
+
             
 
-            gameOn = false;
+            winText.SetActive(true);
+            loot.SetActive(false);
+
+
+
+
+
 
 
         }
 
         if (other.gameObject.CompareTag ("Enemy"))
         {
-           
-            gameOn = false;
-            //Gamecontroller.instance.Lose();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
         }
         
     }
