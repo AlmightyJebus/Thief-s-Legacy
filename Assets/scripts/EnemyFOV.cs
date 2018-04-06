@@ -75,15 +75,18 @@ public class EnemyFOV : MonoBehaviour
         {
             //Huutomerkki
             detectionPercent += 0.5f;
+            isCautious = true;
         }
 
-        if (isDetected == false && detectionPercent > 0)
+        if (isDetected == false && isCautious == true && detectionPercent > 0)
         {
+            isCautious = true;
             cautionTime -= Time.deltaTime;
         }
         
-        if (cautionTime > 0)
+        if (isCautious == true && cautionTime < 0)
         {
+            isCautious = false;
             cautionTime = defaultCautionTime;
         }
     }
