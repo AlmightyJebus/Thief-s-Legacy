@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class CameraFOV : MonoBehaviour
 {
     public bool isSeen;
-    public float borderViewNegative = -23f;
-    public float borderViewPositive = 23f;
+    public float cameraBorderViewNegative = -23f;
+    public float cameraBorderViewPositive = 23f;
     public float viewLength = 3;
 
     void FixedUpdate()
@@ -18,8 +18,8 @@ public class CameraFOV : MonoBehaviour
         RaycastHit hit3;
 
         //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
-        Quaternion spreadAngleNegative = Quaternion.AngleAxis(borderViewNegative, Vector3.up);
-        Quaternion spreadAnglePositive = Quaternion.AngleAxis(borderViewPositive, Vector3.up);
+        Quaternion spreadAngleNegative = Quaternion.AngleAxis(cameraBorderViewNegative, Vector3.up);
+        Quaternion spreadAnglePositive = Quaternion.AngleAxis(cameraBorderViewPositive, Vector3.up);
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
         {
