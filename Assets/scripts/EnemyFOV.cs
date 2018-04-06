@@ -79,10 +79,12 @@ public class EnemyFOV : MonoBehaviour
 
         if (isDetected == false && detectionPercent > 0)
         {
-            while (cautionTime > 0)
-            {
-                cautionTime -= Time.deltaTime;
-            }
+            cautionTime -= Time.deltaTime;
+        }
+        
+        if (cautionTime > 0)
+        {
+            cautionTime = defaultCautionTime;
         }
     }
 
