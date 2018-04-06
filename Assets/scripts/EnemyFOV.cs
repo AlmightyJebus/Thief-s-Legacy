@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EnemyFOV : MonoBehaviour
 {
-    public bool isSeen;
+    public bool isDetected;
     public float enemyBorderViewNegative = -23f;
     public float enemyBorderViewPositive = 23f;
     public float viewLength = 3;
