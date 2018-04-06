@@ -13,41 +13,78 @@ public class Patroller : MonoBehaviour
     public Transform pos6;
     public Transform pos7;
     public Transform pos8;
-
-
-
-
-    public NavMeshAgent agent;
     
+    public NavMeshAgent agent;
+    EnemyFOV enemyScript;
 
-	// Use this for initialization
-	void Start ()
+    public Transform target;
+    public Transform myTransform;
+    public float followSpeed = 3f;
+
+
+    void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+        target = GameObject.FindGameObjectWithTag("Player").transform;
 
-
-    private void OnTriggerEnter(Collider other)
-    {
+        if (agent == null)
+        {
+            Debug.LogError("hei muista laittaa agentti tähän",this);
+        }
 
         
+     /*   theEnemy = GameObject.FindGameObjectWithTag("Enemy");
+        if (theEnemy == null)
+        {
+            Debug.LogError("ei löydy enemy", this);
+
+        }
+        */
+        enemyScript = gameObject.GetComponent<EnemyFOV>();
+
+        if (enemyScript == null)
+        {
+            Debug.LogError("ei löydy enemyscript", enemyScript);
+        }
+
+
+
+    }
+
+    
+    void Update()
+    {
+        if(enemyScript.isDetected == true)
+        {
+            transform.LookAt(target);
+            transform.Translate(Vector3.forward * followSpeed * Time.deltaTime);
+        }
+        
+    }
+
+
+    public void OnTriggerEnter(Collider other)
+    {
+
+
+      
+       
+
+        if (enemyScript.isDetected == false)
+        {
+
+            agent.SetDestination(pos1.position);
+
+
             if (other.tag == "1")
             {
                 agent.SetDestination(pos2.position);
-            
-           
             }
 
             if (other.tag == "2")
             {
                 agent.SetDestination(pos3.position);
-            
+
             }
 
             if (other.tag == "3")
@@ -74,9 +111,23 @@ public class Patroller : MonoBehaviour
             {
                 agent.SetDestination(pos8.position);
             }
-        if (other.tag == "8")
+            if (other.tag == "8")
             {
                 agent.SetDestination(pos1.position);
             }
+        }
+
+        if (enemyScript.isDetected == true)
+        {
+
+        }
+
+
     }
 }
+
+
+
+
+
+

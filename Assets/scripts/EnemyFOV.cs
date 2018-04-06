@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class EnemyFOV : MonoBehaviour
 {
-    public bool isDetected;
+    public bool isDetected = false;
     public float enemyBorderViewNegative = -23f;
     public float enemyBorderViewPositive = 23f;
     public float viewLength = 3;
-    
+
+
+    void Start()
+    {
+        isDetected = false;
+    }
     void FixedUpdate()
     {
 
@@ -25,7 +30,8 @@ public class EnemyFOV : MonoBehaviour
         {
             if (hit.collider.tag == "Player")
             {
-                ReloadScene();
+                isDetected = true;
+                //ReloadScene();
             }
         }
 
@@ -33,7 +39,8 @@ public class EnemyFOV : MonoBehaviour
         {
             if (hit2.collider.tag == "Player")
             {
-                ReloadScene();
+                isDetected = true;
+                //ReloadScene();
             }
         }
         
@@ -41,10 +48,13 @@ public class EnemyFOV : MonoBehaviour
         {
             if (hit3.collider.tag == "Player")
             {
-                ReloadScene();
+                isDetected = true;
+                //ReloadScene();
             }
         }
     }
+
+    
     
     public static void ReloadScene()
     {
