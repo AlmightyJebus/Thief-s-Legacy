@@ -55,7 +55,7 @@ public class EnemyFOV : MonoBehaviour
                 //ReloadScene();
             }
         }
-        
+
         if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
         {
             if (hit3.collider.tag == "Player")
@@ -92,7 +92,7 @@ public class EnemyFOV : MonoBehaviour
         string currentScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadSceneAsync(currentScene);
     }
-    
+
     /*
     //vanha script, toimii truehen asti
     void Update()
