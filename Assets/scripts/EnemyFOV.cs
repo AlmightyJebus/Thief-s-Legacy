@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class EnemyFOV : MonoBehaviour
 {
     public bool isDetected = false;
+    public bool isCautious = false;
     public float enemyBorderViewNegative = -23f;
     public float enemyBorderViewPositive = 23f;
     public float viewLength = 3;
@@ -78,12 +79,10 @@ public class EnemyFOV : MonoBehaviour
 
         if (isDetected == false && detectionPercent > 0)
         {
-            cautionTime -= Time.deltaTime;
-        }
-
-        if (cautionTime < 0)
-        {
-            cautionTime = defaultCautionTime;
+            while (cautionTime > 0)
+            {
+                cautionTime -= Time.deltaTime;
+            }
         }
     }
 
