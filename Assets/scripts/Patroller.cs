@@ -39,6 +39,7 @@ public class Patroller : MonoBehaviour
     public Transform myTransform;
     public float followSpeed = 3f;
     public bool start = true;
+    public bool disable = false;
 
 
 
@@ -74,34 +75,43 @@ public class Patroller : MonoBehaviour
     
     void Update()
     {
-        if(enemyScript.isDetected == true)
+        //enemy chase
+        if (enemyScript.isDetected == true)
         {
             transform.LookAt(target);
             transform.Translate(Vector3.forward * followSpeed * Time.deltaTime);
             warningText.SetActive(true);
+            disable = true;
         }
 
+        //enemy searching
         if (enemyScript.isCautious == true && enemyScript.isDetected == false)
         {
             transform.Rotate(0, 50 * Time.deltaTime, 0);
             questionText.SetActive(true);
             start = false;
+            disable = true;
         }
+        //enemy continue patrol
         if (enemyScript.isCautious == false && start == false)
         {
             questionText.SetActive(false);
             agent.SetDestination(pos1.position);
             start = true;
+            disable = false;
         }
-        if (enemyScript.isDetected == true && start == false)
+
+        
+        /*if (enemyScript.isDetected == true && start == false)
         {
             
             warningText.SetActive(true);
+            disable = true;
         }
         if (enemyScript.isDetected == false && start == true)
         {
             warningText.SetActive(false);
-        }
+        } */
     }
 
 
@@ -111,60 +121,61 @@ public class Patroller : MonoBehaviour
 
       
        
+        //enemy patrol route 1
 
-        if (enemyScript.isDetected == false && enemyScript.isCautious == false)
-        {
+            if (disable == false)
+            {
+                if (other.tag == "1")
+                {
+                    agent.SetDestination(pos2.position);
+                    start = true;
+                }
+
+                if (other.tag == "2")
+                {
+                    agent.SetDestination(pos3.position);
+
+                }
+
+                if (other.tag == "3")
+                {
+                    agent.SetDestination(pos4.position);
+                }
+
+                if (other.tag == "4")
+                {
+                    agent.SetDestination(pos5.position);
+                }
+
+                if (other.tag == "5")
+                {
+                    agent.SetDestination(pos6.position);
+                }
+
+                if (other.tag == "6")
+                {
+                    agent.SetDestination(pos7.position);
+                }
+
+                if (other.tag == "7")
+                {
+                    agent.SetDestination(pos8.position);
+                }
+                if (other.tag == "8")
+                {
+                    agent.SetDestination(pos1.position);
+                }
+            }
+
 
             
-
-
-            if (other.tag == "1")
-            {
-                agent.SetDestination(pos2.position);
-                start = true;
-            }
-
-            if (other.tag == "2")
-            {
-                agent.SetDestination(pos3.position);
-
-            }
-
-            if (other.tag == "3")
-            {
-                agent.SetDestination(pos4.position);
-            }
-
-            if (other.tag == "4")
-            {
-                agent.SetDestination(pos5.position);
-            }
-
-            if (other.tag == "5")
-            {
-                agent.SetDestination(pos6.position);
-            }
-
-            if (other.tag == "6")
-            {
-                agent.SetDestination(pos7.position);
-            }
-
-            if (other.tag == "7")
-            {
-                agent.SetDestination(pos8.position);
-            }
-            if (other.tag == "8")
-            {
-                agent.SetDestination(pos1.position);
-            }
         }
 
         
 
 
     }
-}
+
 
 
 

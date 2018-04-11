@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject winText;
     public GameObject loot;
     public Text loseText;
+    public bool isCrouching = false;
+    public bool atTheWall = false;
     
 
     void Start ()
@@ -22,6 +24,38 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (gameOn)
         {
+
+            //crouching
+            if (Input.GetKey(KeyCode.C))
+            {
+
+                if (atTheWall)
+                {
+                    //toggle crouching
+                    isCrouching = !isCrouching;
+                    if (isCrouching)
+                    {
+                        //animation change in the future
+                        return;
+                    }
+                    else
+                    {
+                        //animation change in the future
+                        return;
+                    }
+                }
+
+                //if not at the wall you can quit crouching
+                if (!atTheWall)
+                {
+                    if(isCrouching)
+                    {
+                        isCrouching = false;
+                    }
+                }
+
+            }
+            
 
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
@@ -43,6 +77,8 @@ public class PlayerMovement : MonoBehaviour {
                 {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            
+
         }
         else
         {
@@ -56,20 +92,18 @@ public class PlayerMovement : MonoBehaviour {
 
     {
 
+
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            atTheWall = true;
+        }
+
         if (other.gameObject.CompareTag("Loot"))
         {
 
-            
-
             winText.SetActive(true);
             loot.SetActive(false);
-
-
-
-
-
-
-
+            
         }
 
         if (other.gameObject.CompareTag ("Enemy"))
@@ -78,6 +112,14 @@ public class PlayerMovement : MonoBehaviour {
 
         }
         
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            atTheWall = false;
+        }
     }
 
     
