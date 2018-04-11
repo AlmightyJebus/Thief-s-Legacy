@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class EnemyFOV : MonoBehaviour
 {
     PlayerMovement playerScript;
+    public Transform target;
+    public Transform myTransform;
 
     public bool isDetected = false;
     public bool isCautious = false;
@@ -21,7 +23,8 @@ public class EnemyFOV : MonoBehaviour
         defaultCautionTime = cautionTime;
         
         playerScript = gameObject.GetComponent<PlayerMovement>();
-        
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
 
     void FixedUpdate()
@@ -92,11 +95,11 @@ public class EnemyFOV : MonoBehaviour
             cautionTime = defaultCautionTime;
         }
 
-        if (playerScript.isCrouching)
+       if (PlayerMovement.pl.isCrouching)
         {
             isCautious = false;
             isDetected = false;
-        }
+        } 
 
     }
 }

@@ -13,10 +13,11 @@ public class PlayerMovement : MonoBehaviour {
     public Text loseText;
     public bool isCrouching = false;
     public bool atTheWall = false;
-    
+    public static PlayerMovement pl;
 
     void Start ()
     {
+        pl = this;
         gameOn = true;
 	}
 
