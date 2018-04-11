@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
         if (reduceStamina)
         {
             stamina -= 2 * Time.deltaTime;
-            staminaBar.fillAmount -= 2 * Time.deltaTime;
+            staminaBar.fillAmount -= 0.2f * Time.deltaTime;
         }
 
         if (increaseStamina)
@@ -49,10 +49,12 @@ public class PlayerMovement : MonoBehaviour {
             if (stamina <=10)
             {
                 stamina += Time.deltaTime;
+                staminaBar.fillAmount += 0.1f * Time.deltaTime;
 
                 if (stamina >10)
                 {
                     stamina = 10f;
+                    staminaBar.fillAmount = 1;
                 }
                 //staminaText.SetActive(false);
             }
