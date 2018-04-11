@@ -89,6 +89,7 @@ public class Patroller : MonoBehaviour
         {
             transform.Rotate(0, 50 * Time.deltaTime, 0);
             questionText.SetActive(true);
+            warningText.SetActive(false);
             start = false;
             disable = true;
         }
