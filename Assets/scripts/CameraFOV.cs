@@ -67,16 +67,4 @@ public class CameraFOV : MonoBehaviour
             }
         }
     }
-    //mahdollinen rotator script
-
-    /*
-    public float speed = 1f;
-    public float maxRotation = 45f;
-
-    void Update ()
-    {
-        transform.rotation = Quaternion.Euler(0f, maxRotation * Mathf.Sin(Time.time * speed), 0f);
-
-    }
-    */
 }

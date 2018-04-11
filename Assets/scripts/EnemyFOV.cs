@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class EnemyFOV : MonoBehaviour
 {
+    PlayerMovement playerScript;
+
     public bool isDetected = false;
     public bool isCautious = false;
     public float enemyBorderViewNegative = -23f;
@@ -17,6 +19,9 @@ public class EnemyFOV : MonoBehaviour
     public void Start()
     {
         defaultCautionTime = cautionTime;
+        
+        playerScript = gameObject.GetComponent<PlayerMovement>();
+        
     }
 
     void FixedUpdate()
@@ -39,7 +44,6 @@ public class EnemyFOV : MonoBehaviour
             if (hit.collider.tag != "Player")
             {
                 isDetected = false;
-                //ReloadScene();
             }
         }
 
@@ -53,7 +57,6 @@ public class EnemyFOV : MonoBehaviour
             if (hit2.collider.tag != "Player")
             {
                 isDetected = false;
-                //ReloadScene();
             }
         }
         
@@ -67,7 +70,6 @@ public class EnemyFOV : MonoBehaviour
             if (hit3.collider.tag != "Player")
             {
                 isDetected = false;
-                //ReloadScene();
             }
         }
 
@@ -89,36 +91,12 @@ public class EnemyFOV : MonoBehaviour
             isCautious = false;
             cautionTime = defaultCautionTime;
         }
-    }
 
-    public static void ReloadScene()
-    {
-        string currentScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadSceneAsync(currentScene);
-    }
-    
-    /*
-    //vanha script, toimii truehen asti
-    void Update()
-    {
-        RaycastHit hit;
-        
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
-        Debug.DrawRay(transform.position, forward, Color.green);
-
-        if (Physics.Raycast(transform.position, (forward), out hit))
+        if (playerScript.isCrouching)
         {
-            if(hit.collider.tag == "Player")
-            {
-                isSeen = true;
-                //Gamecontroller.instance.Seen();
-            }
-
-            else
-            {
-                isSeen = false;
-            }
+            isCautious = false;
+            isDetected = false;
         }
+
     }
-    */
 }
