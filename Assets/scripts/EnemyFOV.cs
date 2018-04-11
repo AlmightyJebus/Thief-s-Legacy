@@ -32,6 +32,7 @@ public class EnemyFOV : MonoBehaviour
         RaycastHit hit;
         RaycastHit hit2;
         RaycastHit hit3;
+        RaycastHit spherehit;
 
         //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
@@ -75,7 +76,15 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = false;
             }
         }
+        /*
+        if (Physics.SphereCast())
+        {
+            if (spherehit.collider.tag == "Player")
+            {
 
+            }
+        }
+        */
         if (isDetected == true)
         {
             //Huutomerkki
@@ -99,7 +108,6 @@ public class EnemyFOV : MonoBehaviour
         {
             isCautious = false;
             isDetected = false;
-        } 
-
+        }
     }
 }
