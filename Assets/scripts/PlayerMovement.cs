@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject crouchText;
     public GameObject sprintText;
     public GameObject staminaText;
+    public Image staminaBar;
 
     public Text loseText;
     public bool isCrouching = false;
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour {
         if (reduceStamina)
         {
             stamina -= 2 * Time.deltaTime;
+            staminaBar.fillAmount -= 2 * Time.deltaTime;
         }
 
         if (increaseStamina)
