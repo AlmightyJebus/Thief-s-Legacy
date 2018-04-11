@@ -10,11 +10,16 @@ public class PlayerMovement : MonoBehaviour {
     public float slowdownValue = 1;
     public float normalValue = 1.5f;
     public float sprintSpeed = 4f;
+    public float stamina = 10f;
     public bool gameOn;
+    public bool reduceStamina = false;
+    public bool increaseStamina = false;
     public GameObject winText;
     public GameObject loot;
     public GameObject crouchText;
     public GameObject sprintText;
+    public GameObject staminaText;
+
     public Text loseText;
     public bool isCrouching = false;
     public bool isSprinting = false;
@@ -29,6 +34,38 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update ()
     {
+
+
+        if (reduceStamina)
+        {
+            stamina -= 2 * Time.deltaTime;
+        }
+
+        if (increaseStamina)
+        {
+            
+            if (stamina <=10)
+            {
+                stamina += Time.deltaTime;
+
+                if (stamina >10)
+                {
+                    stamina = 10f;
+                }
+                //staminaText.SetActive(false);
+            }
+        }
+
+        if (stamina < 0)
+        {
+            isSprinting = false;
+            speed = normalValue;
+            sprintText.SetActive(false);
+            //staminaText.SetActive(true);
+            reduceStamina = false;
+            increaseStamina = true;
+        }
+
         if (gameOn)
         {
 
@@ -75,12 +112,21 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     sprintText.SetActive(true);
                     speed = sprintSpeed;
+                    reduceStamina = true;
+                    if (stamina < 0)
+                    {
+                        isSprinting = false;
+                        speed = normalValue;
+                        sprintText.SetActive(false);
+                        staminaText.SetActive(true);
+                    }
 
                 }
                 if (isSprinting == false)
                 {
                     sprintText.SetActive(false);
                     speed = normalValue;
+                    reduceStamina = false;
 
                 }
             }
