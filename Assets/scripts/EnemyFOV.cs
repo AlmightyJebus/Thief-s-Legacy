@@ -17,6 +17,7 @@ public class EnemyFOV : MonoBehaviour
     public float cautionTime = 10.0f;
     public float defaultCautionTime;
     public float detectionPercent = 0.0f;
+    
 
     public void Start()
     {
@@ -76,15 +77,8 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = false;
             }
         }
-        /*
-        if (Physics.SphereCast())
-        {
-            if (spherehit.collider.tag == "Player")
-            {
-
-            }
-        }
-        */
+       
+        
         if (isDetected == true)
         {
             //Huutomerkki
