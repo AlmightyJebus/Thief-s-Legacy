@@ -10,12 +10,15 @@ public class CameraFOV : MonoBehaviour
     public float cameraBorderViewPositive = 23f;
     public float viewLength = 3;
 
+    public float speed = 1f;
+    public float maxRotation = 45f;
+
     void FixedUpdate()
     {
 
-        transform.Rotate(0, 30 * Time.deltaTime, 0);
-        
-        
+        //transform.Rotate(0, 30 * Time.deltaTime, 0);
+
+        transform.rotation = Quaternion.Euler(31f, 180 + maxRotation * Mathf.Sin(Time.time * speed), 0f);
 
         RaycastHit hit;
         RaycastHit hit2;
@@ -64,4 +67,16 @@ public class CameraFOV : MonoBehaviour
             }
         }
     }
+    //mahdollinen rotator script
+
+    /*
+    public float speed = 1f;
+    public float maxRotation = 45f;
+
+    void Update ()
+    {
+        transform.rotation = Quaternion.Euler(0f, maxRotation * Mathf.Sin(Time.time * speed), 0f);
+
+    }
+    */
 }
