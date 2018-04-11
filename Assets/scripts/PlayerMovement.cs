@@ -9,12 +9,15 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 2f;
     public float slowdownValue = 1;
     public float normalValue = 1.5f;
+    public float sprintSpeed = 4f;
     public bool gameOn;
     public GameObject winText;
     public GameObject loot;
     public GameObject crouchText;
+    public GameObject sprintText;
     public Text loseText;
     public bool isCrouching = false;
+    public bool isSprinting = false;
     public bool atTheWall = false;
     public static PlayerMovement pl;
 
@@ -30,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
         {
 
             //crouching
-            if (Input.GetKey(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.C))
             {
 
                 if (atTheWall)
@@ -62,8 +65,26 @@ public class PlayerMovement : MonoBehaviour {
                     }
                 }
 
+                
+
             }
-            
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                isSprinting = !isSprinting;
+                if (isSprinting)
+                {
+                    sprintText.SetActive(true);
+                    speed = sprintSpeed;
+
+                }
+                if (isSprinting == false)
+                {
+                    sprintText.SetActive(false);
+                    speed = normalValue;
+
+                }
+            }
+
 
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
