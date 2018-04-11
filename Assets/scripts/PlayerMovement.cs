@@ -7,9 +7,12 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour {
 
     public float speed = 2f;
+    public float slowdownValue = 1;
+    public float normalValue = 1.5f;
     public bool gameOn;
     public GameObject winText;
     public GameObject loot;
+    public GameObject crouchText;
     public Text loseText;
     public bool isCrouching = false;
     public bool atTheWall = false;
@@ -37,12 +40,14 @@ public class PlayerMovement : MonoBehaviour {
                     if (isCrouching)
                     {
                         //animation change in the future
-                        return;
+                        crouchText.SetActive(true);
+                        speed = slowdownValue;
                     }
-                    else
+                    if (isCrouching == false)
                     {
                         //animation change in the future
-                        return;
+                        crouchText.SetActive(false);
+                        speed = normalValue;
                     }
                 }
 
@@ -52,6 +57,8 @@ public class PlayerMovement : MonoBehaviour {
                     if(isCrouching)
                     {
                         isCrouching = false;
+                        crouchText.SetActive(false);
+                        speed = normalValue;
                     }
                 }
 

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EnemyFOV : MonoBehaviour
 {
-    PlayerMovement playerScript;
+
     public Transform target;
     public Transform myTransform;
 
@@ -22,7 +22,7 @@ public class EnemyFOV : MonoBehaviour
     {
         defaultCautionTime = cautionTime;
         
-        playerScript = gameObject.GetComponent<PlayerMovement>();
+
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
