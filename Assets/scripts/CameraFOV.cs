@@ -5,13 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class CameraFOV : MonoBehaviour
 {
-    public bool isSeen;
+    public bool isSeen = false;
     public float cameraBorderViewNegative = -23f;
     public float cameraBorderViewPositive = 23f;
     public float viewLength = 3;
 
     void FixedUpdate()
     {
+
+        transform.Rotate(0, 30 * Time.deltaTime, 0);
+        
+        
 
         RaycastHit hit;
         RaycastHit hit2;
@@ -25,7 +29,12 @@ public class CameraFOV : MonoBehaviour
         {
             if (hit.collider.tag == "Player")
             {
-                ReloadScene();
+                isSeen = true;
+            }
+
+            if (hit.collider.tag != "Player")
+            {
+                isSeen = false;
             }
         }
 
@@ -33,7 +42,12 @@ public class CameraFOV : MonoBehaviour
         {
             if (hit2.collider.tag == "Player")
             {
-                ReloadScene();
+                isSeen = true;
+            }
+
+            if (hit2.collider.tag != "Player")
+            {
+                isSeen = false;
             }
         }
 
@@ -41,14 +55,13 @@ public class CameraFOV : MonoBehaviour
         {
             if (hit3.collider.tag == "Player")
             {
-                ReloadScene();
+                isSeen = true;
+            }
+
+            if (hit3.collider.tag != "Player")
+            {
+                isSeen = false;
             }
         }
-    }
-
-    public static void ReloadScene()
-    {
-        string currentScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadSceneAsync(currentScene);
     }
 }
