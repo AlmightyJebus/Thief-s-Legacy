@@ -26,11 +26,13 @@ public class DetectionSphere : MonoBehaviour {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
             detection = true;
+            EnemyFOV.efov.isDetected = true;
         }
 
         if (col.CompareTag("Player") && !PlayerMovement.pl.isSprinting)
         {
             detection = false;
+            EnemyFOV.efov.isDetected = false;
         }
     }
 
@@ -39,11 +41,13 @@ public class DetectionSphere : MonoBehaviour {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
             detection = true;
+            EnemyFOV.efov.isDetected = true;
         }
 
         if (col.CompareTag("Player"))
         {
             detection = false;
+            EnemyFOV.efov.isDetected = false;
         }
     }
 }

@@ -17,8 +17,12 @@ public class EnemyFOV : MonoBehaviour
     public float defaultCautionTime;
     public float detectionPercent = 0.0f;
 
+    public static EnemyFOV efov;
+
     public void Start()
     {
+        efov = this;
+
         defaultCautionTime = cautionTime;
         
         target = GameObject.FindGameObjectWithTag("Player").transform;
