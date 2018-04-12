@@ -4,20 +4,41 @@ using UnityEngine;
 
 public class DetectionSphere : MonoBehaviour {
 
-    public bool Detection = false;
+    public bool detection = false;
+
+    void Start()
+    {
+
+    }
 
     void Update()
     {
 
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay(Collider col)
     {
-        if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting)
+        if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
-            Detection = true;
+            detection = true;
         }
 
-        //:D
+        if (col.CompareTag("Player") && !PlayerMovement.pl.isSprinting)
+        {
+            detection = false;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
+        {
+            detection = true;
+        }
+
+        if (col.CompareTag("Player"))
+        {
+            detection = false;
+        }
     }
 }
