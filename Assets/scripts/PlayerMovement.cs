@@ -50,13 +50,14 @@ public class PlayerMovement : MonoBehaviour {
             
             if (stamina <=10)
             {
-                stamina += Time.deltaTime;
-                staminaBar.fillAmount += 0.1f * Time.deltaTime;
+                stamina += 0.5f * Time.deltaTime;
+                staminaBar.fillAmount += 0.05f * Time.deltaTime;
 
                 if (stamina >10)
                 {
                     stamina = 10f;
                     staminaBar.fillAmount = 1;
+                    staminaText.SetActive(false);
                 }
                 //staminaText.SetActive(false);
             }
@@ -111,13 +112,11 @@ public class PlayerMovement : MonoBehaviour {
                 
 
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                isSprinting = !isSprinting;
-                if (isSprinting)
-                {
-                    sprintText.SetActive(true);
-                    speed = sprintSpeed;
+                isSprinting = true;
+                sprintText.SetActive(true);
+                speed = sprintSpeed;
                     reduceStamina = true;
                     if (stamina < 0)
                     {
@@ -128,11 +127,12 @@ public class PlayerMovement : MonoBehaviour {
                     }
 
                 }
-                if (isSprinting == false)
+                if (Input.GetKeyUp(KeyCode.LeftShift))
                 {
                     sprintText.SetActive(false);
                     speed = normalValue;
                     reduceStamina = false;
+                increaseStamina = true;
 
                 }
             }
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour {
             }
             
 
-        }
+        
         else
         {
             isMoving = false;
