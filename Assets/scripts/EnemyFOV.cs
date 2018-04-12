@@ -24,6 +24,18 @@ public class EnemyFOV : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
+
+    void Update()
+    {
+        //näitä arvoja muutetaan, kun pelaaja löytää aarteen, FOV kasvaa?
+        if (PlayerMovement.pl.isStolen)
+        {
+            enemyBorderViewNegative = -23f;
+            enemyBorderViewPositive = 23f;
+            viewLength = 3;
+        }
+    }
+
     void FixedUpdate()
     {
         RaycastHit hit;

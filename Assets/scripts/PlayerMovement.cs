@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool isCrouching = false;
     public bool isSprinting = false;
     public bool atTheWall = false;
+    public bool isStolen = false;
     public static PlayerMovement pl;
 
     void Start ()
@@ -186,8 +187,9 @@ public class PlayerMovement : MonoBehaviour {
         if (other.gameObject.CompareTag("Loot"))
         {
 
-            winText.SetActive(true);
+           // winText.SetActive(true);
             loot.SetActive(false);
+            isStolen = true;
             
         }
 

@@ -31,6 +31,7 @@ public class Patroller : MonoBehaviour
 
     public GameObject questionText;
     public GameObject warningText;
+    public GameObject alertText;
     
     public NavMeshAgent agent;
     EnemyFOV enemyScript;
@@ -88,6 +89,7 @@ public class Patroller : MonoBehaviour
         if (enemyScript.isCautious == true && enemyScript.isDetected == false)
         {
             transform.Rotate(0, 50 * Time.deltaTime, 0);
+            GetComponent<NavMeshAgent>().speed = 0f;
             questionText.SetActive(true);
             warningText.SetActive(false);
             start = false;
@@ -98,8 +100,16 @@ public class Patroller : MonoBehaviour
         {
             questionText.SetActive(false);
             agent.SetDestination(pos1.position);
+            GetComponent<NavMeshAgent>().speed = 3f;
             start = true;
             disable = false;
+        }
+
+        if (PlayerMovement.pl.isStolen)
+        {
+            GetComponent<NavMeshAgent>().speed = 8f;
+            agent = GetComponent<NavMeshAgent>();
+            alertText.SetActive(true);
         }
 
         
