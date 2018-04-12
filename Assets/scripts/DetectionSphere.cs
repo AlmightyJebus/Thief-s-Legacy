@@ -5,6 +5,7 @@ using UnityEngine;
 public class DetectionSphere : MonoBehaviour {
 
     public bool detection = false;
+    public float radius = 10f;
 
     void Start()
     {
@@ -13,7 +14,11 @@ public class DetectionSphere : MonoBehaviour {
 
     void Update()
     {
-
+        if (PlayerMovement.pl.isStolen)
+        {
+            SphereCollider myCollider = transform.GetComponent<SphereCollider>();
+            myCollider.radius = 2.5f; 
+        }
     }
 
     void OnTriggerStay(Collider col)
