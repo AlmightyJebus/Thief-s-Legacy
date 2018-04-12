@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class EnemyFOV : MonoBehaviour
 {
-
     public Transform target;
     public Transform myTransform;
 
@@ -17,15 +16,12 @@ public class EnemyFOV : MonoBehaviour
     public float cautionTime = 10.0f;
     public float defaultCautionTime;
     public float detectionPercent = 0.0f;
-    
 
     public void Start()
     {
         defaultCautionTime = cautionTime;
         
-
         target = GameObject.FindGameObjectWithTag("Player").transform;
-
     }
 
     void FixedUpdate()
@@ -33,7 +29,6 @@ public class EnemyFOV : MonoBehaviour
         RaycastHit hit;
         RaycastHit hit2;
         RaycastHit hit3;
-        RaycastHit spherehit;
 
         //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
@@ -64,7 +59,7 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = false;
             }
         }
-        
+
         if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
         {
             if (hit3.collider.tag == "Player")
@@ -77,8 +72,7 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = false;
             }
         }
-       
-        
+
         if (isDetected == true)
         {
             //Huutomerkki
@@ -91,14 +85,14 @@ public class EnemyFOV : MonoBehaviour
             isCautious = true;
             cautionTime -= Time.deltaTime;
         }
-        
+
         if (isCautious == true && cautionTime < 0)
         {
             isCautious = false;
             cautionTime = defaultCautionTime;
         }
 
-       if (PlayerMovement.pl.isCrouching)
+        if (PlayerMovement.pl.isCrouching)
         {
             isCautious = false;
             isDetected = false;
