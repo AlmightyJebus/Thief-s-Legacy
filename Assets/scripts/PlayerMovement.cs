@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
     public Image staminaBar;
 
     public Text loseText;
+    public bool isMoving = false;
     public bool isCrouching = false;
     public bool isSprinting = false;
     public bool atTheWall = false;
@@ -138,18 +139,22 @@ public class PlayerMovement : MonoBehaviour {
 
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
+                isMoving = true;
                 transform.position += Vector3.left * speed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             {
+                isMoving = true;
                 transform.position += Vector3.right * speed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
+                isMoving = true;
                 transform.position += Vector3.forward * speed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
+                isMoving = true;
                 transform.position += Vector3.back * speed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.R))
@@ -161,6 +166,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         else
         {
+            isMoving = false;
             return;
         }
 
