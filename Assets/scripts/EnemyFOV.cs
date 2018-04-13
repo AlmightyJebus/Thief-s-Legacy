@@ -26,8 +26,6 @@ public class EnemyFOV : MonoBehaviour
         defaultCautionTime = cautionTime;
         
         target = GameObject.FindGameObjectWithTag("Player").transform;
-
-        efov = this;
     }
 
 
@@ -51,7 +49,7 @@ public class EnemyFOV : MonoBehaviour
         //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
         Quaternion spreadAnglePositive = Quaternion.AngleAxis(enemyBorderViewPositive, Vector3.up);
-
+        
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
         {
             if (hit.collider.tag == "Player")

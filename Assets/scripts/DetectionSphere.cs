@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DetectionSphere : MonoBehaviour {
 
-    public bool detection = false;
+    public bool isHeard = false;
     public float radius = 10f;
 
     void Start()
@@ -19,20 +19,24 @@ public class DetectionSphere : MonoBehaviour {
             SphereCollider myCollider = transform.GetComponent<SphereCollider>();
             myCollider.radius = 2.5f; 
         }
+
+        if (isHeard == true)
+        {
+            EnemyFOV.efov.isDetected = true;
+        }
+
     }
 
     void OnTriggerStay(Collider col)
     {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
-            detection = true;
-            EnemyFOV.efov.isDetected = true;
+            isHeard = true;
         }
 
         if (col.CompareTag("Player") && !PlayerMovement.pl.isSprinting)
         {
-            detection = false;
-            EnemyFOV.efov.isDetected = false;
+            isHeard = false;
         }
     }
 
@@ -40,14 +44,12 @@ public class DetectionSphere : MonoBehaviour {
     {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
-            detection = true;
-            EnemyFOV.efov.isDetected = true;
+            isHeard = true;
         }
 
         if (col.CompareTag("Player"))
         {
-            detection = false;
-            EnemyFOV.efov.isDetected = false;
+            isHeard = false;
         }
     }
 }
