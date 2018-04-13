@@ -49,7 +49,18 @@ public class EnemyFOV : MonoBehaviour
         //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
         Quaternion spreadAnglePositive = Quaternion.AngleAxis(enemyBorderViewPositive, Vector3.up);
+        
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")) && hit.collider.tag == "Player")
+        {
+            isDetected = true;
+        }
 
+        else
+        {
+            isDetected = false;
+        }
+
+        /*
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")))
         {
             if (hit.collider.tag == "Player")
@@ -88,7 +99,8 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = false;
             }
         }
-        
+        */
+
         if (isDetected == true)
         {
             //Huutomerkki
