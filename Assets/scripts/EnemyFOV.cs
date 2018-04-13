@@ -54,9 +54,7 @@ public class EnemyFOV : MonoBehaviour
                 timerOn = false;
                 timer = 6f;
             }
-            
         }
-        
     }
 
     void FixedUpdate()

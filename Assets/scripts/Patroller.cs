@@ -111,7 +111,7 @@ public class Patroller : MonoBehaviour
             agent = GetComponent<NavMeshAgent>();
             alertText.SetActive(true);
         }
-
+        
         
         /*if (enemyScript.isDetected == true && start == false)
         {

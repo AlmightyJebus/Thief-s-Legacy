@@ -13,6 +13,13 @@ public class CameraFOV : MonoBehaviour
     public float speed = 1f;
     public float maxRotation = 45f;
 
+    public static CameraFOV cfov;
+
+    void Start()
+    {
+        cfov = this;
+    }
+
     void FixedUpdate()
     {
 
@@ -33,6 +40,7 @@ public class CameraFOV : MonoBehaviour
             if (hit.collider.tag == "Player")
             {
                 isSeen = true;
+                EnemyFOV.efov.detectionPercent += 0.5f;
             }
 
             if (hit.collider.tag != "Player")
@@ -46,6 +54,7 @@ public class CameraFOV : MonoBehaviour
             if (hit2.collider.tag == "Player")
             {
                 isSeen = true;
+                EnemyFOV.efov.detectionPercent += 0.5f;
             }
 
             if (hit2.collider.tag != "Player")
@@ -59,6 +68,7 @@ public class CameraFOV : MonoBehaviour
             if (hit3.collider.tag == "Player")
             {
                 isSeen = true;
+                EnemyFOV.efov.detectionPercent += 0.5f;
             }
 
             if (hit3.collider.tag != "Player")
