@@ -21,6 +21,8 @@ public class EnemyFOV : MonoBehaviour
 
     public void Start()
     {
+        efov = this;
+
         defaultCautionTime = cautionTime;
         
         target = GameObject.FindGameObjectWithTag("Player").transform;
