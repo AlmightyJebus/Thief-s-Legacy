@@ -24,7 +24,6 @@ public class DetectionSphere : MonoBehaviour {
         {
             EnemyFOV.efov.isDetected = true;
         }
-
     }
 
     void OnTriggerStay(Collider col)
@@ -32,6 +31,7 @@ public class DetectionSphere : MonoBehaviour {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
             isHeard = true;
+            EnemyFOV.efov.timerOn = true;
         }
 
         if (col.CompareTag("Player") && !PlayerMovement.pl.isSprinting)
@@ -45,6 +45,7 @@ public class DetectionSphere : MonoBehaviour {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
             isHeard = true;
+            EnemyFOV.efov.timerOn = true;
         }
 
         if (col.CompareTag("Player"))
