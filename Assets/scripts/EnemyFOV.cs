@@ -64,26 +64,19 @@ public class EnemyFOV : MonoBehaviour
         RaycastHit hit;
         RaycastHit hit2;
         RaycastHit hit3;
-        
 
         //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
         Quaternion spreadAnglePositive = Quaternion.AngleAxis(enemyBorderViewPositive, Vector3.up);
-        
+
+        /*
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")) && hit.collider.tag == "Player")
         {
             isDetected = true;
-            
             timerOn = true;
-            
-            
-             
         }
-        
+        */
 
-       
-
-        
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")))
         {
             if (hit.collider.tag == "Player")
@@ -91,8 +84,6 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = true;
                 timerOn = true;
             }
-
-            
         }
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength, 1 << LayerMask.NameToLayer("Player")))
@@ -102,8 +93,6 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = true;
                 timerOn = true;
             }
-
-            
         }
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength, 1 << LayerMask.NameToLayer("Player")))
@@ -113,8 +102,6 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = true;
                 timerOn = true;
             }
-
-           
         }
         
         if (isDetected == true)
