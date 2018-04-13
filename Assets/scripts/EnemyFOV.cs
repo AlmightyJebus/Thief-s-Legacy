@@ -16,6 +16,10 @@ public class EnemyFOV : MonoBehaviour
     public float cautionTime = 10.0f;
     public float defaultCautionTime;
     public float detectionPercent = 0.0f;
+    public float timer = 6f;
+    public bool timerOn = false;
+    public bool timesUp = false;
+    
 
     public static EnemyFOV efov;
     
@@ -38,6 +42,21 @@ public class EnemyFOV : MonoBehaviour
             enemyBorderViewPositive = 23f;
             viewLength = 3;
         }
+
+        if (timerOn)
+        {
+            timer -= Time.deltaTime;
+            if (timer <=0)
+            {
+
+                timesUp = true;
+                isDetected = false;
+                timerOn = false;
+                timer = 6f;
+            }
+            
+        }
+        
     }
 
     void FixedUpdate()
@@ -45,6 +64,7 @@ public class EnemyFOV : MonoBehaviour
         RaycastHit hit;
         RaycastHit hit2;
         RaycastHit hit3;
+        
 
         //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
@@ -53,25 +73,26 @@ public class EnemyFOV : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")) && hit.collider.tag == "Player")
         {
             isDetected = true;
+            
+            timerOn = true;
+            
+            
+             
         }
+        
 
-        else
-        {
-            isDetected = false;
-        }
+       
 
-        /*
+        
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")))
         {
             if (hit.collider.tag == "Player")
             {
                 isDetected = true;
+                timerOn = true;
             }
 
-            if (hit.collider.tag != "Player")
-            {
-                isDetected = false;
-            }
+            
         }
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength, 1 << LayerMask.NameToLayer("Player")))
@@ -79,12 +100,10 @@ public class EnemyFOV : MonoBehaviour
             if (hit2.collider.tag == "Player")
             {
                 isDetected = true;
+                timerOn = true;
             }
 
-            if (hit2.collider.tag != "Player")
-            {
-                isDetected = false;
-            }
+            
         }
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength, 1 << LayerMask.NameToLayer("Player")))
@@ -92,15 +111,12 @@ public class EnemyFOV : MonoBehaviour
             if (hit3.collider.tag == "Player")
             {
                 isDetected = true;
+                timerOn = true;
             }
 
-            if (hit3.collider.tag != "Player")
-            {
-                isDetected = false;
-            }
+           
         }
-        */
-
+        
         if (isDetected == true)
         {
             //Huutomerkki
