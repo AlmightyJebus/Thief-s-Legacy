@@ -115,6 +115,7 @@ public class PlayerMovement : MonoBehaviour {
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 isSprinting = true;
+                isMoving = true;
                 sprintText.SetActive(true);
                 speed = sprintSpeed;
                     reduceStamina = true;
@@ -133,12 +134,16 @@ public class PlayerMovement : MonoBehaviour {
                     speed = normalValue;
                     reduceStamina = false;
                 increaseStamina = true;
+                isSprinting = false;
 
                 }
             }
+        
+        
 
 
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
                 isMoving = true;
                 transform.position += Vector3.left * speed * Time.deltaTime;
@@ -158,18 +163,42 @@ public class PlayerMovement : MonoBehaviour {
                 isMoving = true;
                 transform.position += Vector3.back * speed * Time.deltaTime;
             }
-            if (Input.GetKey(KeyCode.R))
+
+
+        if (!Input.anyKey && Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+        {
+            isMoving = false;
+        }
+        if (!Input.anyKey && Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+        {
+            isMoving = false;
+        }
+        if (!Input.anyKey && Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
+        {
+            isMoving = false;
+        }
+        if (!Input.anyKey && Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
+        {
+            isMoving = false;
+        }
+
+
+
+        if (Input.GetKey(KeyCode.R))
                 {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
             
 
         
-        else
+            
+
+        
+        /*else
         {
             isMoving = false;
-            return;
-        }
+            
+        }*/
 
 
 
