@@ -18,7 +18,7 @@ public class EnemyFOV : MonoBehaviour
     public float detectionPercent = 0.0f;
 
     public static EnemyFOV efov;
-
+    
     public void Start()
     {
         efov = this;
@@ -49,8 +49,8 @@ public class EnemyFOV : MonoBehaviour
         //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
         Quaternion spreadAnglePositive = Quaternion.AngleAxis(enemyBorderViewPositive, Vector3.up);
-        
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")))
         {
             if (hit.collider.tag == "Player")
             {
@@ -63,7 +63,7 @@ public class EnemyFOV : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength, 1 << LayerMask.NameToLayer("Player")))
         {
             if (hit2.collider.tag == "Player")
             {
@@ -76,7 +76,7 @@ public class EnemyFOV : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength, 1 << LayerMask.NameToLayer("Player")))
         {
             if (hit3.collider.tag == "Player")
             {
@@ -88,7 +88,7 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = false;
             }
         }
-
+        
         if (isDetected == true)
         {
             //Huutomerkki
