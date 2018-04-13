@@ -70,7 +70,7 @@ public class EnemyFOV : MonoBehaviour
         Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
         Quaternion spreadAnglePositive = Quaternion.AngleAxis(enemyBorderViewPositive, Vector3.up);
         
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")) && hit.collider.tag == "Player")
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength) && hit.collider.tag == "Player")
         {
             isDetected = true;
             
@@ -84,7 +84,7 @@ public class EnemyFOV : MonoBehaviour
        
 
         
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
         {
             if (hit.collider.tag == "Player")
             {
@@ -95,7 +95,7 @@ public class EnemyFOV : MonoBehaviour
             
         }
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength, 1 << LayerMask.NameToLayer("Player")))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength))
         {
             if (hit2.collider.tag == "Player")
             {
@@ -106,7 +106,7 @@ public class EnemyFOV : MonoBehaviour
             
         }
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength, 1 << LayerMask.NameToLayer("Player")))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
         {
             if (hit3.collider.tag == "Player")
             {
@@ -141,5 +141,7 @@ public class EnemyFOV : MonoBehaviour
             isCautious = false;
             isDetected = false;
         }
+
+        /* 1 << LayerMask.NameToLayer("Player") */
     }
 }
