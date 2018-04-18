@@ -27,8 +27,10 @@ public class HackingMiniGame : MonoBehaviour
 
     void Update()
     {
-        if (HackableObject.hackable.isHackable == true)
+        if (HackableObject.hackable.isHackable == true && Input.GetKey(KeyCode.E))
         {
+            //Minipeli alkaa...
+            /*
             if (Input.GetKeyDown(sequenceFirst[sequenceIndex]))
             {
                 if (++sequenceIndex == sequenceFirst.Length)
@@ -37,6 +39,23 @@ public class HackingMiniGame : MonoBehaviour
                     //Tähän tulee mitä tapahtuu, kun minipeli ratkaistaan
                     sequenceIndex = 0;
                 }
+
+                if (sequenceIndex == 1)
+                {
+                    //sytytä Q
+                }
+
+                if (sequenceIndex == 2)
+                {
+                    //sammuta Q
+                    //sytytä F
+                }
+
+                if (sequenceIndex == 3)
+                {
+                    //sytytä A
+                }
+
             }
 
             else if (Input.anyKeyDown && sequenceIndex > 0)
@@ -45,6 +64,7 @@ public class HackingMiniGame : MonoBehaviour
                 sequenceIndex = 0;
                 EnemyFOV.efov.detectionPercent = +25f;
             }
+            */
         }
     }
 }
