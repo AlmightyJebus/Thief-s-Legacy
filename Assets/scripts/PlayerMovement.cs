@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
 
+    public bool pause = false;
+
     public float speed = 2f;
     public float slowdownValue = 1;
     public float normalValue = 1.5f;
@@ -28,158 +30,204 @@ public class PlayerMovement : MonoBehaviour {
     public bool atTheWall = false;
     public bool isStolen = false;
     public static PlayerMovement pl;
+    Patroller Patrollerscript;
+    
 
     void Start ()
     {
         pl = this;
         gameOn = true;
+        
 	}
 
     void Update()
     {
-        if (reduceStamina)
+
+        
+        //MAIN MENU
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            stamina -= 2 * Time.deltaTime;
-            staminaBar.fillAmount -= 0.2f * Time.deltaTime;
+            SceneManager.LoadScene(0);
         }
 
-        if (increaseStamina)
+        //PAUSE
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            if (stamina <= 10)
-            {
-                stamina += 0.5f * Time.deltaTime;
-                staminaBar.fillAmount += 0.05f * Time.deltaTime;
+            pause = !pause;
 
-                if (stamina > 10)
-                {
-                    stamina = 10f;
-                    staminaBar.fillAmount = 1;
-                    staminaText.SetActive(false);
-                }
-                //staminaText.SetActive(false);
+            if (pause)
+            {
+                Debug.Log("PAUSE");
+                pause = true;
+                Patroller.patr.disable = true;
+
+            }
+            else if (!pause)
+            {
+                pause = false;
+                Debug.Log("UNPAUSE");
+                
+                Patroller.patr.unpause = true;
+                //Patroller.patr.start = true;
             }
         }
 
-        if (stamina < 0)
-        {
-            isSprinting = false;
-            speed = normalValue;
-            sprintText.SetActive(false);
-            //staminaText.SetActive(true);
-            reduceStamina = false;
-            increaseStamina = true;
-        }
 
-        if (gameOn)
+        if (!pause)
         {
-            //crouching
-            if (Input.GetKeyDown(KeyCode.C))
+
+            if (reduceStamina)
             {
-                if (atTheWall)
+                stamina -= 2 * Time.deltaTime;
+                staminaBar.fillAmount -= 0.2f * Time.deltaTime;
+            }
+
+            if (increaseStamina)
+            {
+                if (stamina <= 10)
                 {
-                    //toggle crouching
-                    isCrouching = !isCrouching;
+                    stamina += 0.5f * Time.deltaTime;
+                    staminaBar.fillAmount += 0.05f * Time.deltaTime;
 
-                    if (isCrouching)
+                    if (stamina > 10)
                     {
-                        //animation change in the future
-                        crouchText.SetActive(true);
-                        speed = slowdownValue;
+                        stamina = 10f;
+                        staminaBar.fillAmount = 1;
+                        staminaText.SetActive(false);
                     }
-
-                    if (isCrouching == false)
-                    {
-                        //animation change in the future
-                        crouchText.SetActive(false);
-                        speed = normalValue;
-                    }
-                }
-
-                //if not at the wall you can quit crouching
-                if (!atTheWall)
-                {
-                    if (isCrouching)
-                    {
-                        isCrouching = false;
-                        crouchText.SetActive(false);
-                        speed = normalValue;
-                    }
+                    //staminaText.SetActive(false);
                 }
             }
 
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                isSprinting = true;
-                isMoving = true;
-                sprintText.SetActive(true);
-                speed = sprintSpeed;
-                reduceStamina = true;
-
-                if (stamina < 0)
-                {
-                    isSprinting = false;
-                    speed = normalValue;
-                    sprintText.SetActive(false);
-                    staminaText.SetActive(true);
-                }
-            }
-
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (stamina < 0)
             {
                 isSprinting = false;
-                sprintText.SetActive(false);
                 speed = normalValue;
+                sprintText.SetActive(false);
+                //staminaText.SetActive(true);
                 reduceStamina = false;
                 increaseStamina = true;
-                isSprinting = false;
             }
 
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if (gameOn)
             {
-                isMoving = true;
-                transform.position += Vector3.left * speed * Time.deltaTime;
-            }
+                //crouching
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    if (atTheWall)
+                    {
+                        //toggle crouching
+                        isCrouching = !isCrouching;
 
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-            {
-                isMoving = true;
-                transform.position += Vector3.right * speed * Time.deltaTime;
-            }
+                        if (isCrouching)
+                        {
+                            //animation change in the future
+                            crouchText.SetActive(true);
+                            speed = slowdownValue;
+                        }
 
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-            {
-                isMoving = true;
-                transform.position += Vector3.forward * speed * Time.deltaTime;
-            }
+                        if (isCrouching == false)
+                        {
+                            //animation change in the future
+                            crouchText.SetActive(false);
+                            speed = normalValue;
+                        }
+                    }
 
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-            {
-                isMoving = true;
-                transform.position += Vector3.back * speed * Time.deltaTime;
-            }
+                    //if not at the wall you can quit crouching
+                    if (!atTheWall)
+                    {
+                        if (isCrouching)
+                        {
+                            isCrouching = false;
+                            crouchText.SetActive(false);
+                            speed = normalValue;
+                        }
+                    }
+                }
 
-            if (!Input.anyKey && Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
-            {
-                isMoving = false;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    isSprinting = true;
+                    isMoving = true;
+                    sprintText.SetActive(true);
+                    speed = sprintSpeed;
+                    reduceStamina = true;
+
+                    if (stamina < 0)
+                    {
+                        isSprinting = false;
+                        speed = normalValue;
+                        sprintText.SetActive(false);
+                        staminaText.SetActive(true);
+                    }
+                }
+
+                if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    isSprinting = false;
+                    sprintText.SetActive(false);
+                    speed = normalValue;
+                    reduceStamina = false;
+                    increaseStamina = true;
+                    isSprinting = false;
+                }
+
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                {
+                    isMoving = true;
+                    transform.position += Vector3.left * speed * Time.deltaTime;
+                }
+
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                {
+                    isMoving = true;
+                    transform.position += Vector3.right * speed * Time.deltaTime;
+                }
+
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                {
+                    isMoving = true;
+                    transform.position += Vector3.forward * speed * Time.deltaTime;
+                }
+
+                if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                {
+                    isMoving = true;
+                    transform.position += Vector3.back * speed * Time.deltaTime;
+                }
+
+                if (!Input.anyKey && Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+                {
+                    isMoving = false;
+                }
+                if (!Input.anyKey && Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+                {
+                    isMoving = false;
+                }
+                if (!Input.anyKey && Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
+                {
+                    isMoving = false;
+                }
+                if (!Input.anyKey && Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
+                {
+                    isMoving = false;
+                }
+                /*
+                if (Input.GetKey(KeyCode.R))
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }*/
             }
-            if (!Input.anyKey && Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
-            {
-                isMoving = false;
-            }
-            if (!Input.anyKey && Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
-            {
-                isMoving = false;
-            }
-            if (!Input.anyKey && Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
-            {
-                isMoving = false;
-            }
-            /*
-            if (Input.GetKey(KeyCode.R))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }*/
         }
+
+
+
+    }
+
+    void Play()
+    {
+
     }
 
     void OnTriggerEnter(Collider other)
