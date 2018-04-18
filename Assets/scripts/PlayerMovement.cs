@@ -174,11 +174,11 @@ public class PlayerMovement : MonoBehaviour {
             {
                 isMoving = false;
             }
-
+            /*
             if (Input.GetKey(KeyCode.R))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+            }*/
         }
     }
 
