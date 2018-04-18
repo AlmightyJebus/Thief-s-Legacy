@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGame : MonoBehaviour {
+public class HackingMiniGame : MonoBehaviour {
+
+    // LAITA OBJEKTIIN JOKA HAKKEROIDAAN!!
+    // LAITA AKTIVOITUMAAN KUN HAKKEROINTI ALKAA!!
+    // KATSO SAMALLA EnemyFOV.efov.detectionPercent JA isSolved TOIMINTA!!
 
     bool isSolved = false;
 
@@ -19,7 +23,7 @@ public class MiniGame : MonoBehaviour {
     KeyCode.E
     };
 
-    private int sequenceIndex;
+private int sequenceIndex;
 
     private void Update()
     {
@@ -28,12 +32,14 @@ public class MiniGame : MonoBehaviour {
             if (++sequenceIndex == sequenceFirst.Length)
             {
                 isSolved = true;
+                //Tähän tulee mitä tapahtuu, kun minipeli ratkaistaan
+                sequenceIndex = 0;
             }
         }
 
-        else if (Input.anyKeyDown)
+        else if (Input.anyKeyDown && sequenceIndex > 0)
         {
-            isSolved = false; //?
+            isSolved = false;
             sequenceIndex = 0;
             EnemyFOV.efov.detectionPercent =+ 25f;
         }
