@@ -17,6 +17,8 @@ public class HackingMiniGame : MonoBehaviour
     public static HackingMiniGame miniGame;
     public GameObject hackBoard;
     public Image hacktimer;
+    public Image progressbar;
+    public float multiplier;
     public GameObject lightQ, lightW, lightE, lightR, lightT, lightA, lightS, lightD, lightF, lightG, lightZ, lightX, lightC, lightV, lightB;
 
     //1st sequence - Q F A R W D S E
@@ -86,7 +88,7 @@ public class HackingMiniGame : MonoBehaviour
             hackBoard.SetActive(true);
             hacktimer.GetComponent<Image>().enabled = true;
             solvingTime = solvingTime - Time.deltaTime;
-            
+
 
             hacktimer.fillAmount -= timerbarconverter * Time.deltaTime;
 
@@ -100,6 +102,7 @@ public class HackingMiniGame : MonoBehaviour
                 lightD.SetActive(false);
                 lightS.SetActive(false);
                 lightE.SetActive(false);
+                progressbar.fillAmount = 0f;
             }
 
             //Minipeli alkaa...
@@ -116,47 +119,65 @@ public class HackingMiniGame : MonoBehaviour
                 if (sequenceIndex > 0)
                 {
                     lightQ.SetActive(false);
+                    
+                    multiplier = sequenceIndex +1;
+                    Fill();
                 }
 
                 if (sequenceIndex == 1)
                 {
                     lightF.SetActive(true);
+                    multiplier = sequenceIndex + 1;
+                    Fill();
+                    
                 }
 
                 if (sequenceIndex == 2)
                 {
                     lightF.SetActive(false);
                     lightA.SetActive(true);
+                    multiplier = sequenceIndex + 1;
+                    Fill();
                 }
 
                 if (sequenceIndex == 3)
                 {
                     lightA.SetActive(false);
                     lightR.SetActive(true);
+                    multiplier = sequenceIndex + 1;
+                    Fill();
                 }
 
                 if (sequenceIndex == 4)
                 {
                     lightR.SetActive(false);
                     lightW.SetActive(true);
+                    multiplier = sequenceIndex + 1;
+                    Fill();
                 }
 
                 if (sequenceIndex == 5)
                 {
                     lightW.SetActive(false);
                     lightD.SetActive(true);
+                    multiplier = sequenceIndex + 1;
+                    Fill();
                 }
 
                 if (sequenceIndex == 6)
                 {
                     lightD.SetActive(false);
                     lightS.SetActive(true);
+                    multiplier = sequenceIndex + 1;
+                    Fill();
                 }
 
                 if (sequenceIndex == 7)
                 {
                     lightS.SetActive(false);
                     lightE.SetActive(true);
+                    multiplier = sequenceIndex + 1;
+                    Fill();
                 }
             }
 
@@ -165,6 +186,7 @@ public class HackingMiniGame : MonoBehaviour
                 isSolved = false;
                 EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
                 sequenceIndex = 0;
+                progressbar.fillAmount = 0;
             }
         }
 
@@ -186,5 +208,10 @@ public class HackingMiniGame : MonoBehaviour
             lightE.SetActive(false);
             PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
         }
+
     }
-}
+        public void Fill()
+    {
+            progressbar.fillAmount = multiplier * 0.085f;
+        }
+    }
