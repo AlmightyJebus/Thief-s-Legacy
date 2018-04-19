@@ -12,6 +12,7 @@ public class HackableObject : MonoBehaviour
     public bool isHackable = false;
     public static HackableObject hackable;
     public GameObject hackText;
+    public GameObject hackCompletedText;
 
     public void Start()
     {
@@ -28,6 +29,16 @@ public class HackableObject : MonoBehaviour
             {
                 isHackable = true;
                 hackText.SetActive(true);
+            }
+
+            if (hit.collider.tag == "Player" && HackingMiniGame.miniGame.isHacking == true)
+            {
+                hackText.SetActive(false);
+            }
+
+            if (isHackable == true && HackingMiniGame.miniGame.isSolved == true)
+            {
+                hackText.SetActive(false);
             }
         }
 

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool pause = false;
 
     public float speed = 2f;
+    public float defaultSpeed = 2f;
     public float slowdownValue = 1;
     public float normalValue = 1.5f;
     public float sprintSpeed = 4f;
