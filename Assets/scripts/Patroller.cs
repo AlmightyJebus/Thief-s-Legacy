@@ -48,7 +48,7 @@ public class Patroller : MonoBehaviour
     public bool unpause = false;
 
     public float dist;
-    public Transform other;
+    public GameObject other;
 
 
 
@@ -88,7 +88,16 @@ public class Patroller : MonoBehaviour
     void Update()
     {
 
-
+        //check distance
+        if(other)
+        {
+            dist = Vector3.Distance(other.transform.position, transform.position);
+        }
+        else
+        {
+            Debug.Log("other ei löydy");
+        }
+        
 
         if (unpause)
         {
@@ -108,8 +117,7 @@ public class Patroller : MonoBehaviour
         {
 
 
-            //check distance
-            dist = Vector3.Distance(other.position, transform.position);
+            
 
             //enemy chase
             if (enemyScript.isDetected == true)
