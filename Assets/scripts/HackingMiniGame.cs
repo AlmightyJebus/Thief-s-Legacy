@@ -10,6 +10,8 @@ public class HackingMiniGame : MonoBehaviour
 
     public bool isSolved = false;
     public bool isHacking = false;
+    public float solvingTime = 10f;
+    public float defaultSolvingTime = 10f;
     public static HackingMiniGame miniGame;
     public GameObject hackBoard;
     public GameObject lightQ, lightW, lightE, lightR, lightT, lightA, lightS, lightD, lightF, lightG, lightZ, lightX, lightC, lightV, lightB;
@@ -48,6 +50,16 @@ public class HackingMiniGame : MonoBehaviour
             PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
             isHacking = false;
             hackBoard.SetActive(false);
+            solvingTime = defaultSolvingTime;
+            sequenceIndex = 0;
+            lightQ.SetActive(false);
+            lightF.SetActive(false);
+            lightA.SetActive(false);
+            lightR.SetActive(false);
+            lightW.SetActive(false);
+            lightD.SetActive(false);
+            lightS.SetActive(false);
+            lightE.SetActive(false);
         }
 
         if (isSolved == true)
@@ -57,11 +69,13 @@ public class HackingMiniGame : MonoBehaviour
             lightQ.SetActive(false);
             lightE.SetActive(false);
             hackBoard.SetActive(false);
+            solvingTime = defaultSolvingTime;
         }
 
         if (isHacking == true)
         {
             hackBoard.SetActive(true);
+            solvingTime = solvingTime - Time.deltaTime;
 
             if (sequenceIndex == 0)
             {
@@ -138,8 +152,26 @@ public class HackingMiniGame : MonoBehaviour
                 isSolved = false;
                 EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
                 sequenceIndex = 0;
-                //lightQ.SetActive(true);
             }
+        }
+
+        if (solvingTime < 0)
+        {
+            //Mitä tapahtuu kun minigamen ratkaisuaika loppuu :D
+            EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
+            solvingTime = defaultSolvingTime;
+            isHacking = false;
+            hackBoard.SetActive(false);
+            sequenceIndex = 0;
+            lightQ.SetActive(false);
+            lightF.SetActive(false);
+            lightA.SetActive(false);
+            lightR.SetActive(false);
+            lightW.SetActive(false);
+            lightD.SetActive(false);
+            lightS.SetActive(false);
+            lightE.SetActive(false);
+            PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
         }
     }
 }
