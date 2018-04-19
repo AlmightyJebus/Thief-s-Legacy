@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour {
     public bool pause = false;
 
     public float speed = 2f;
+    public float normalHeight = 2f;
+    public float crouchHeight = 1f;
     public float defaultSpeed = 2f;
     public float slowdownValue = 1;
     public float normalValue = 1.5f;
@@ -32,14 +34,16 @@ public class PlayerMovement : MonoBehaviour {
     public bool isStolen = false;
     public static PlayerMovement pl;
     Patroller Patrollerscript;
+    public CapsuleCollider pCollider;
     
 
     void Start ()
     {
         pl = this;
         gameOn = true;
+        pCollider = GetComponent<CapsuleCollider>();
         
-	}
+    }
 
     void Update()
     {
@@ -125,6 +129,7 @@ public class PlayerMovement : MonoBehaviour {
                             //animation change in the future
                             crouchText.SetActive(true);
                             speed = slowdownValue;
+                            pCollider.height = crouchHeight;
                         }
 
                         if (isCrouching == false)
@@ -132,6 +137,7 @@ public class PlayerMovement : MonoBehaviour {
                             //animation change in the future
                             crouchText.SetActive(false);
                             speed = normalValue;
+                            pCollider.height = normalHeight;
                         }
                     }
 
@@ -143,6 +149,7 @@ public class PlayerMovement : MonoBehaviour {
                             isCrouching = false;
                             crouchText.SetActive(false);
                             speed = normalValue;
+                            pCollider.height = normalHeight;
                         }
                     }
                 }
