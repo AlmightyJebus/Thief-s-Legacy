@@ -11,6 +11,8 @@ public class HackingMiniGame : MonoBehaviour
     public bool isSolved = false;
     public bool isHacking = false;
     public static HackingMiniGame miniGame;
+    public GameObject hackBoard;
+    public GameObject lightQ, lightW, lightE, lightR, lightT, lightA, lightS, lightD, lightF, lightG, lightZ, lightX, lightC, lightV, lightB;
 
     //1st sequence - Q F A R W D S E
 
@@ -25,7 +27,7 @@ public class HackingMiniGame : MonoBehaviour
     KeyCode.E
     };
 
-    private int sequenceIndex;
+    public int sequenceIndex;
 
     void Start()
     {
@@ -45,19 +47,25 @@ public class HackingMiniGame : MonoBehaviour
             //Minipelistä pääsee pois
             PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
             isHacking = false;
+            hackBoard.SetActive(false);
         }
 
         if (isSolved == true)
         {
             PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
             isHacking = false;
+            lightE.SetActive(false);
+            hackBoard.SetActive(false);
         }
 
         if (isHacking == true)
         {
+            hackBoard.SetActive(true);
+
             //Minipeli alkaa...
             if (Input.GetKey(sequenceFirst[sequenceIndex]))
             {
+
                 if (++sequenceIndex == sequenceFirst.Length)
                 {
                     isSolved = true;
@@ -65,20 +73,55 @@ public class HackingMiniGame : MonoBehaviour
                     sequenceIndex = 0;
                 }
 
+                if (sequenceIndex == 0)
+                {
+                    lightQ.SetActive(true);
+                }
+
+                if (sequenceIndex > 0)
+                {
+                    lightQ.SetActive(false);
+                }
+
                 if (sequenceIndex == 1)
                 {
-                    //sytytä Q
+                    lightF.SetActive(true);
                 }
 
                 if (sequenceIndex == 2)
                 {
-                    //sammuta Q
-                    //sytytä F
+                    lightF.SetActive(false);
+                    lightA.SetActive(true);
                 }
 
                 if (sequenceIndex == 3)
                 {
-                    //sytytä A
+                    lightA.SetActive(false);
+                    lightR.SetActive(true);
+                }
+
+                if (sequenceIndex == 4)
+                {
+                    lightR.SetActive(false);
+                    lightW.SetActive(true);
+                }
+
+                if (sequenceIndex == 5)
+                {
+                    lightW.SetActive(false);
+                    lightD.SetActive(true);
+                }
+
+                if (sequenceIndex == 6)
+                {
+                    lightD.SetActive(false);
+                    lightS.SetActive(true);
+                }
+
+                if (sequenceIndex == 7)
+                {
+                    lightS.SetActive(false);
+                    lightE.SetActive(true);
                 }
 
             }
@@ -88,6 +131,7 @@ public class HackingMiniGame : MonoBehaviour
                 isSolved = false;
                 sequenceIndex = 0;
                 EnemyFOV.efov.detectionPercent = +25f;
+                //lightQ.SetActive(true);
             }
         }
     }
