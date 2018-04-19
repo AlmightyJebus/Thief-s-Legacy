@@ -16,6 +16,7 @@ public class EnemyFOV : MonoBehaviour
     public float cautionTime = 10.0f;
     public float defaultCautionTime;
     public float detectionPercent = 0.0f;
+    public float detectionRate;
     public float timer = 3f;
     public bool timerOn = false;
     public bool timesUp = false;
@@ -106,7 +107,7 @@ public class EnemyFOV : MonoBehaviour
         if (isDetected == true)
         {
             //Huutomerkki
-            detectionPercent += 0.5f;
+            detectionPercent = detectionPercent + detectionRate;
             isCautious = true;
         }
 

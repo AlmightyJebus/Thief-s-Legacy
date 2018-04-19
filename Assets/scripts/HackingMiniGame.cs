@@ -54,6 +54,7 @@ public class HackingMiniGame : MonoBehaviour
         {
             PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
             isHacking = false;
+            lightQ.SetActive(false);
             lightE.SetActive(false);
             hackBoard.SetActive(false);
         }
@@ -61,6 +62,18 @@ public class HackingMiniGame : MonoBehaviour
         if (isHacking == true)
         {
             hackBoard.SetActive(true);
+
+            if (sequenceIndex == 0)
+            {
+                lightQ.SetActive(true);
+                lightF.SetActive(false);
+                lightA.SetActive(false);
+                lightR.SetActive(false);
+                lightW.SetActive(false);
+                lightD.SetActive(false);
+                lightS.SetActive(false);
+                lightE.SetActive(false);
+            }
 
             //Minipeli alkaa...
             if (Input.GetKey(sequenceFirst[sequenceIndex]))
@@ -71,11 +84,6 @@ public class HackingMiniGame : MonoBehaviour
                     isSolved = true;
                     //Tähän tulee mitä tapahtuu, kun minipeli ratkaistaan
                     sequenceIndex = 0;
-                }
-
-                if (sequenceIndex == 0)
-                {
-                    lightQ.SetActive(true);
                 }
 
                 if (sequenceIndex > 0)
@@ -123,14 +131,13 @@ public class HackingMiniGame : MonoBehaviour
                     lightS.SetActive(false);
                     lightE.SetActive(true);
                 }
-
             }
 
             else if (Input.anyKeyDown && sequenceIndex > 0)
             {
                 isSolved = false;
+                EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
                 sequenceIndex = 0;
-                EnemyFOV.efov.detectionPercent = +25f;
                 //lightQ.SetActive(true);
             }
         }
