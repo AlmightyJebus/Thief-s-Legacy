@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject sprintText;
     public GameObject staminaText;
     public Image staminaBar;
+    public Image hacktimer;
 
     public Text loseText;
     public bool isMoving = false;
@@ -44,18 +45,28 @@ public class PlayerMovement : MonoBehaviour {
         pl = this;
         gameOn = true;
         pCollider = GetComponent<CapsuleCollider>();
+        hacktimer.GetComponent<Image>().enabled = true;
 
-        
+
     }
 
     void Update()
     {
-        enemydist = Vector3.Distance(other.position, transform.position);
+        //enemydist = Vector3.Distance(other.position, transform.position);
 
         //MAIN MENU
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            hacktimer.GetComponent<Image>().enabled = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            hacktimer.GetComponent<Image>().enabled = false;
         }
 
         //PAUSE

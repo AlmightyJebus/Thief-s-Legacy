@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HackingMiniGame : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class HackingMiniGame : MonoBehaviour
     public float defaultSolvingTime = 10f;
     public static HackingMiniGame miniGame;
     public GameObject hackBoard;
+    public Image hacktimer;
     public GameObject lightQ, lightW, lightE, lightR, lightT, lightA, lightS, lightD, lightF, lightG, lightZ, lightX, lightC, lightV, lightB;
 
     //1st sequence - Q F A R W D S E
@@ -34,6 +36,8 @@ public class HackingMiniGame : MonoBehaviour
     void Start()
     {
         miniGame = this;
+        hacktimer.GetComponent<Image>().enabled = true;
+
     }
 
     void Update()
@@ -42,6 +46,7 @@ public class HackingMiniGame : MonoBehaviour
         {
             PlayerMovement.pl.speed = 0;
             isHacking = true;
+
         }
 
         if (isHacking == true && Input.GetKey(KeyCode.Backspace))
@@ -50,6 +55,7 @@ public class HackingMiniGame : MonoBehaviour
             PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
             isHacking = false;
             hackBoard.SetActive(false);
+            //hacktimer.GetComponent<Image>().enabled = false;
             solvingTime = defaultSolvingTime;
             sequenceIndex = 0;
             lightQ.SetActive(false);
@@ -69,13 +75,16 @@ public class HackingMiniGame : MonoBehaviour
             lightQ.SetActive(false);
             lightE.SetActive(false);
             hackBoard.SetActive(false);
+            //hacktimer.GetComponent<Image>().enabled = false;
             solvingTime = defaultSolvingTime;
         }
 
         if (isHacking == true)
         {
             hackBoard.SetActive(true);
+            hacktimer.GetComponent<Image>().enabled = true;
             solvingTime = solvingTime - Time.deltaTime;
+            hacktimer.fillAmount -= Time.deltaTime;
 
             if (sequenceIndex == 0)
             {
