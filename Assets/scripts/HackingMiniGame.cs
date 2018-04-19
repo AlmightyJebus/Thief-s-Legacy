@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HackingMiniGame : MonoBehaviour {
-
+public class HackingMiniGame : MonoBehaviour
+{
     // LAITA OBJEKTIIN JOKA HAKKEROIDAAN!!
     // LAITA AKTIVOITUMAAN KUN HAKKEROINTI ALKAA!!
     // KATSO SAMALLA EnemyFOV.efov.detectionPercent JA isSolved TOIMINTA!!
 
-    bool isSolved = false;
+    public bool isSolved = false;
 
     //1st sequence - Q F A R W D S E
 
@@ -23,25 +23,48 @@ public class HackingMiniGame : MonoBehaviour {
     KeyCode.E
     };
 
-private int sequenceIndex;
+    private int sequenceIndex;
 
-    private void Update()
+    void Update()
     {
-        if (Input.GetKeyDown(sequenceFirst[sequenceIndex]))
+        if (HackableObject.hackable.isHackable == true && Input.GetKey(KeyCode.E))
         {
-            if (++sequenceIndex == sequenceFirst.Length)
+            //Minipeli alkaa...
+            /*
+            if (Input.GetKeyDown(sequenceFirst[sequenceIndex]))
             {
-                isSolved = true;
-                //Tähän tulee mitä tapahtuu, kun minipeli ratkaistaan
-                sequenceIndex = 0;
-            }
-        }
+                if (++sequenceIndex == sequenceFirst.Length)
+                {
+                    isSolved = true;
+                    //Tähän tulee mitä tapahtuu, kun minipeli ratkaistaan
+                    sequenceIndex = 0;
+                }
 
-        else if (Input.anyKeyDown && sequenceIndex > 0)
-        {
-            isSolved = false;
-            sequenceIndex = 0;
-            EnemyFOV.efov.detectionPercent =+ 25f;
+                if (sequenceIndex == 1)
+                {
+                    //sytytä Q
+                }
+
+                if (sequenceIndex == 2)
+                {
+                    //sammuta Q
+                    //sytytä F
+                }
+
+                if (sequenceIndex == 3)
+                {
+                    //sytytä A
+                }
+
+            }
+
+            else if (Input.anyKeyDown && sequenceIndex > 0)
+            {
+                isSolved = false;
+                sequenceIndex = 0;
+                EnemyFOV.efov.detectionPercent = +25f;
+            }
+            */
         }
     }
 }

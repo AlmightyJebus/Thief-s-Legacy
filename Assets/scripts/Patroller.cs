@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class Patroller : MonoBehaviour
 {
+
+    public static Patroller patr;
+    public PlayerMovement playerscript;
+
     public Transform pos1;
     public Transform pos2;
     public Transform pos3;
@@ -24,15 +28,15 @@ public class Patroller : MonoBehaviour
     public bool position5 = false;
     public bool position6 = false;
     public bool position7 = false;
-    public bool position8 ;
-    
+    public bool position8;
+
 
 
 
     public GameObject questionText;
     public GameObject warningText;
     public GameObject alertText;
-    
+
     public NavMeshAgent agent;
     EnemyFOV enemyScript;
 
@@ -41,27 +45,31 @@ public class Patroller : MonoBehaviour
     public float followSpeed = 3f;
     public bool start = true;
     public bool disable = false;
+    public bool unpause = false;
 
 
 
     void Start()
     {
+
+        patr = this;
+
         agent = gameObject.GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         if (agent == null)
         {
-            Debug.LogError("hei muista laittaa agentti tähän",this);
+            Debug.LogError("hei muista laittaa agentti tähän", this);
         }
 
-        
-     /*   theEnemy = GameObject.FindGameObjectWithTag("Enemy");
-        if (theEnemy == null)
-        {
-            Debug.LogError("ei löydy enemy", this);
 
-        }
-        */
+        /*   theEnemy = GameObject.FindGameObjectWithTag("Enemy");
+           if (theEnemy == null)
+           {
+               Debug.LogError("ei löydy enemy", this);
+
+           }
+           */
         enemyScript = gameObject.GetComponent<EnemyFOV>();
 
         if (enemyScript == null)
@@ -73,56 +81,97 @@ public class Patroller : MonoBehaviour
 
     }
 
-    
+
     void Update()
     {
-        //enemy chase
-        if (enemyScript.isDetected == true)
-        {
-            transform.LookAt(target);
-            transform.Translate(Vector3.forward * followSpeed * Time.deltaTime);
-            warningText.SetActive(true);
-            disable = true;
-        }
 
-        //enemy searching
-        if (enemyScript.isCautious == true && enemyScript.isDetected == false)
+        if (!PlayerMovement.pl.pause)
         {
-            transform.Rotate(0, 50 * Time.deltaTime, 0);
-            GetComponent<NavMeshAgent>().speed = 0f;
-            questionText.SetActive(true);
-            warningText.SetActive(false);
-            start = false;
-            disable = true;
-        }
-        //enemy continue patrol
-        if (enemyScript.isCautious == false && start == false)
-        {
-            questionText.SetActive(false);
-            agent.SetDestination(pos1.position);
-            GetComponent<NavMeshAgent>().speed = 3f;
-            start = true;
-            disable = false;
-        }
+            //enemy chase
+            if (enemyScript.isDetected == true)
+            {
+                transform.LookAt(target);
+                transform.Translate(Vector3.forward * followSpeed * Time.deltaTime);
+                warningText.SetActive(true);
+                disable = true;
+            }
 
-        if (PlayerMovement.pl.isStolen)
-        {
-            GetComponent<NavMeshAgent>().speed = 8f;
-            agent = GetComponent<NavMeshAgent>();
-            alertText.SetActive(true);
-        }
-        
-        
-        /*if (enemyScript.isDetected == true && start == false)
-        {
+            //enemy searching
+            if (enemyScript.isCautious == true && enemyScript.isDetected == false)
+            {
+                transform.Rotate(0, 50 * Time.deltaTime, 0);
+                GetComponent<NavMeshAgent>().speed = 0f;
+                questionText.SetActive(true);
+                warningText.SetActive(false);
+                start = false;
+                disable = true;
+            }
+            //enemy continue patrol
+            if (enemyScript.isCautious == false && start == false)
+            {
+
+                Continue();
+                
+            }
+
+            if (unpause)
+            {
+                Continue();
+                unpause = false;
+                Move();
+               
+            }
+            if (PlayerMovement.pl.pause)
+            {
+                Stop();
+            }
             
-            warningText.SetActive(true);
-            disable = true;
+
+            /*if (start)
+            {
+                //questionText.SetActive(false);
+                agent.SetDestination(pos1.position);
+                GetComponent<NavMeshAgent>().speed = 3f;
+            }
+
+            if (PlayerMovement.pl.isStolen)
+            {
+                GetComponent<NavMeshAgent>().speed = 8f;
+                agent = GetComponent<NavMeshAgent>();
+                alertText.SetActive(true);
+            }
+
+
+            /*if (enemyScript.isDetected == true && start == false)
+            {
+
+                warningText.SetActive(true);
+                disable = true;
+            }
+            if (enemyScript.isDetected == false && start == true)
+            {
+                warningText.SetActive(false);
+            } */
         }
-        if (enemyScript.isDetected == false && start == true)
-        {
-            warningText.SetActive(false);
-        } */
+
+    }
+
+    public void Continue()
+    {
+        questionText.SetActive(false);
+        agent.SetDestination(pos1.position);
+        GetComponent<NavMeshAgent>().speed = 3f;
+        start = true;
+        disable = false;
+    }
+
+    public void Stop()
+    {
+        GetComponent<NavMeshAgent>().speed = 0f;
+    }
+    public void Move()
+    {
+        GetComponent<NavMeshAgent>().speed = 3f;
     }
 
 
@@ -130,9 +179,9 @@ public class Patroller : MonoBehaviour
     {
 
 
-      
-       
-        //enemy patrol route 1
+        if (PlayerMovement.pl.pause==false)
+        {
+            //enemy patrol route 1
 
             if (disable == false)
             {
@@ -177,15 +226,19 @@ public class Patroller : MonoBehaviour
                     agent.SetDestination(pos1.position);
                 }
             }
-
-
-            
         }
+
+
+
+
+
+    }
+}
 
         
 
 
-    }
+    
 
 
 

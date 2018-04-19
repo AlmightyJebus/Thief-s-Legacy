@@ -16,11 +16,10 @@ public class EnemyFOV : MonoBehaviour
     public float cautionTime = 10.0f;
     public float defaultCautionTime;
     public float detectionPercent = 0.0f;
-    public float timer = 6f;
+    public float timer = 3f;
     public bool timerOn = false;
     public bool timesUp = false;
     
-
     public static EnemyFOV efov;
     
     public void Start()
@@ -52,7 +51,7 @@ public class EnemyFOV : MonoBehaviour
                 timesUp = true;
                 isDetected = false;
                 timerOn = false;
-                timer = 6f;
+                timer = 3f;
             }
         }
     }
