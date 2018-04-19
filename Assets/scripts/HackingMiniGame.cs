@@ -13,6 +13,7 @@ public class HackingMiniGame : MonoBehaviour
     public bool isHacking = false;
     public float solvingTime = 10f;
     public float defaultSolvingTime = 10f;
+    public float timerbarconverter;
     public static HackingMiniGame miniGame;
     public GameObject hackBoard;
     public Image hacktimer;
@@ -37,6 +38,7 @@ public class HackingMiniGame : MonoBehaviour
     {
         miniGame = this;
         hacktimer.GetComponent<Image>().enabled = true;
+        timerbarconverter = 1f / solvingTime;
 
     }
 
@@ -84,7 +86,9 @@ public class HackingMiniGame : MonoBehaviour
             hackBoard.SetActive(true);
             hacktimer.GetComponent<Image>().enabled = true;
             solvingTime = solvingTime - Time.deltaTime;
-            hacktimer.fillAmount -= Time.deltaTime;
+            
+
+            hacktimer.fillAmount -= timerbarconverter * Time.deltaTime;
 
             if (sequenceIndex == 0)
             {
