@@ -9,11 +9,12 @@ public class CameraFOV : MonoBehaviour
     public float cameraBorderViewNegative = -23f;
     public float cameraBorderViewPositive = 23f;
     public float viewLength = 3;
+    public float cameraAngle;
 
     public float speed = 1f;
-    public float maxRotation = 45f;
+    public float maxRotation;
     public PlayerMovement playerScript;
-
+    
     public static CameraFOV cfov;
 
     void Start()
@@ -28,7 +29,7 @@ public class CameraFOV : MonoBehaviour
         {
             //transform.Rotate(0, 30 * Time.deltaTime, 0);
 
-            transform.rotation = Quaternion.Euler(31f, 180 + maxRotation * Mathf.Sin(Time.time * speed), 0f);
+            transform.rotation = Quaternion.Euler(31f, cameraAngle + maxRotation * Mathf.Sin(Time.time * speed), 0f);
 
             RaycastHit hit;
             RaycastHit hit2;
