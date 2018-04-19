@@ -12,6 +12,7 @@ public class CameraFOV : MonoBehaviour
 
     public float speed = 1f;
     public float maxRotation = 45f;
+    public PlayerMovement playerScript;
 
     public static CameraFOV cfov;
 
@@ -22,59 +23,65 @@ public class CameraFOV : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        //transform.Rotate(0, 30 * Time.deltaTime, 0);
-
-        transform.rotation = Quaternion.Euler(31f, 180 + maxRotation * Mathf.Sin(Time.time * speed), 0f);
-
-        RaycastHit hit;
-        RaycastHit hit2;
-        RaycastHit hit3;
-
-        //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
-        Quaternion spreadAngleNegative = Quaternion.AngleAxis(cameraBorderViewNegative, Vector3.up);
-        Quaternion spreadAnglePositive = Quaternion.AngleAxis(cameraBorderViewPositive, Vector3.up);
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
+        //If pause is off
+        if (!PlayerMovement.pl.pause)
         {
-            if (hit.collider.tag == "Player")
+            //transform.Rotate(0, 30 * Time.deltaTime, 0);
+
+            transform.rotation = Quaternion.Euler(31f, 180 + maxRotation * Mathf.Sin(Time.time * speed), 0f);
+
+            RaycastHit hit;
+            RaycastHit hit2;
+            RaycastHit hit3;
+
+            //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
+            Quaternion spreadAngleNegative = Quaternion.AngleAxis(cameraBorderViewNegative, Vector3.up);
+            Quaternion spreadAnglePositive = Quaternion.AngleAxis(cameraBorderViewPositive, Vector3.up);
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
             {
-                isSeen = true;
-                EnemyFOV.efov.detectionPercent += 0.5f;
+                if (hit.collider.tag == "Player")
+                {
+                    isSeen = true;
+                    EnemyFOV.efov.detectionPercent += 0.5f;
+                }
+
+                if (hit.collider.tag != "Player")
+                {
+                    isSeen = false;
+                }
             }
 
-            if (hit.collider.tag != "Player")
+            if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength))
             {
-                isSeen = false;
+                if (hit2.collider.tag == "Player")
+                {
+                    isSeen = true;
+                    EnemyFOV.efov.detectionPercent += 0.5f;
+                }
+
+                if (hit2.collider.tag != "Player")
+                {
+                    isSeen = false;
+                }
+            }
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
+            {
+                if (hit3.collider.tag == "Player")
+                {
+                    isSeen = true;
+                    EnemyFOV.efov.detectionPercent += 0.5f;
+                }
+
+                if (hit3.collider.tag != "Player")
+                {
+                    isSeen = false;
+                }
             }
         }
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength))
-        {
-            if (hit2.collider.tag == "Player")
-            {
-                isSeen = true;
-                EnemyFOV.efov.detectionPercent += 0.5f;
-            }
-
-            if (hit2.collider.tag != "Player")
-            {
-                isSeen = false;
-            }
-        }
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
-        {
-            if (hit3.collider.tag == "Player")
-            {
-                isSeen = true;
-                EnemyFOV.efov.detectionPercent += 0.5f;
-            }
-
-            if (hit3.collider.tag != "Player")
-            {
-                isSeen = false;
-            }
-        }
+        
+        
     }
 }

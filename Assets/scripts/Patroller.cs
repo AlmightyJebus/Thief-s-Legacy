@@ -47,6 +47,9 @@ public class Patroller : MonoBehaviour
     public bool disable = false;
     public bool unpause = false;
 
+    public float dist;
+    public Transform other;
+
 
 
     void Start()
@@ -85,8 +88,29 @@ public class Patroller : MonoBehaviour
     void Update()
     {
 
+
+
+        if (unpause)
+        {
+            Continue();
+            unpause = false;
+            Move();
+
+        }
+        if (PlayerMovement.pl.pause)
+        {
+            Stop();
+        }
+
+
+
         if (!PlayerMovement.pl.pause)
         {
+
+
+            //check distance
+            dist = Vector3.Distance(other.position, transform.position);
+
             //enemy chase
             if (enemyScript.isDetected == true)
             {
@@ -107,24 +131,14 @@ public class Patroller : MonoBehaviour
                 disable = true;
             }
             //enemy continue patrol
-            if (enemyScript.isCautious == false && start == false)
+            if (!enemyScript.isCautious && !start)
             {
 
                 Continue();
                 
             }
 
-            if (unpause)
-            {
-                Continue();
-                unpause = false;
-                Move();
-               
-            }
-            if (PlayerMovement.pl.pause)
-            {
-                Stop();
-            }
+            
             
 
             /*if (start)
@@ -158,8 +172,17 @@ public class Patroller : MonoBehaviour
 
     public void Continue()
     {
+        if (dist < 1)
+        {
+            agent.SetDestination(pos2.position);
+        }
+
+        else if (dist >=1)
+        {
+            agent.SetDestination(pos1.position);
+        }
         questionText.SetActive(false);
-        agent.SetDestination(pos1.position);
+        
         GetComponent<NavMeshAgent>().speed = 3f;
         start = true;
         disable = false;
