@@ -85,6 +85,22 @@ public class Patroller : MonoBehaviour
     void Update()
     {
 
+
+
+        if (unpause)
+        {
+            Continue();
+            unpause = false;
+            Move();
+
+        }
+        if (PlayerMovement.pl.pause)
+        {
+            Stop();
+        }
+
+
+
         if (!PlayerMovement.pl.pause)
         {
             //enemy chase
@@ -114,17 +130,7 @@ public class Patroller : MonoBehaviour
                 
             }
 
-            if (unpause)
-            {
-                Continue();
-                unpause = false;
-                Move();
-               
-            }
-            if (PlayerMovement.pl.pause)
-            {
-                Stop();
-            }
+            
             
 
             /*if (start)

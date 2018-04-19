@@ -15,4 +15,18 @@ public class Mainmenu : MonoBehaviour
         Debug.Log("QUIT!");
         Application.Quit();
     }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void WinScreen()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void LoseScreen()
+    {
+        SceneManager.LoadScene(3);
+    }
+    
+
 }
