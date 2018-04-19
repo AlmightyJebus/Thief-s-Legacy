@@ -35,20 +35,23 @@ public class PlayerMovement : MonoBehaviour {
     public static PlayerMovement pl;
     Patroller Patrollerscript;
     public CapsuleCollider pCollider;
-    
+    public Transform other;
+    public float enemydist;
+
 
     void Start ()
     {
         pl = this;
         gameOn = true;
         pCollider = GetComponent<CapsuleCollider>();
+
         
     }
 
     void Update()
     {
+        enemydist = Vector3.Distance(other.position, transform.position);
 
-        
         //MAIN MENU
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -231,6 +234,17 @@ public class PlayerMovement : MonoBehaviour {
 
 
 
+    }
+
+
+    
+    void Example()
+    {
+        if (other)
+        {
+            float dist = Vector3.Distance(other.position, transform.position);
+            //print("Distance to other: " + dist);
+        }
     }
 
     void Play()
