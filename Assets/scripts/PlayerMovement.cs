@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour {
 
     public bool pause = false;
+    public GameObject pauseText;
 
     public float speed = 2f;
     public float normalHeight = 2f;
@@ -79,6 +80,7 @@ public class PlayerMovement : MonoBehaviour {
                 Debug.Log("PAUSE");
                 pause = true;
                 Patroller.patr.disable = true;
+                pauseText.SetActive(true);
 
             }
             else if (!pause)
@@ -88,6 +90,7 @@ public class PlayerMovement : MonoBehaviour {
                 
                 Patroller.patr.unpause = true;
                 //Patroller.patr.start = true;
+                pauseText.SetActive(false);
             }
         }
 
