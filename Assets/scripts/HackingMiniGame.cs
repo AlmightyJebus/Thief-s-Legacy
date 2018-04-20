@@ -12,14 +12,20 @@ public class HackingMiniGame : MonoBehaviour
     public PlayerMovement playerscript;
     public bool isSolved = false;
     public bool isHacking = false;
-    public float solvingTime = 10f;
-    public float defaultSolvingTime = 10f;
+    public float solvingTime;
+    public float defaultSolvingTime;
     public float timerbarconverter;
     public static HackingMiniGame miniGame;
     public GameObject hackBoard;
     public Image hacktimer;
     public Image progressbar;
     public float multiplier;
+    public float count;
+    public Text countText;
+    public float waitTime = 2f;
+    public bool wait = false;
+    public bool waitover = false;
+
     public GameObject lightQ, lightW, lightE, lightR, lightT, lightA, lightS, lightD, lightF, lightG, lightZ, lightX, lightC, lightV, lightB;
 
     //1st sequence - Q F A R W D S E
@@ -50,6 +56,28 @@ public class HackingMiniGame : MonoBehaviour
 
         if (!PlayerMovement.pl.pause)
         {
+
+            //wait
+           if (wait)
+            {
+                //Debug.Log("Timer");
+                waitTime -= Time.deltaTime;
+                if (waitTime < 0)
+                {
+                    
+                    //Debug.Log("Time over");
+                    waitover = true;
+                    waitTime = 2f;
+                    wait = false;
+                    
+                    
+                    
+                }
+            }
+            
+
+
+
             if (HackableObject.hackable.isHackable == true && Input.GetKey(KeyCode.E))
             {
                 PlayerMovement.pl.speed = 0;
@@ -78,13 +106,22 @@ public class HackingMiniGame : MonoBehaviour
 
             if (isSolved == true)
             {
-                PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
                 isHacking = false;
-                lightQ.SetActive(false);
+                PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
+                if (waitover == true)
+                {
+                    lightQ.SetActive(false);
                 lightE.SetActive(false);
                 hackBoard.SetActive(false);
+                    waitover = false;
+                }
+               
+
                 //hacktimer.GetComponent<Image>().enabled = false;
                 solvingTime = defaultSolvingTime;
+                    
+                
+                
             }
 
             if (isHacking == true)
@@ -115,23 +152,37 @@ public class HackingMiniGame : MonoBehaviour
 
                     if (++sequenceIndex == sequenceFirst.Length)
                     {
-                        isSolved = true;
+                        Debug.Log("SOLVED!");
+                        
+                                                
+
                         //Tähän tulee mitä tapahtuu, kun minipeli ratkaistaan
+
+                        
+                        
+                        wait = true;
+                        Full();
+                        isSolved = true;
                         sequenceIndex = 0;
+                        
                     }
 
                     if (sequenceIndex > 0)
                     {
+
+                        Debug.Log("0");
                         lightQ.SetActive(false);
 
-                        multiplier = sequenceIndex + 1;
+                        multiplier = sequenceIndex;
                         Fill();
+                        
                     }
 
                     if (sequenceIndex == 1)
                     {
+                        Debug.Log("1");
                         lightF.SetActive(true);
-                        multiplier = sequenceIndex + 1;
+                        multiplier = sequenceIndex;
                         Fill();
 
                     }
@@ -140,7 +191,7 @@ public class HackingMiniGame : MonoBehaviour
                     {
                         lightF.SetActive(false);
                         lightA.SetActive(true);
-                        multiplier = sequenceIndex + 1;
+                        multiplier = sequenceIndex;
                         Fill();
                     }
 
@@ -148,7 +199,7 @@ public class HackingMiniGame : MonoBehaviour
                     {
                         lightA.SetActive(false);
                         lightR.SetActive(true);
-                        multiplier = sequenceIndex + 1;
+                        multiplier = sequenceIndex;
                         Fill();
                     }
 
@@ -156,7 +207,7 @@ public class HackingMiniGame : MonoBehaviour
                     {
                         lightR.SetActive(false);
                         lightW.SetActive(true);
-                        multiplier = sequenceIndex + 1;
+                        multiplier = sequenceIndex;
                         Fill();
                     }
 
@@ -164,7 +215,7 @@ public class HackingMiniGame : MonoBehaviour
                     {
                         lightW.SetActive(false);
                         lightD.SetActive(true);
-                        multiplier = sequenceIndex + 1;
+                        multiplier = sequenceIndex;
                         Fill();
                     }
 
@@ -172,7 +223,7 @@ public class HackingMiniGame : MonoBehaviour
                     {
                         lightD.SetActive(false);
                         lightS.SetActive(true);
-                        multiplier = sequenceIndex + 1;
+                        
                         Fill();
                     }
 
@@ -180,9 +231,13 @@ public class HackingMiniGame : MonoBehaviour
                     {
                         lightS.SetActive(false);
                         lightE.SetActive(true);
-                        multiplier = sequenceIndex + 1;
                         Fill();
+                        
                     }
+                   
+                    
+
+                    
                 }
 
                 else if (Input.anyKeyDown && sequenceIndex > 0)
@@ -218,8 +273,26 @@ public class HackingMiniGame : MonoBehaviour
         
     public void Fill()
     {
-        progressbar.fillAmount = multiplier * 0.085f;
+        multiplier = sequenceIndex;
+        progressbar.fillAmount = multiplier * 0.125f;
+        count = multiplier * 12.5f;
+        countText.text = count.ToString() + " %";
     }
+    public void Full()
+    {
+        Debug.Log("FULL!");
+        progressbar.fillAmount = 1f;
+        count = 100;
+        countText.text = count.ToString() + " %";
+    }
+
+    public void Wait()
+    {
+        
+        
+    }
+
+    
 }
         
     
