@@ -144,6 +144,8 @@ public class HackingMiniGame : MonoBehaviour
                     lightS.SetActive(false);
                     lightE.SetActive(false);
                     progressbar.fillAmount = 0f;
+                    count = 0;
+                    countText.text = count.ToString() + " %";
                 }
 
                 //Minipeli alkaa...
@@ -246,6 +248,8 @@ public class HackingMiniGame : MonoBehaviour
                     EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
                     sequenceIndex = 0;
                     progressbar.fillAmount = 0;
+                    count = 0;
+                    countText.text = count.ToString() + " %";
                 }
             }
 
