@@ -37,8 +37,8 @@ public class PlayerMovement : MonoBehaviour {
     public static PlayerMovement pl;
     Patroller Patrollerscript;
     public CapsuleCollider pCollider;
-    public Transform other;
-    public float enemydist;
+    //public Transform other;
+    //public float enemydist;
 
 
     void Start ()
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour {
         pl = this;
         gameOn = true;
         pCollider = GetComponent<CapsuleCollider>();
-        hacktimer.GetComponent<Image>().enabled = true;
+        //hacktimer.GetComponent<Image>().enabled = true;
 
 
     }
@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour {
             SceneManager.LoadScene(0);
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+      /*  if (Input.GetKeyDown(KeyCode.T))
         {
             hacktimer.GetComponent<Image>().enabled = true;
         }
@@ -69,6 +69,8 @@ public class PlayerMovement : MonoBehaviour {
         {
             hacktimer.GetComponent<Image>().enabled = false;
         }
+
+        */
 
         //PAUSE
         if (Input.GetKeyDown(KeyCode.P))
@@ -252,7 +254,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
     
-    void Example()
+   /* void Example()
     {
         if (other)
         {
@@ -265,6 +267,7 @@ public class PlayerMovement : MonoBehaviour {
     {
 
     }
+    */
 
     void OnTriggerEnter(Collider other)
     {

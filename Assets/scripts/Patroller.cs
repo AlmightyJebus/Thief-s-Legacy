@@ -18,7 +18,7 @@ public class Patroller : MonoBehaviour
     public Transform pos6;
     public Transform pos7;
     public Transform pos8;
-    public Transform pos;
+    //public Transform pos;
 
 
     public bool position1 = true;
@@ -28,7 +28,7 @@ public class Patroller : MonoBehaviour
     public bool position5 = false;
     public bool position6 = false;
     public bool position7 = false;
-    public bool position8;
+    public bool position8 = false;
 
 
 
@@ -48,7 +48,9 @@ public class Patroller : MonoBehaviour
     public bool unpause = false;
 
     public float dist;
-    public GameObject other;
+    //public GameObject other;
+    public bool returning = false;
+    public int route=1;
 
 
 
@@ -88,7 +90,7 @@ public class Patroller : MonoBehaviour
     void Update()
     {
 
-        //check distance
+        /*
         if(other)
         {
             dist = Vector3.Distance(other.transform.position, transform.position);
@@ -97,6 +99,7 @@ public class Patroller : MonoBehaviour
         {
             Debug.Log("other ei löydy");
         }
+        */
         
 
         if (unpause)
@@ -209,54 +212,92 @@ public class Patroller : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
 
-
+        
         if (PlayerMovement.pl.pause==false)
         {
             //enemy patrol route 1
 
-            if (disable == false)
+            if (disable == false && route==1)
             {
+                
+                if (other.tag == "1")
+                    {
+                        agent.SetDestination(pos2.position);
+                        start = true;
+                    returning = false;
+                    }
+
+                    if (other.tag == "2" && !returning)
+                    {
+                        agent.SetDestination(pos3.position);
+
+                    }
+
+                    if (other.tag == "3")
+                    {
+                        agent.SetDestination(pos2.position);
+                        returning = true;
+
+                    }
+                    if (other.tag == "2" && returning)
+                    {
+                        agent.SetDestination(pos1.position);
+                    
+                    }
+                }
+            //enemy patrol route 2
+
+            if (disable == false && route == 2)
+            {
+
                 if (other.tag == "1")
                 {
                     agent.SetDestination(pos2.position);
                     start = true;
                 }
 
-                if (other.tag == "2")
+                if (other.tag == "2" && !returning)
                 {
                     agent.SetDestination(pos3.position);
 
                 }
 
-                if (other.tag == "3")
+                if (other.tag == "3" && !returning)
                 {
                     agent.SetDestination(pos4.position);
-                }
+                    
 
-                if (other.tag == "4")
+                }
+                if (other.tag == "4" && !returning)
                 {
                     agent.SetDestination(pos5.position);
+                    
                 }
-
                 if (other.tag == "5")
                 {
-                    agent.SetDestination(pos6.position);
+                    agent.SetDestination(pos4.position);
+                    returning = true;
                 }
 
-                if (other.tag == "6")
+                if (other.tag=="4" && returning)
                 {
-                    agent.SetDestination(pos7.position);
+                    agent.SetDestination(pos3.position);
                 }
 
-                if (other.tag == "7")
+                if (other.tag == "3" && returning)
                 {
-                    agent.SetDestination(pos8.position);
+                    agent.SetDestination(pos2.position);
                 }
-                if (other.tag == "8")
+
+                if (other.tag == "2" && returning)
                 {
                     agent.SetDestination(pos1.position);
+                    returning = false;
                 }
             }
+
+
+        }
         }
 
 
@@ -264,7 +305,7 @@ public class Patroller : MonoBehaviour
 
 
     }
-}
+
 
         
 
