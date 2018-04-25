@@ -41,7 +41,7 @@ public class Patroller : MonoBehaviour
     EnemyFOV enemyScript;
 
     public Transform target;
-    public Transform myTransform;
+   public GameObject resetpos;
     public float followSpeed = 3f;
     public bool start = true;
     public bool disable = false;
@@ -90,16 +90,8 @@ public class Patroller : MonoBehaviour
     void Update()
     {
 
-        /*
-        if(other)
-        {
-            dist = Vector3.Distance(other.transform.position, transform.position);
-        }
-        else
-        {
-            Debug.Log("other ei löydy");
-        }
-        */
+        
+        
         
 
         if (unpause)
@@ -120,7 +112,17 @@ public class Patroller : MonoBehaviour
         {
 
 
-            
+            if (resetpos)
+            {
+                dist = Vector3.Distance(resetpos.transform.position, transform.position);
+            }
+            else
+            {
+                Debug.Log("resetpositionia ei löydy");
+            }
+
+
+
 
             //enemy chase
             if (enemyScript.isDetected == true)
@@ -295,6 +297,91 @@ public class Patroller : MonoBehaviour
                     returning = false;
                 }
             }
+            //enemy patrol route 3
+
+            if (disable == false && route == 3)
+            {
+
+                if (other.tag == "1")
+                {
+                    agent.SetDestination(pos2.position);
+                    start = true;
+                    
+                }
+
+                if (other.tag == "2")
+                {
+                    agent.SetDestination(pos3.position);
+
+                }
+
+                if (other.tag == "3")
+                {
+                    agent.SetDestination(pos4.position);
+                    
+
+                }
+                if (other.tag == "4")
+                {
+                    agent.SetDestination(pos1.position);
+
+                }
+            }
+            //enemy patrol route 4
+            if (disable == false && route == 4)
+            {
+
+                if (other.tag == "1")
+                {
+                    agent.SetDestination(pos2.position);
+                    start = true;
+                    returning = false;
+
+                }
+
+                if (other.tag == "2" && !returning)
+                {
+                    agent.SetDestination(pos3.position);
+
+                }
+
+                if (other.tag == "3" && !returning)
+                {
+                    agent.SetDestination(pos4.position);
+
+
+                }
+                if (other.tag == "4" && !returning)
+                {
+                    agent.SetDestination(pos5.position);
+
+                }
+
+                if (other.tag == "5")
+                {
+                    agent.SetDestination(pos1.position);
+                    returning = true;
+
+                }
+
+                if (other.tag == "4" && returning)
+                {
+                    agent.SetDestination(pos3.position);
+                }
+
+                if (other.tag == "3" && returning)
+                {
+                    agent.SetDestination(pos2.position);
+                }
+
+                if (other.tag == "2" && returning)
+                {
+                    agent.SetDestination(pos1.position);
+                }
+
+            }
+
+
 
 
         }
