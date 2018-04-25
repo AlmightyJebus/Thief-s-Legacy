@@ -15,6 +15,7 @@ public class CameraDisable : MonoBehaviour {
     public Transform transformCamera;
     public Transform player;
     public float distance;
+    public float minDistance = 2.5f;
     public float disableTime = 10f;
     public float defaultDisableTime = 10f;
 
@@ -27,13 +28,13 @@ public class CameraDisable : MonoBehaviour {
     {
         distance = Vector3.Distance(transformCamera.position, player.position);
 
-        if (distance < 2.5f)
+        if (distance < minDistance)
         {
             disableText.SetActive(true);
             canBeDisabled = true;
         }
 
-        if (distance > 2.5f)
+        if (distance > minDistance)
         {
             disableText.SetActive(false);
             canBeDisabled = false;
