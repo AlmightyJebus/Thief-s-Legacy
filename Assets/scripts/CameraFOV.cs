@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class CameraFOV : MonoBehaviour
 {
     public bool isSeen = false;
-    public float cameraBorderViewNegative = -23f;
-    public float cameraBorderViewPositive = 23f;
-    public float viewLength = 3;
+    public float cameraBorderViewNegative;
+    public float cameraBorderViewPositive;
+    public float viewLength;
+    public float defaultViewLength;
     public float cameraAngle;
 
     public float speed = 1f;
