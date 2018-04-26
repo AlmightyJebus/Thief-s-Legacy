@@ -10,6 +10,7 @@ public class HackingMiniGame : MonoBehaviour
     // KATSO SAMALLA EnemyFOV.efov.detectionPercent JA isSolved TOIMINTA!!
 
     public PlayerMovement playerscript;
+    public static HackingMiniGame hacking1;
     public bool isSolved = false;
     public bool isHacking = false;
     public float solvingTime;
@@ -25,6 +26,7 @@ public class HackingMiniGame : MonoBehaviour
     public float waitTime = 2f;
     public bool wait = false;
     public bool waitover = false;
+
 
     public GameObject lightQ, lightW, lightE, lightR, lightT, lightA, lightS, lightD, lightF, lightG, lightZ, lightX, lightC, lightV, lightB;
 
@@ -48,6 +50,7 @@ public class HackingMiniGame : MonoBehaviour
         miniGame = this;
         hacktimer.GetComponent<Image>().enabled = true;
         timerbarconverter = 1f / solvingTime;
+        hacking1 = this;
 
     }
 

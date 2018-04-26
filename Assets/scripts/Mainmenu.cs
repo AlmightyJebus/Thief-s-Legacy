@@ -10,6 +10,10 @@ public class Mainmenu : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void Level2()
+    {
+        SceneManager.LoadScene(2);
+    }
     public void QuitGame()
     {
         Debug.Log("QUIT!");
@@ -21,11 +25,15 @@ public class Mainmenu : MonoBehaviour
     }
     public void WinScreen()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
     public void LoseScreen()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
 

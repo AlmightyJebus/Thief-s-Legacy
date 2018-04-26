@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool pause = false;
     public GameObject pauseText;
+    public GameObject losescreen;
+    public GameObject winscreen;
 
     public float speed = 2f;
     public float normalHeight = 2f;
@@ -22,6 +24,8 @@ public class PlayerMovement : MonoBehaviour {
     public bool increaseStamina = false;
     public GameObject winText;
     public GameObject loot;
+    public GameObject pickable1, pickable2, pickable3, pickable4;
+    public Image picked1, picked2, picked3, picked4, looted;
     public GameObject crouchText;
     public GameObject sprintText;
     public GameObject staminaText;
@@ -34,12 +38,24 @@ public class PlayerMovement : MonoBehaviour {
     public bool isSprinting = false;
     public bool atTheWall = false;
     public bool isStolen = false;
+    public bool gotit = false;
     public static PlayerMovement pl;
     Patroller Patrollerscript;
     public CapsuleCollider pCollider;
     //public Transform other;
     //public float enemydist;
 
+    public HackingMiniGame hackingscript;
+
+
+    void Awake()
+    {
+        picked1.GetComponent<Image>().enabled = false;
+        picked2.GetComponent<Image>().enabled = false;
+        picked3.GetComponent<Image>().enabled = false;
+        picked4.GetComponent<Image>().enabled = false;
+        looted.GetComponent<Image>().enabled = false;
+    }
 
     void Start ()
     {
@@ -47,8 +63,7 @@ public class PlayerMovement : MonoBehaviour {
         gameOn = true;
         pCollider = GetComponent<CapsuleCollider>();
         //hacktimer.GetComponent<Image>().enabled = true;
-
-
+        
     }
 
     void Update()
@@ -276,16 +291,57 @@ public class PlayerMovement : MonoBehaviour {
             atTheWall = true;
         }
 
-        if (other.gameObject.CompareTag("Loot"))
+        if (other.gameObject.CompareTag("Loot") && HackingMiniGame.hacking1.isSolved)
         {
            // winText.SetActive(true);
             loot.SetActive(false);
+            gotit = true;
+            looted.GetComponent<Image>().enabled = true;
             isStolen = true;
         }
+        if (other.gameObject.CompareTag("Pickable1"))
+        {
+            pickable1.SetActive(false);
+            picked1.GetComponent<Image>().enabled = true;
+
+            
+            
+
+        }
+        //exit with primary loot
+        if (other.gameObject.CompareTag("Exit") && gotit )
+        {
+            Win();
+        } 
+        //DEBUG
+        /*if (other.gameObject.CompareTag("Exit"))
+        {
+            Win();
+        } */
+        if (other.gameObject.CompareTag("Pickable2"))
+        {
+            pickable2.SetActive(false);
+            picked2.GetComponent<Image>().enabled = true;
+
+        }
+        if (other.gameObject.CompareTag("Pickable3"))
+        {
+            pickable3.SetActive(false);
+            picked3.GetComponent<Image>().enabled = true;
+
+        }
+        if (other.gameObject.CompareTag("Pickable4"))
+        {
+            pickable4.SetActive(false);
+            picked4.GetComponent<Image>().enabled = true;
+
+        }
+
 
         if (other.gameObject.CompareTag ("Enemy"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Lose();
         }
     }
 
@@ -295,5 +351,15 @@ public class PlayerMovement : MonoBehaviour {
         {
             atTheWall = false;
         }
+    }
+    public void Lose()
+    {
+        losescreen.SetActive(true);
+        pause = true;
+    }
+    public void Win()
+    {
+        winscreen.SetActive(true);
+        pause = true;
     }
 }
