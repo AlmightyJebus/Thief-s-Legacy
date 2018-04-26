@@ -13,9 +13,16 @@ public class Gamecontroller : MonoBehaviour
     public Text scoreText;
     public GameObject gameOverText;
     public GameObject winText;
+    public PlayerMovement playerscript;
+    public EnemyFOV enemyFOVscript;
+    public Patroller patrollerscript;
+    public float criticalPercent;
+
+        
 
     void Awake()
     {
+        //onko muuttunut GIT
         if (instance == null)
         {
             instance = this;
@@ -28,10 +35,7 @@ public class Gamecontroller : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start ()
-    {
-		
-	}
+  
 	
 	// Update is called once per frame
 	void Update ()

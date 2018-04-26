@@ -15,13 +15,18 @@ public class EnemyFOV : MonoBehaviour
     public float viewLength = 3;
     public float cautionTime = 10.0f;
     public float defaultCautionTime;
-    public float detectionPercent;
-    public float detectionRate;
+
+
+    public float detectionPercent = 0.0f;
+    public float detectionRate = 0.1f;
+
+
     public float timer = 3f;
     public bool timerOn = false;
     public bool timesUp = false;
     
     public static EnemyFOV efov;
+    public Gamecontroller Gamecontrolscript;
     
     public void Start()
     {
@@ -35,6 +40,7 @@ public class EnemyFOV : MonoBehaviour
 
     void Update()
     {
+        
         //näitä arvoja muutetaan, kun pelaaja löytää aarteen, FOV kasvaa?
         if (PlayerMovement.pl.isStolen)
         {
@@ -53,6 +59,7 @@ public class EnemyFOV : MonoBehaviour
                 isDetected = false;
                 timerOn = false;
                 timer = 3f;
+                //onko muuuttunut GIT
             }
         }
     }
@@ -107,11 +114,12 @@ public class EnemyFOV : MonoBehaviour
         if (isDetected == true)
         {
             //Huutomerkki
-            detectionPercent = detectionPercent + detectionRate;
+           /* detectionPercent = detectionPercent + detectionRate; */
             isCautious = true;
+            Gamecontroller.instance.criticalPercent += detectionRate;
         }
 
-        if (isDetected == false && isCautious == true && detectionPercent > 0)
+        if (isDetected == false && isCautious == true && Gamecontroller.instance.criticalPercent > 0)
         {
             isCautious = true;
             cautionTime -= Time.deltaTime;
