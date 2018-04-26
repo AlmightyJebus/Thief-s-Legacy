@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour {
     public CapsuleCollider pCollider;
     public HackingMiniGame hackingscript;
     public EnemyFOV enemyFOVscript;
+    public Gamecontroller Gamecontrolscript;
     //public Transform other;
     //public float enemydist;
 
@@ -120,8 +121,8 @@ public class PlayerMovement : MonoBehaviour {
         if (!pause)
         {
             //critical meter kasvaa jos..
-            criticalMeter.fillAmount = EnemyFOV.efov.detectionPercent/detectionBarConverter;
-            detectionValue = EnemyFOV.efov.detectionPercent;
+            criticalMeter.fillAmount = Gamecontroller.instance.criticalPercent/detectionBarConverter;
+            detectionValue = Gamecontroller.instance.criticalPercent;
 
             //check if lose
             if (criticalMeter.fillAmount == 1)

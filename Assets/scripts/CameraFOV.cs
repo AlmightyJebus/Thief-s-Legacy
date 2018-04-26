@@ -11,12 +11,14 @@ public class CameraFOV : MonoBehaviour
     public float viewLength;
     public float defaultViewLength;
     public float cameraAngle;
+    public float detectionRate = 0.1f;
 
     public float speed = 1f;
     public float maxRotation;
     public PlayerMovement playerScript;
     
     public static CameraFOV cfov;
+    public Gamecontroller gamecontrolscript;
 
     void Start()
     {
@@ -47,7 +49,8 @@ public class CameraFOV : MonoBehaviour
                 if (hit.collider.tag == "Player")
                 {
                     isSeen = true;
-                    EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    Gamecontroller.instance.criticalPercent += detectionRate;
                 }
 
                 if (hit.collider.tag != "Player")
@@ -61,7 +64,8 @@ public class CameraFOV : MonoBehaviour
                 if (hit2.collider.tag == "Player")
                 {
                     isSeen = true;
-                    EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    Gamecontroller.instance.criticalPercent += detectionRate;
                 }
 
                 if (hit2.collider.tag != "Player")
@@ -75,7 +79,8 @@ public class CameraFOV : MonoBehaviour
                 if (hit3.collider.tag == "Player")
                 {
                     isSeen = true;
-                    EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    Gamecontroller.instance.criticalPercent += detectionRate;
                 }
 
                 if (hit3.collider.tag != "Player")
@@ -89,7 +94,8 @@ public class CameraFOV : MonoBehaviour
                 if (hit4.collider.tag == "Player")
                 {
                     isSeen = true;
-                    EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    Gamecontroller.instance.criticalPercent += detectionRate;
                 }
 
                 if (hit4.collider.tag != "Player")
@@ -103,7 +109,8 @@ public class CameraFOV : MonoBehaviour
                 if (hit5.collider.tag == "Player")
                 {
                     isSeen = true;
-                    EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                    Gamecontroller.instance.criticalPercent += detectionRate;
                 }
 
                 if (hit5.collider.tag != "Player")
