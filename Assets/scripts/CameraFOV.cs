@@ -35,6 +35,8 @@ public class CameraFOV : MonoBehaviour
             RaycastHit hit;
             RaycastHit hit2;
             RaycastHit hit3;
+            RaycastHit hit4;
+            RaycastHit hit5;
 
             //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
             Quaternion spreadAngleNegative = Quaternion.AngleAxis(cameraBorderViewNegative, Vector3.up);
@@ -77,6 +79,34 @@ public class CameraFOV : MonoBehaviour
                 }
 
                 if (hit3.collider.tag != "Player")
+                {
+                    isSeen = false;
+                }
+            }
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward * 0.5f), out hit4, viewLength))
+            {
+                if (hit4.collider.tag == "Player")
+                {
+                    isSeen = true;
+                    EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                }
+
+                if (hit4.collider.tag != "Player")
+                {
+                    isSeen = false;
+                }
+            }
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward * 0.5f), out hit5, viewLength))
+            {
+                if (hit5.collider.tag == "Player")
+                {
+                    isSeen = true;
+                    EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
+                }
+
+                if (hit5.collider.tag != "Player")
                 {
                     isSeen = false;
                 }
