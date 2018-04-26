@@ -15,7 +15,7 @@ public class EnemyFOV : MonoBehaviour
     public float viewLength = 3;
     public float cautionTime = 10.0f;
     public float defaultCautionTime;
-    public float detectionPercent = 0.0f;
+    public float detectionPercent;
     public float detectionRate;
     public float timer = 3f;
     public bool timerOn = false;

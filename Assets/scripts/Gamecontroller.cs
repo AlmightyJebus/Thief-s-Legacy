@@ -14,7 +14,6 @@ public class Gamecontroller : MonoBehaviour
     public GameObject gameOverText;
     public GameObject winText;
 
-
     void Awake()
     {
         if (instance == null)
@@ -37,23 +36,17 @@ public class Gamecontroller : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		
+
 	}
 
     public void Score()
     {
-
         if (gameOver)
         {
             return;
         }
 
-        
-        
-            score++;
-        
-
-
+        score++;
         scoreText.text = "Score: " + score.ToString() + "/40";
 
 
