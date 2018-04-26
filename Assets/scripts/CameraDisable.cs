@@ -31,20 +31,12 @@ public class CameraDisable : MonoBehaviour {
         if (distance < minDistance)
         {
             canBeDisabled = true;
+            disableText.SetActive(true);
         }
 
         if (distance > minDistance)
         {
             canBeDisabled = false;
-        }
-
-        if (canBeDisabled == true)
-        {
-            disableText.SetActive(true);
-        }
-
-        if (canBeDisabled == false)
-        {
             disableText.SetActive(false);
         }
 
