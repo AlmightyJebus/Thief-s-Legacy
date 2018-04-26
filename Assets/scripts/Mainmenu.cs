@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class Mainmenu : MonoBehaviour
 {
+    PlayerMovement playerscript;
 
 	public void PlayGame()
     {
@@ -34,6 +36,10 @@ public class Mainmenu : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void Resume()
+    {
+        PlayerMovement.pl.pause = false;
     }
     
 

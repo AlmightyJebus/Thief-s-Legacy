@@ -10,7 +10,10 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject pauseText;
     public GameObject losescreen;
     public GameObject winscreen;
+    public GameObject pausemenu;
 
+    public float detectionValue;
+    public float detectionBarConverter;
     public float speed = 2f;
     public float normalHeight = 2f;
     public float crouchHeight = 1f;
@@ -30,9 +33,10 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject sprintText;
     public GameObject staminaText;
     public Image staminaBar;
-    public Image hacktimer;
+    public Image criticalMeter;
+    //public Image hacktimer;
 
-    public Text loseText;
+    //public Text loseText;
     public bool isMoving = false;
     public bool isCrouching = false;
     public bool isSprinting = false;
@@ -42,11 +46,10 @@ public class PlayerMovement : MonoBehaviour {
     public static PlayerMovement pl;
     Patroller Patrollerscript;
     public CapsuleCollider pCollider;
+    public HackingMiniGame hackingscript;
+    public EnemyFOV enemyFOVscript;
     //public Transform other;
     //public float enemydist;
-
-    public HackingMiniGame hackingscript;
-
 
     void Awake()
     {
@@ -97,7 +100,8 @@ public class PlayerMovement : MonoBehaviour {
                 Debug.Log("PAUSE");
                 pause = true;
                 Patroller.patr.disable = true;
-                pauseText.SetActive(true);
+                //pauseText.SetActive(true);
+                pausemenu.SetActive(true);
 
             }
             else if (!pause)
@@ -107,13 +111,25 @@ public class PlayerMovement : MonoBehaviour {
                 
                 Patroller.patr.unpause = true;
                 //Patroller.patr.start = true;
-                pauseText.SetActive(false);
+                //pauseText.SetActive(false);
+                pausemenu.SetActive(false);
             }
         }
 
-
+        // PELI ALKAA
         if (!pause)
         {
+            //critical meter kasvaa jos..
+            criticalMeter.fillAmount = EnemyFOV.efov.detectionPercent/detectionBarConverter;
+            detectionValue = EnemyFOV.efov.detectionPercent;
+
+            //check if lose
+            if (criticalMeter.fillAmount == 1)
+            {
+                Lose();
+            }
+
+
 
             if (reduceStamina)
             {
@@ -337,12 +353,15 @@ public class PlayerMovement : MonoBehaviour {
 
         }
 
-
-        if (other.gameObject.CompareTag ("Enemy"))
+        // lose condition
+       if (other.gameObject.CompareTag ("Enemy"))
+          
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Lose();
         }
+        
+       
     }
 
     void OnTriggerExit(Collider other)
