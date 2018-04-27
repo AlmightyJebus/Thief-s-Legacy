@@ -306,37 +306,37 @@ public class PlayerMovement : MonoBehaviour {
             loot.SetActive(false);
             gotit = true;
             Gamecontroller.instance.AddLoot();
+            Gamecontroller.instance.AddScore();
+
             looted.GetComponent<Image>().enabled = true;
             isStolen = true;
         }
+
+        //exit with primary loot
+        if (other.gameObject.CompareTag("Exit") && gotit)
+        {
+            Exit();
+            Win();
+
+
+        }
+
         if (other.gameObject.CompareTag("Pickable1"))
         {
             pickable1.SetActive(false);
             picked1.GetComponent<Image>().enabled = true;
             Gamecontroller.instance.AddLoot();
-
-
-
-
+            Gamecontroller.instance.AddScore();
+            
         }
-        //exit with primary loot
-        if (other.gameObject.CompareTag("Exit") && gotit )
-        {
-            Exit();
-            Win();
-            
-            
-        } 
-        //DEBUG
-        /*if (other.gameObject.CompareTag("Exit"))
-        {
-            Win();
-        } */
+       
+       
         if (other.gameObject.CompareTag("Pickable2"))
         {
             pickable2.SetActive(false);
             picked2.GetComponent<Image>().enabled = true;
             Gamecontroller.instance.AddLoot();
+            Gamecontroller.instance.AddScore();
 
         }
         if (other.gameObject.CompareTag("Pickable3"))
@@ -344,6 +344,7 @@ public class PlayerMovement : MonoBehaviour {
             pickable3.SetActive(false);
             picked3.GetComponent<Image>().enabled = true;
             Gamecontroller.instance.AddLoot();
+            Gamecontroller.instance.AddScore();
 
         }
         if (other.gameObject.CompareTag("Pickable4"))
@@ -351,6 +352,7 @@ public class PlayerMovement : MonoBehaviour {
             pickable4.SetActive(false);
             picked4.GetComponent<Image>().enabled = true;
             Gamecontroller.instance.AddLoot();
+            Gamecontroller.instance.AddScore();
 
         }
 
@@ -377,7 +379,10 @@ public class PlayerMovement : MonoBehaviour {
         losescreen.SetActive(true);
         pause = true;
         Gamecontroller.instance.successTime = 0;
-        Exit();
+        Gamecontroller.instance.lootProcent = 1;
+        Gamecontroller.instance.CountMeter();
+        Gamecontroller.instance.ScoreLoot();
+        Gamecontroller.instance.CountTime();
         Gamecontroller.instance.ShowScore();
     }
     public void Win()
@@ -394,6 +399,7 @@ public class PlayerMovement : MonoBehaviour {
         Gamecontroller.instance.ScoreLoot();
         Gamecontroller.instance.CountTime();
         Gamecontroller.instance.ResetTime();
+        Gamecontroller.instance.Exit();
     }
 
 }

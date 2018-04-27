@@ -45,10 +45,6 @@ public class Gamecontroller : MonoBehaviour
         successTime = 100f;
     }
 
-    // Use this for initialization
-  
-	
-	// Update is called once per frame
 	void Update ()
 
         
@@ -71,17 +67,7 @@ public class Gamecontroller : MonoBehaviour
         timerOn = false;
     }
 
-    public void ScorePickable()
-    {
-        score +=10;
-                
-    }
-    public void ScoreTreasure()
-    {
-        
-        score += 20;
-        
-    }
+   
     public void CountMeter()
     {
 
@@ -116,11 +102,15 @@ public class Gamecontroller : MonoBehaviour
     }
     public void ScoreLoot()
     {
-        score += score * lootProcent;
+        score = score * lootProcent;
     }
     public void CountTime()
     {
         score +=successTime;
+    }
+    public void AddScore()
+    {
+        score += 10;
     }
     public void ResetTime()
     {
@@ -138,7 +128,7 @@ public class Gamecontroller : MonoBehaviour
     }
     public void Exit()
     {
-        score += 50f;
+        //score += 50f;
     }
     public void Timer()
     {

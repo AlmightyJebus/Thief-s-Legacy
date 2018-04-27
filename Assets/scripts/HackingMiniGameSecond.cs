@@ -139,7 +139,7 @@ public class HackingMiniGameSecond : MonoBehaviour
                     {
                         Debug.Log("SOLVED!");
                         //Tähän tulee mitä tapahtuu, kun minipeli ratkaistaan
-                        
+                        Gamecontroller.instance.Hack();
                         wait = true;
                         Full();
                         isSolved = true;
@@ -210,9 +210,10 @@ public class HackingMiniGameSecond : MonoBehaviour
                         Fill();
                     }
                 }
-
+                //FAIL
                 else if (Input.anyKeyDown && sequenceIndex > 0)
                 {
+                    Gamecontroller.instance.HackFail();
                     isSolved = false;
                     EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
                     sequenceIndex = 0;
@@ -225,6 +226,7 @@ public class HackingMiniGameSecond : MonoBehaviour
             if (solvingTime < 0)
             {
                 //Mitä tapahtuu kun minigamen ratkaisuaika loppuu :D
+                Gamecontroller.instance.HackFail();
                 EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
                 solvingTime = defaultSolvingTime;
                 isHacking = false;
