@@ -67,7 +67,8 @@ public class PlayerMovement : MonoBehaviour {
         gameOn = true;
         pCollider = GetComponent<CapsuleCollider>();
         //hacktimer.GetComponent<Image>().enabled = true;
-        
+        Gamecontroller.instance.timerOn = true;
+
     }
 
     void Update()
@@ -120,6 +121,9 @@ public class PlayerMovement : MonoBehaviour {
         // PELI ALKAA
         if (!pause)
         {
+
+            
+            
             //critical meter kasvaa jos..
             criticalMeter.fillAmount = Gamecontroller.instance.criticalPercent/detectionBarConverter;
             detectionValue = Gamecontroller.instance.criticalPercent;
@@ -129,6 +133,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 Lose();
             }
+
 
 
 
@@ -286,20 +291,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
     
-   /* void Example()
-    {
-        if (other)
-        {
-            float dist = Vector3.Distance(other.position, transform.position);
-            //print("Distance to other: " + dist);
-        }
-    }
-
-    void Play()
-    {
-
-    }
-    */
+   
 
     void OnTriggerEnter(Collider other)
     {
@@ -313,6 +305,7 @@ public class PlayerMovement : MonoBehaviour {
            // winText.SetActive(true);
             loot.SetActive(false);
             gotit = true;
+            Gamecontroller.instance.AddLoot();
             looted.GetComponent<Image>().enabled = true;
             isStolen = true;
         }
@@ -320,15 +313,19 @@ public class PlayerMovement : MonoBehaviour {
         {
             pickable1.SetActive(false);
             picked1.GetComponent<Image>().enabled = true;
+            Gamecontroller.instance.AddLoot();
 
-            
-            
+
+
 
         }
         //exit with primary loot
         if (other.gameObject.CompareTag("Exit") && gotit )
         {
+            Exit();
             Win();
+            
+            
         } 
         //DEBUG
         /*if (other.gameObject.CompareTag("Exit"))
@@ -339,18 +336,21 @@ public class PlayerMovement : MonoBehaviour {
         {
             pickable2.SetActive(false);
             picked2.GetComponent<Image>().enabled = true;
+            Gamecontroller.instance.AddLoot();
 
         }
         if (other.gameObject.CompareTag("Pickable3"))
         {
             pickable3.SetActive(false);
             picked3.GetComponent<Image>().enabled = true;
+            Gamecontroller.instance.AddLoot();
 
         }
         if (other.gameObject.CompareTag("Pickable4"))
         {
             pickable4.SetActive(false);
             picked4.GetComponent<Image>().enabled = true;
+            Gamecontroller.instance.AddLoot();
 
         }
 
@@ -376,10 +376,24 @@ public class PlayerMovement : MonoBehaviour {
     {
         losescreen.SetActive(true);
         pause = true;
+        Gamecontroller.instance.successTime = 0;
+        Exit();
+        Gamecontroller.instance.ShowScore();
     }
     public void Win()
     {
         winscreen.SetActive(true);
         pause = true;
+        Gamecontroller.instance.ShowScore();
+        
+
     }
+    public void Exit()
+    {
+        Gamecontroller.instance.CountMeter();
+        Gamecontroller.instance.ScoreLoot();
+        Gamecontroller.instance.CountTime();
+        Gamecontroller.instance.ResetTime();
+    }
+
 }

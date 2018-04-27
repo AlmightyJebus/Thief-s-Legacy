@@ -9,14 +9,19 @@ public class Gamecontroller : MonoBehaviour
     public bool gameOver = false;
     public bool gameWon = false;
     public static Gamecontroller instance;
-    private int score = 0;
+    public float score = 0;
     public Text scoreText;
+    public GameObject scoreTextDisplay;
     public GameObject gameOverText;
     public GameObject winText;
     public PlayerMovement playerscript;
     public EnemyFOV enemyFOVscript;
     public Patroller patrollerscript;
     public float criticalPercent;
+    public float lootProcent;
+    public float lootMultiplier;
+    public float successTime;
+    public bool timerOn = false;
 
         
 
@@ -34,37 +39,114 @@ public class Gamecontroller : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        lootProcent = 1f;
+        successTime = 100f;
+    }
+
     // Use this for initialization
   
 	
 	// Update is called once per frame
 	void Update ()
-    {
 
+        
+    {
+        if (!PlayerMovement.pl.pause)
+        {
+            if (timerOn)
+            {
+                Timer();
+            }
+        }
+        
 	}
 
-    public void Score()
+    public void ShowScore()
     {
-        if (gameOver)
+        score = Mathf.RoundToInt(score);
+        scoreTextDisplay.SetActive(true);
+        scoreText.text = "SCORE: " + score.ToString();
+        timerOn = false;
+    }
+
+    public void ScorePickable()
+    {
+        score +=10;
+                
+    }
+    public void ScoreTreasure()
+    {
+        
+        score += 20;
+        
+    }
+    public void CountMeter()
+    {
+
+        if (PlayerMovement.pl.criticalMeter.fillAmount <= 0.1f)
         {
-            return;
+            score +=500;
         }
 
-        score++;
-        scoreText.text = "Score: " + score.ToString() + "/40";
 
-
+        if (PlayerMovement.pl.criticalMeter.fillAmount <= 0.3f)
+        {
+            score +=300;
+        }
+        
+        if (PlayerMovement.pl.criticalMeter.fillAmount<=0.5f)
+        {
+            score +=100;
+        }
+        
+    }
+    public void Hack()
+    {
+        score += 100f;
+    }
+    public void HackFail()
+    {
+        score -= 30;
+    }
+    public void AddLoot()
+    {
+        lootProcent += lootMultiplier;
+    }
+    public void ScoreLoot()
+    {
+        score += score * lootProcent;
+    }
+    public void CountTime()
+    {
+        score +=successTime;
+    }
+    public void ResetTime()
+    {
+        successTime = 100f;
     }
     public void Lose()
     {
         gameOverText.SetActive(true);
         gameOver = true;
     }
-
     public void Win()
     {
         winText.SetActive(true);
         gameOver = true;
+    }
+    public void Exit()
+    {
+        score += 50f;
+    }
+    public void Timer()
+    {
+        successTime -= Time.deltaTime;
+        if (successTime <0)
+        {
+            successTime = 0;
+        }
     }
     public void Seen()
     {

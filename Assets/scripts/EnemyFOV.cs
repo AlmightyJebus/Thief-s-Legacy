@@ -40,103 +40,111 @@ public class EnemyFOV : MonoBehaviour
 
     void Update()
     {
-        
-        //näitä arvoja muutetaan, kun pelaaja löytää aarteen, FOV kasvaa?
-        if (PlayerMovement.pl.isStolen)
+        if (!PlayerMovement.pl.pause)
         {
-            enemyBorderViewNegative = -23f;
-            enemyBorderViewPositive = 23f;
-            viewLength = 3;
-        }
-
-        if (timerOn)
-        {
-            timer -= Time.deltaTime;
-            if (timer <=0)
+            //näitä arvoja muutetaan, kun pelaaja löytää aarteen, FOV kasvaa?
+            if (PlayerMovement.pl.isStolen)
             {
+                enemyBorderViewNegative = -23f;
+                enemyBorderViewPositive = 23f;
+                viewLength = 3;
+            }
 
-                timesUp = true;
-                isDetected = false;
-                timerOn = false;
-                timer = 3f;
-                //onko muuuttunut GIT
+            if (timerOn)
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0)
+                {
+
+                    timesUp = true;
+                    isDetected = false;
+                    timerOn = false;
+                    timer = 3f;
+                    //onko muuuttunut GIT
+                }
             }
         }
+        
+       
     }
 
     void FixedUpdate()
     {
-        RaycastHit hit;
-        RaycastHit hit2;
-        RaycastHit hit3;
-
-        //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
-        Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
-        Quaternion spreadAnglePositive = Quaternion.AngleAxis(enemyBorderViewPositive, Vector3.up);
-        
-        /*
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")) && hit.collider.tag == "Player")
-
+        if (!PlayerMovement.pl.pause)
         {
-            isDetected = true;
-            timerOn = true;
-        }
-        */
-        
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
+            RaycastHit hit;
+            RaycastHit hit2;
+            RaycastHit hit3;
 
-        {
-            if (hit.collider.tag == "Player")
+            //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
+            Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
+            Quaternion spreadAnglePositive = Quaternion.AngleAxis(enemyBorderViewPositive, Vector3.up);
+
+            /*
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")) && hit.collider.tag == "Player")
+
             {
                 isDetected = true;
                 timerOn = true;
             }
-        }
+            */
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength))
-        {
-            if (hit2.collider.tag == "Player")
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
+
             {
-                isDetected = true;
-                timerOn = true;
+                if (hit.collider.tag == "Player")
+                {
+                    isDetected = true;
+                    timerOn = true;
+                }
             }
-        }
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
-        {
-            if (hit3.collider.tag == "Player")
+            if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength))
             {
-                isDetected = true;
-                timerOn = true;
+                if (hit2.collider.tag == "Player")
+                {
+                    isDetected = true;
+                    timerOn = true;
+                }
             }
-        }
-        
-        if (isDetected == true)
-        {
-            //Huutomerkki
-           /* detectionPercent = detectionPercent + detectionRate; */
-            isCautious = true;
-            Gamecontroller.instance.criticalPercent += detectionRate;
-        }
 
-        if (isDetected == false && isCautious == true && Gamecontroller.instance.criticalPercent > 0)
-        {
-            isCautious = true;
-            cautionTime -= Time.deltaTime;
-        }
+            if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
+            {
+                if (hit3.collider.tag == "Player")
+                {
+                    isDetected = true;
+                    timerOn = true;
+                }
+            }
 
-        if (isCautious == true && cautionTime < 0)
-        {
-            isCautious = false;
-            cautionTime = defaultCautionTime;
-        }
+            if (isDetected == true)
+            {
+                //Huutomerkki
+                /* detectionPercent = detectionPercent + detectionRate; */
+                isCautious = true;
+                Gamecontroller.instance.criticalPercent += detectionRate;
+            }
 
-        if (PlayerMovement.pl.isCrouching)
-        {
-            isCautious = false;
-            isDetected = false;
-        }
+            if (isDetected == false && isCautious == true && Gamecontroller.instance.criticalPercent > 0)
+            {
+                isCautious = true;
+                cautionTime -= Time.deltaTime;
+            }
 
-        /* 1 << LayerMask.NameToLayer("Player") */
+            if (isCautious == true && cautionTime < 0)
+            {
+                isCautious = false;
+                cautionTime = defaultCautionTime;
+            }
+
+            if (PlayerMovement.pl.isCrouching)
+            {
+                isCautious = false;
+                isDetected = false;
+            }
+
+            /* 1 << LayerMask.NameToLayer("Player") */
+        }
     }
+        
 }
