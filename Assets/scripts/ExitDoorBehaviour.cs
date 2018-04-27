@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorBehaviour : MonoBehaviour
+public class ExitDoorBehaviour : MonoBehaviour
 {
     public bool isOpen = false;
     public GameObject doorLeft;
@@ -21,7 +21,6 @@ public class DoorBehaviour : MonoBehaviour
 
     void Start()
     {
-
         openPositionLeft = doorLeft.transform.localPosition + new Vector3(openDistance, 0.0f, 0.0f);
         closePositionLeft = doorLeft.transform.localPosition;
 
@@ -33,14 +32,14 @@ public class DoorBehaviour : MonoBehaviour
     {
         distance = Vector3.Distance(transformDoor.position, player.position);
 
-        if (distance < minDistance)
+        if (distance < minDistance && HackingMiniGame.miniGame.isSolved == true)
         {
 
             doorLeft.transform.position = openPositionLeft;
             doorRight.transform.position = openPositionRight;
         }
 
-        if (distance > minDistance)
+        if (distance > minDistance && HackingMiniGame.miniGame.isSolved == true)
         {
             doorLeft.transform.position = closePositionLeft;
             doorRight.transform.position = closePositionRight;
