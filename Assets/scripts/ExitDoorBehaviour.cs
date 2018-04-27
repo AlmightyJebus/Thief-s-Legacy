@@ -32,14 +32,14 @@ public class ExitDoorBehaviour : MonoBehaviour
     {
         distance = Vector3.Distance(transformDoor.position, player.position);
 
-        if (distance < minDistance && HackingMiniGame.miniGame.isSolved == true)
+        if (distance < minDistance && PlayerMovement.pl.gotit == true)
         {
 
             doorLeft.transform.position = openPositionLeft;
             doorRight.transform.position = openPositionRight;
         }
 
-        if (distance > minDistance && HackingMiniGame.miniGame.isSolved == true)
+        if (distance > minDistance && PlayerMovement.pl.gotit == true)
         {
             doorLeft.transform.position = closePositionLeft;
             doorRight.transform.position = closePositionRight;
