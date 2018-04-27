@@ -10,8 +10,11 @@ public class Gamecontroller : MonoBehaviour
     public bool gameWon = false;
     public static Gamecontroller instance;
     public float score = 0;
+    public int items = 0;
     public Text scoreText;
     public GameObject scoreTextDisplay;
+    public Text itemText;
+    public GameObject itemTextDisplay;
     public GameObject gameOverText;
     public GameObject winText;
     public PlayerMovement playerscript;
@@ -128,7 +131,7 @@ public class Gamecontroller : MonoBehaviour
     }
     public void Exit()
     {
-        //score += 50f;
+        score += 50f;
     }
     public void Timer()
     {
@@ -141,5 +144,14 @@ public class Gamecontroller : MonoBehaviour
     public void Seen()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void Items()
+    {
+        items++;
+    }
+    public void ShowItems()
+    {
+       // itemTextDisplay.SetActive(true);
+       // itemText.text = "SCORE: " + score.ToString();
     }
 }

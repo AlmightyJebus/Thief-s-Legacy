@@ -26,6 +26,7 @@ public class HackingMiniGame : MonoBehaviour
     public float waitTime = 2f;
     public bool wait = false;
     public bool waitover = false;
+    public bool fail = false;
 
 
     public GameObject lightQ, lightW, lightE, lightR, lightT, lightA, lightS, lightD, lightF, lightG, lightZ, lightX, lightC, lightV, lightB;
@@ -133,7 +134,10 @@ public class HackingMiniGame : MonoBehaviour
             {
                 hackBoard.SetActive(true);
                 hacktimer.GetComponent<Image>().enabled = true;
+                //TIMER
                 solvingTime = solvingTime - Time.deltaTime;
+                
+                
 
 
                 hacktimer.fillAmount -= timerbarconverter * Time.deltaTime;
@@ -251,6 +255,8 @@ public class HackingMiniGame : MonoBehaviour
                 {
                     Gamecontroller.instance.HackFail();
                     isSolved = false;
+                    fail = true;
+                    Reset();
                     
                     EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
                     sequenceIndex = 0;
@@ -303,6 +309,11 @@ public class HackingMiniGame : MonoBehaviour
     {
         
         
+    }
+    public void Reset()
+    {
+        hacktimer.fillAmount = 1;
+        solvingTime = defaultSolvingTime;
     }
 
     
