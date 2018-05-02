@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour {
 
     public Animator anim;
+    public static PlayerAnimator animator;
 
 	void Start ()
     {
+        animator = this;
         anim = GetComponent<Animator>();
 	}
 	

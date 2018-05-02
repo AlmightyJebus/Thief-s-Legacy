@@ -68,7 +68,6 @@ public class PlayerMovement : MonoBehaviour {
         pCollider = GetComponent<CapsuleCollider>();
         //hacktimer.GetComponent<Image>().enabled = true;
         Gamecontroller.instance.timerOn = true;
-
     }
 
     void Update()

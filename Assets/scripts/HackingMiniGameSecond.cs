@@ -111,6 +111,11 @@ public class HackingMiniGameSecond : MonoBehaviour
 
             if (isHacking == true)
             {
+                PlayerMovement.pl.speed = 0;
+                PlayerAnimator.animator.anim.SetBool("A", false);
+                PlayerAnimator.animator.anim.SetBool("W", false);
+                PlayerAnimator.animator.anim.SetBool("D", false);
+                PlayerAnimator.animator.anim.SetBool("S", false);
                 hackBoard.SetActive(true);
                 hacktimer.GetComponent<Image>().enabled = true;
                 solvingTime = solvingTime - Time.deltaTime;
@@ -215,7 +220,7 @@ public class HackingMiniGameSecond : MonoBehaviour
                 {
                     Gamecontroller.instance.HackFail();
                     isSolved = false;
-                    EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 10f;
                     sequenceIndex = 0;
                     progressbar.fillAmount = 0;
                     count = 0;
@@ -227,7 +232,7 @@ public class HackingMiniGameSecond : MonoBehaviour
             {
                 //Mitä tapahtuu kun minigamen ratkaisuaika loppuu :D
                 Gamecontroller.instance.HackFail();
-                EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
+                Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 10f;
                 solvingTime = defaultSolvingTime;
                 isHacking = false;
                 hackBoard.SetActive(false);
