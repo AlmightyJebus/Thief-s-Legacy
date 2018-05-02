@@ -54,6 +54,10 @@ public class PlayerAnimator : MonoBehaviour {
         }
         
         //When two buttons are pressed at the same time, only one animation should play...
-
+        /*if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
+        {
+            anim.SetBool("A", true);
+        }
+        */
     }
 }
