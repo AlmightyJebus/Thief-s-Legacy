@@ -75,10 +75,14 @@ public class EnemyFOV : MonoBehaviour
             RaycastHit hit;
             RaycastHit hit2;
             RaycastHit hit3;
+            RaycastHit hit4;
+            RaycastHit hit5;
 
             //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
             Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
             Quaternion spreadAnglePositive = Quaternion.AngleAxis(enemyBorderViewPositive, Vector3.up);
+            Quaternion spreadAngleNegativeHalf = Quaternion.AngleAxis(enemyBorderViewNegative / 2, Vector3.up);
+            Quaternion spreadAnglePositiveHalf = Quaternion.AngleAxis(enemyBorderViewPositive / 2, Vector3.up);
 
             /*
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")) && hit.collider.tag == "Player")
@@ -88,6 +92,12 @@ public class EnemyFOV : MonoBehaviour
                 timerOn = true;
             }
             */
+
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * viewLength, Color.green);
+            Debug.DrawRay(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward) * viewLength, Color.green);
+            Debug.DrawRay(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward) * viewLength, Color.green);
+            Debug.DrawRay(transform.position, transform.TransformDirection(spreadAngleNegativeHalf * Vector3.forward) * viewLength, Color.green);
+            Debug.DrawRay(transform.position, transform.TransformDirection(spreadAnglePositiveHalf * Vector3.forward) * viewLength, Color.green);
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
 
@@ -111,6 +121,24 @@ public class EnemyFOV : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
             {
                 if (hit3.collider.tag == "Player")
+                {
+                    isDetected = true;
+                    timerOn = true;
+                }
+            }
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositiveHalf * Vector3.forward), out hit4, viewLength))
+            {
+                if (hit4.collider.tag == "Player")
+                {
+                    isDetected = true;
+                    timerOn = true;
+                }
+            }
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositiveHalf * Vector3.forward), out hit5, viewLength))
+            {
+                if (hit5.collider.tag == "Player")
                 {
                     isDetected = true;
                     timerOn = true;
