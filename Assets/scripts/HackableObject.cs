@@ -12,7 +12,6 @@ public class HackableObject : MonoBehaviour
     public bool isHackable = false;
     public static HackableObject hackable;
     public GameObject hackText;
-    public GameObject hackCompletedText;
 
     public void Start()
     {

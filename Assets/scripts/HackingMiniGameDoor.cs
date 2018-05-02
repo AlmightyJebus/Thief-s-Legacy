@@ -74,7 +74,6 @@ public class HackingMiniGameDoor : MonoBehaviour
 
             if (HackableDoor.hackableDoor.isHackableDoor == true && Input.GetKey(KeyCode.E))
             {
-                PlayerMovement.pl.speed = 0;
                 isHacking = true;
             }
 
@@ -91,6 +90,7 @@ public class HackingMiniGameDoor : MonoBehaviour
                 lightW.SetActive(false);
                 lightE.SetActive(false);
                 lightR.SetActive(false);
+                Reset();
             }
 
             if (isSolved == true)
@@ -112,6 +112,11 @@ public class HackingMiniGameDoor : MonoBehaviour
 
             if (isHacking == true)
             {
+                PlayerMovement.pl.speed = 0;
+                PlayerAnimator.animator.anim.SetBool("A", false);
+                PlayerAnimator.animator.anim.SetBool("W", false);
+                PlayerAnimator.animator.anim.SetBool("D", false);
+                PlayerAnimator.animator.anim.SetBool("S", false);
                 hackBoard.SetActive(true);
                 hacktimer.GetComponent<Image>().enabled = true;
                 solvingTime = solvingTime - Time.deltaTime;
@@ -209,7 +214,7 @@ public class HackingMiniGameDoor : MonoBehaviour
                 {
                     Gamecontroller.instance.HackFail();
                     isSolved = false;
-                    EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 10f;
                     sequenceIndex = 0;
                     progressbar.fillAmount = 0;
                     count = 0;
@@ -220,7 +225,7 @@ public class HackingMiniGameDoor : MonoBehaviour
             if (solvingTime < 0)
             {
                 //Mitä tapahtuu kun minigamen ratkaisuaika loppuu :D
-                EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + 25f;
+                Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 10f;
                 solvingTime = defaultSolvingTime;
                 Gamecontroller.instance.HackFail();
                 isHacking = false;
@@ -254,5 +259,11 @@ public class HackingMiniGameDoor : MonoBehaviour
     public void Wait()
     {
 
+    }
+
+    public void Reset()
+    {
+        hacktimer.fillAmount = 1;
+        solvingTime = defaultSolvingTime;
     }
 }

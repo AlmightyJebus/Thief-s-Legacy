@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour {
     public Image picked1, picked2, picked3, picked4, looted;
     public GameObject crouchText;
     public GameObject sprintText;
-    public GameObject staminaText;
+    //public GameObject staminaText;
     public Image staminaBar;
     public Image criticalMeter;
     //public Image hacktimer;
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour {
         pCollider = GetComponent<CapsuleCollider>();
         //hacktimer.GetComponent<Image>().enabled = true;
         Gamecontroller.instance.timerOn = true;
-
+        Debug.Log("Clear");
     }
 
     void Update()
@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour {
 
             if (reduceStamina)
             {
-                stamina -= 2 * Time.deltaTime;
+                stamina -= 1 * Time.deltaTime;
                 staminaBar.fillAmount -= 0.2f * Time.deltaTime;
             }
 
@@ -148,15 +148,16 @@ public class PlayerMovement : MonoBehaviour {
                 if (stamina <= 10)
                 {
                     stamina += 0.5f * Time.deltaTime;
-                    staminaBar.fillAmount += 0.05f * Time.deltaTime;
+                    staminaBar.fillAmount += 0.5f/10.5f * Time.deltaTime;
 
-                    if (stamina > 10)
+                    if (stamina >= 10)
                     {
                         stamina = 10f;
                         staminaBar.fillAmount = 1;
-                        staminaText.SetActive(false);
+                        Debug.Log("FULL STAMINA");
+                        //staminaText.SetActive(false);
                     }
-                    //staminaText.SetActive(false);
+                    
                 }
             }
 
@@ -223,7 +224,8 @@ public class PlayerMovement : MonoBehaviour {
                         isSprinting = false;
                         speed = normalValue;
                         sprintText.SetActive(false);
-                        staminaText.SetActive(true);
+                        Debug.Log("OUT OF STAMINA");
+                        //staminaText.SetActive(true);
                     }
                 }
 

@@ -15,25 +15,18 @@ public class EnemyFOV : MonoBehaviour
     public float viewLength = 3;
     public float cautionTime = 10.0f;
     public float defaultCautionTime;
-
-
     public float detectionPercent = 0.0f;
     public float detectionRate = 0.1f;
-
-
     public float timer = 3f;
     public bool timerOn = false;
     public bool timesUp = false;
-    
     public static EnemyFOV efov;
     public Gamecontroller Gamecontrolscript;
     
     public void Start()
     {
         efov = this;
-
         defaultCautionTime = cautionTime;
-        
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -64,8 +57,6 @@ public class EnemyFOV : MonoBehaviour
                 }
             }
         }
-        
-       
     }
 
     void FixedUpdate()
@@ -77,21 +68,11 @@ public class EnemyFOV : MonoBehaviour
             RaycastHit hit3;
             RaycastHit hit4;
             RaycastHit hit5;
-
-            //Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
+            
             Quaternion spreadAngleNegative = Quaternion.AngleAxis(enemyBorderViewNegative, Vector3.up);
             Quaternion spreadAnglePositive = Quaternion.AngleAxis(enemyBorderViewPositive, Vector3.up);
             Quaternion spreadAngleNegativeHalf = Quaternion.AngleAxis(enemyBorderViewNegative / 2, Vector3.up);
             Quaternion spreadAnglePositiveHalf = Quaternion.AngleAxis(enemyBorderViewPositive / 2, Vector3.up);
-
-            /*
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength, 1 << LayerMask.NameToLayer("Player")) && hit.collider.tag == "Player")
-
-            {
-                isDetected = true;
-                timerOn = true;
-            }
-            */
 
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * viewLength, Color.green);
             Debug.DrawRay(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward) * viewLength, Color.green);
@@ -100,7 +81,6 @@ public class EnemyFOV : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(spreadAnglePositiveHalf * Vector3.forward) * viewLength, Color.green);
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
-
             {
                 if (hit.collider.tag == "Player")
                 {
