@@ -52,8 +52,7 @@ public class PlayerAnimator : MonoBehaviour {
         {
             anim.SetBool("W", false);
         }
-
-        //When two buttons are pressed at the same time, only one animation should play...
+        
         if (anim.GetBool("A") && anim.GetBool("W"))
         {
             anim.SetBool("A", true);
