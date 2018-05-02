@@ -53,7 +53,40 @@ public class PlayerAnimator : MonoBehaviour {
             anim.SetBool("W", false);
         }
         
-        //When two buttons are pressed at the same time, only one animation should play...
+        if (anim.GetBool("A") && anim.GetBool("W"))
+        {
+            anim.SetBool("A", true);
+            anim.SetBool("W", false);
+        }
 
+        if (anim.GetBool("W") && anim.GetBool("D"))
+        {
+            anim.SetBool("W", true);
+            anim.SetBool("D", false);
+        }
+
+        if (anim.GetBool("D") && anim.GetBool("S"))
+        {
+            anim.SetBool("D", true);
+            anim.SetBool("S", false);
+        }
+
+        if (anim.GetBool("S") && anim.GetBool("A"))
+        {
+            anim.SetBool("S", true);
+            anim.SetBool("A", false);
+        }
+
+        if (anim.GetBool("A") && anim.GetBool("D"))
+        {
+            anim.SetBool("A", false);
+            anim.SetBool("D", false);
+        }
+
+        if (anim.GetBool("W") && anim.GetBool("S"))
+        {
+            anim.SetBool("W", false);
+            anim.SetBool("S", false);
+        }
     }
 }

@@ -11,6 +11,7 @@ public class CameraFOV : MonoBehaviour
     public float viewLength;
     public float defaultViewLength;
     public float cameraAngle;
+    public float cameraVerticalAngle;
     public float detectionRate = 0.1f;
 
     public float speed = 1f;
@@ -32,7 +33,7 @@ public class CameraFOV : MonoBehaviour
         {
             //transform.Rotate(0, 30 * Time.deltaTime, 0);
 
-            transform.rotation = Quaternion.Euler(31f, cameraAngle + maxRotation * Mathf.Sin(Time.time * speed), 0f);
+            transform.rotation = Quaternion.Euler(cameraVerticalAngle, cameraAngle + maxRotation * Mathf.Sin(Time.time * speed), 0f);
 
             RaycastHit hit;
             RaycastHit hit2;
@@ -127,8 +128,5 @@ public class CameraFOV : MonoBehaviour
                 }
             }
         }
-
-        
-        
     }
 }
