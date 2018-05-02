@@ -77,5 +77,17 @@ public class PlayerAnimator : MonoBehaviour {
             anim.SetBool("S", true);
             anim.SetBool("A", false);
         }
+
+        if (anim.GetBool("A") && anim.GetBool("D"))
+        {
+            anim.SetBool("A", false);
+            anim.SetBool("D", false);
+        }
+
+        if (anim.GetBool("W") && anim.GetBool("S"))
+        {
+            anim.SetBool("W", false);
+            anim.SetBool("S", false);
+        }
     }
 }
