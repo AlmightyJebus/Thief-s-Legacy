@@ -91,6 +91,7 @@ public class HackingMiniGameSecond : MonoBehaviour
                 lightD.SetActive(false);
                 lightS.SetActive(false);
                 lightE.SetActive(false);
+                Reset();
             }
 
             if (isSolved == true)
@@ -268,5 +269,11 @@ public class HackingMiniGameSecond : MonoBehaviour
     public void Wait()
     {
 
+    }
+
+    public void Reset()
+    {
+        hacktimer.fillAmount = 1;
+        solvingTime = defaultSolvingTime;
     }
 }

@@ -95,6 +95,7 @@ public class HackingMiniGame : MonoBehaviour
                 lightD.SetActive(false);
                 lightS.SetActive(false);
                 lightE.SetActive(false);
+                Reset();
             }
 
             if (isSolved == true)

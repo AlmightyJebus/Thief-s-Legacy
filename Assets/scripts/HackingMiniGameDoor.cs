@@ -90,6 +90,7 @@ public class HackingMiniGameDoor : MonoBehaviour
                 lightW.SetActive(false);
                 lightE.SetActive(false);
                 lightR.SetActive(false);
+                Reset();
             }
 
             if (isSolved == true)
@@ -258,5 +259,11 @@ public class HackingMiniGameDoor : MonoBehaviour
     public void Wait()
     {
 
+    }
+
+    public void Reset()
+    {
+        hacktimer.fillAmount = 1;
+        solvingTime = defaultSolvingTime;
     }
 }
