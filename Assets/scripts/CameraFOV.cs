@@ -59,7 +59,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent += detectionRate;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 1f;
                 }
 
                 if (hit.collider.tag != "Player")
@@ -74,7 +74,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent += detectionRate;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 1f;
                 }
 
                 if (hit2.collider.tag != "Player")
@@ -89,7 +89,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent += detectionRate;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 1f;
                 }
 
                 if (hit3.collider.tag != "Player")
@@ -104,7 +104,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent += detectionRate;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 1f;
                 }
 
                 if (hit4.collider.tag != "Player")
@@ -119,7 +119,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent += detectionRate;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 1f;
                 }
 
                 if (hit5.collider.tag != "Player")
