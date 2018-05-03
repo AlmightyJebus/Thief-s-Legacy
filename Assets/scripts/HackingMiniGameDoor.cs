@@ -107,7 +107,8 @@ public class HackingMiniGameDoor : MonoBehaviour
                 }
 
                 //hacktimer.GetComponent<Image>().enabled = false;
-                solvingTime = defaultSolvingTime;
+                //solvingTime = defaultSolvingTime;
+                Reset();
             }
 
             if (isHacking == true)
@@ -226,7 +227,7 @@ public class HackingMiniGameDoor : MonoBehaviour
             {
                 //Mitä tapahtuu kun minigamen ratkaisuaika loppuu :D
                 Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 10f;
-                solvingTime = defaultSolvingTime;
+                //solvingTime = defaultSolvingTime;
                 Gamecontroller.instance.HackFail();
                 isHacking = false;
                 hackBoard.SetActive(false);
@@ -236,6 +237,7 @@ public class HackingMiniGameDoor : MonoBehaviour
                 lightE.SetActive(false);
                 lightR.SetActive(false);
                 PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
+                Reset();
             }
         }
     }
