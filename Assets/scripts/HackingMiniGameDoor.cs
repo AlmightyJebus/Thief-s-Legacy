@@ -26,6 +26,7 @@ public class HackingMiniGameDoor : MonoBehaviour
     public float waitTime = 1f;
     public bool wait = false;
     public bool waitover = false;
+    private bool reset;
 
 
     public GameObject lightQ, lightW, lightE, lightR, lightT, lightA, lightS, lightD, lightF, lightG, lightZ, lightX, lightC, lightV, lightB;
@@ -51,6 +52,7 @@ public class HackingMiniGameDoor : MonoBehaviour
         hacktimer.GetComponent<Image>().enabled = true;
         timerbarconverter = 1f / solvingTime;
         hackingDoor = this;
+        reset = false;
     }
 
     void Update()
@@ -104,6 +106,7 @@ public class HackingMiniGameDoor : MonoBehaviour
                     lightR.SetActive(false);
                     hackBoard.SetActive(false);
                     waitover = false;
+                    isSolved = false;
                 }
 
                 //hacktimer.GetComponent<Image>().enabled = false;
@@ -267,5 +270,9 @@ public class HackingMiniGameDoor : MonoBehaviour
     {
         hacktimer.fillAmount = 1;
         solvingTime = defaultSolvingTime;
+        reset = true;
+        
+       
     }
+    
 }
