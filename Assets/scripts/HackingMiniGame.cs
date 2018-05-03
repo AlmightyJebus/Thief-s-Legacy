@@ -231,7 +231,7 @@ public class HackingMiniGame : MonoBehaviour
                     Gamecontroller.instance.HackFail();
                     isSolved = false;
                     fail = true;
-                    Reset();
+                    
 
                     Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 10f;
                     sequenceIndex = 0;
@@ -260,6 +260,7 @@ public class HackingMiniGame : MonoBehaviour
                 lightS.SetActive(false);
                 lightE.SetActive(false);
                 PlayerMovement.pl.speed = PlayerMovement.pl.defaultSpeed;
+                Reset();
             }
         }
     }
