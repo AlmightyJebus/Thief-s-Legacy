@@ -48,9 +48,11 @@ public class Patroller : MonoBehaviour
     public bool unpause = false;
 
     public float dist;
+    public float playerDist;
     //public GameObject other;
     public bool returning = false;
     public int route=1;
+    public float rotationSpeed = 0;
 
 
 
@@ -58,7 +60,7 @@ public class Patroller : MonoBehaviour
     {
 
         patr = this;
-
+        
         agent = gameObject.GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -90,9 +92,10 @@ public class Patroller : MonoBehaviour
     void Update()
     {
 
-        
-        
-        
+
+        //mittaa etäisyyden pelaajaan
+        playerDist = Vector3.Distance(target.transform.position, transform.position);
+
 
         if (unpause)
         {
@@ -127,11 +130,36 @@ public class Patroller : MonoBehaviour
             //enemy chase
             if (enemyScript.isDetected == true)
             {
-                transform.LookAt(target);
-                transform.Translate(Vector3.forward * followSpeed * Time.deltaTime);
                 warningText.SetActive(true);
                 disable = true;
+                //vanhaa paskakoodia -->
+                /*transform.LookAt(target);
+                transform.Translate(Vector3.forward * followSpeed * Time.deltaTime); */
+
+                if (target != null)
+                {
+
+                    Vector3 dir = target.position - transform.position;
+                    // Only needed if objects don't share 'z' value.
+                    dir.z = 0.0f;
+
+                    if (playerDist > 1.25f)
+                        transform.LookAt(target);
+
+                    transform.rotation = Quaternion.Slerp(transform.rotation,
+                            Quaternion.FromToRotation(Vector3.right, dir),
+                            rotationSpeed * Time.deltaTime);
+
+                    //Move Towards Target
+                    transform.position += (target.position - transform.position).normalized
+                        * followSpeed * Time.deltaTime;
+                }
+                //rigidbody.velocity = Vector3.zero;
             }
+
+
+
+
 
             //enemy searching
             if (enemyScript.isCautious == true && enemyScript.isDetected == false)
@@ -148,9 +176,9 @@ public class Patroller : MonoBehaviour
             {
 
                 Continue();
-                
-            }
 
+            }
+        }
             
             
 
@@ -181,7 +209,7 @@ public class Patroller : MonoBehaviour
             } */
         }
 
-    }
+    
 
     public void Continue()
     {
