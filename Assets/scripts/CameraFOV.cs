@@ -55,14 +55,14 @@ public class CameraFOV : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, viewLength))
             {
-                if (hit.collider.tag == "Player")
+                if (hit.collider.tag == "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
                     Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
                 }
 
-                if (hit.collider.tag != "Player")
+                if (hit.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = false;
                 }
@@ -70,14 +70,14 @@ public class CameraFOV : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAngleNegative * Vector3.forward), out hit2, viewLength))
             {
-                if (hit2.collider.tag == "Player")
+                if (hit2.collider.tag == "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
                     Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
                 }
 
-                if (hit2.collider.tag != "Player")
+                if (hit2.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = false;
                 }
@@ -85,14 +85,14 @@ public class CameraFOV : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositive * Vector3.forward), out hit3, viewLength))
             {
-                if (hit3.collider.tag == "Player")
+                if (hit3.collider.tag == "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
                     Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
                 }
 
-                if (hit3.collider.tag != "Player")
+                if (hit3.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = false;
                 }
@@ -100,14 +100,14 @@ public class CameraFOV : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositiveHalf * Vector3.forward), out hit4, viewLength))
             {
-                if (hit4.collider.tag == "Player")
+                if (hit4.collider.tag == "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
                     Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
                 }
 
-                if (hit4.collider.tag != "Player")
+                if (hit4.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = false;
                 }
@@ -115,14 +115,14 @@ public class CameraFOV : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(spreadAnglePositiveHalf * Vector3.forward), out hit5, viewLength))
             {
-                if (hit5.collider.tag == "Player")
+                if (hit5.collider.tag == "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
                     Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
                 }
 
-                if (hit5.collider.tag != "Player")
+                if (hit5.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isSeen = false;
                 }

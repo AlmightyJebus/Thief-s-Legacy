@@ -186,7 +186,7 @@ public class PlayerMovement : MonoBehaviour {
                             //animation change in the future
                             crouchText.SetActive(true);
                             speed = slowdownValue;
-                            pCollider.height = crouchHeight;
+                            //pCollider.height = crouchHeight;
                         }
 
                         if (isCrouching == false)
@@ -194,7 +194,7 @@ public class PlayerMovement : MonoBehaviour {
                             //animation change in the future
                             crouchText.SetActive(false);
                             speed = normalValue;
-                            pCollider.height = normalHeight;
+                           // pCollider.height = normalHeight;
                         }
                     }
 
@@ -206,7 +206,7 @@ public class PlayerMovement : MonoBehaviour {
                             isCrouching = false;
                             crouchText.SetActive(false);
                             speed = normalValue;
-                            pCollider.height = normalHeight;
+                            //pCollider.height = normalHeight;
                         }
                     }
                 }
@@ -363,7 +363,7 @@ public class PlayerMovement : MonoBehaviour {
           
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Lose();
+            //Lose();
         }
         
        
