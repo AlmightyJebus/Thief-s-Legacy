@@ -113,7 +113,7 @@ public class HackingMiniGame : MonoBehaviour
                 lightE.SetActive(false);
                 hackBoard.SetActive(false);
                     waitover = false;
-                    isSolved = false;
+                    //isSolved = false;
                 }
 
                 //hacktimer.GetComponent<Image>().enabled = false;
