@@ -42,7 +42,7 @@ public class HackableDoor : MonoBehaviour
             hackText.SetActive(false);
         }
 
-        if (HackingMiniGameDoor.hackingDoor.isSolved == true)
+        if (HackDoorBehaviour.hackDoorBeh.isOpen == true)
         {
             hackText.SetActive(false);
         }

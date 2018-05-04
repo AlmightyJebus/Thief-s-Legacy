@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraDisable : MonoBehaviour {
 
@@ -30,14 +31,14 @@ public class CameraDisable : MonoBehaviour {
 
         if (distance < minDistance)
         {
-            canBeDisabled = true;
             disableText.SetActive(true);
+            canBeDisabled = true;
         }
 
         if (distance > minDistance)
         {
-            canBeDisabled = false;
             disableText.SetActive(false);
+            canBeDisabled = false;
         }
 
         if (isDisabled)
