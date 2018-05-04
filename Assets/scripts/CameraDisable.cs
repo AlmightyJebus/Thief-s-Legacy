@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CameraDisable : MonoBehaviour {
-
-    // LAITA OBJEKTIIN JOKA HAKKEROIDAAN!!
-    // LAITA AKTIVOITUMAAN KUN HAKKEROINTI ALKAA!!
-    // KATSO SAMALLA EnemyFOV.efov.detectionPercent JA isSolved TOIMINTA!!
-
+public class CameraDisable : MonoBehaviour
+{
     public bool canBeDisabled = false;
     public bool isDisabled = false;
     public static CameraDisable disable;
     public GameObject disableText;
     public Transform transformCamera;
     public Transform player;
-    public float distance;
-    public float minDistance = 2.5f;
+    public float distanceFromCamera;
+    public float minDistanceFromCamera = 2.5f;
     public float disableTime = 10f;
     public float defaultDisableTime = 10f;
 
@@ -27,15 +23,15 @@ public class CameraDisable : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        distance = Vector3.Distance(transformCamera.position, player.position);
+        distanceFromCamera = Vector3.Distance(transformCamera.position, player.position);
 
-        if (distance < minDistance)
+        if (distanceFromCamera <= minDistanceFromCamera)
         {
             disableText.SetActive(true);
             canBeDisabled = true;
         }
 
-        if (distance > minDistance)
+        if (distanceFromCamera > minDistanceFromCamera)
         {
             disableText.SetActive(false);
             canBeDisabled = false;
@@ -44,6 +40,7 @@ public class CameraDisable : MonoBehaviour {
         if (isDisabled)
         {
             disableTime = disableTime - Time.deltaTime;
+            disableText.SetActive(false);
         }
 
         if (disableTime <= 0)
