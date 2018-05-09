@@ -19,6 +19,7 @@ public class EnterDoorBehaviour : MonoBehaviour
     
     public float distance;
     public float minDistance = 2f;
+    float currentPosition;
 
     void Start()
     {
@@ -31,19 +32,26 @@ public class EnterDoorBehaviour : MonoBehaviour
 
     void Update()
     {
+        currentPosition = (Time.time - 0.1f) / 5;
         distance = Vector3.Distance(transformDoor.position, player.position);
 
         if (distance < minDistance)
         {
-
-            doorLeft.transform.position = openPositionLeft;
-            doorRight.transform.position = openPositionRight;
+            isOpen = true;
+            //doorLeft.transform.position = openPositionLeft;
+            //doorRight.transform.position = openPositionRight;
+            doorLeft.transform.position = Vector3.Slerp(closePositionLeft, openPositionLeft, currentPosition);
+            doorRight.transform.position = Vector3.Slerp(closePositionRight, openPositionRight, currentPosition);
+            //toimii kerran
         }
 
         if (distance > minDistance)
         {
+            isOpen = false;
             doorLeft.transform.position = closePositionLeft;
             doorRight.transform.position = closePositionRight;
+            //doorLeft.transform.position = Vector3.Slerp(openPositionLeft, closePositionLeft, currentPosition);
+            //doorRight.transform.position = Vector3.Slerp(openPositionRight, closePositionRight, currentPosition);
         }
     }
     
