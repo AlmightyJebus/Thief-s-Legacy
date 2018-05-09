@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
         picked3.GetComponent<Image>().enabled = false;
         picked4.GetComponent<Image>().enabled = false;
         looted.GetComponent<Image>().enabled = false;
+
     }
 
     void Start ()
@@ -310,7 +311,8 @@ public class PlayerMovement : MonoBehaviour {
             Gamecontroller.instance.AddLoot();
             Gamecontroller.instance.AddScore();
 
-            looted.GetComponent<Image>().enabled = true;
+            
+
             isStolen = true;
         }
 

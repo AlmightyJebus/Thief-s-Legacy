@@ -16,6 +16,7 @@ public class EnterDoorBehaviour : MonoBehaviour
 
     public Transform transformDoor;
     public Transform player;
+    
     public float distance;
     public float minDistance = 2f;
 
@@ -45,4 +46,5 @@ public class EnterDoorBehaviour : MonoBehaviour
             doorRight.transform.position = closePositionRight;
         }
     }
+    
 }

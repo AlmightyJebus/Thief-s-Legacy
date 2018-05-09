@@ -20,6 +20,7 @@ public class HackingMiniGame : MonoBehaviour
     public GameObject hackBoard;
     public Image hacktimer;
     public Image progressbar;
+    public GameObject dome;
     public float multiplier;
     public float count;
     public Text countText;
@@ -50,6 +51,7 @@ public class HackingMiniGame : MonoBehaviour
     {
         miniGame = this;
         hacktimer.GetComponent<Image>().enabled = true;
+        dome.SetActive(true);
         timerbarconverter = 1f / solvingTime;
         hacking1 = this;
         
@@ -112,6 +114,7 @@ public class HackingMiniGame : MonoBehaviour
                     lightQ.SetActive(false);
                 lightE.SetActive(false);
                 hackBoard.SetActive(false);
+                    dome.SetActive(false);
                     waitover = false;
                     //isSolved = false;
                 }
