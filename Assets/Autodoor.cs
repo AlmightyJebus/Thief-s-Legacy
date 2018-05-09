@@ -16,11 +16,11 @@ public class Autodoor : MonoBehaviour
     public int right = 1;
     public bool timesUp = false;
     public Collider exit;
-
+    public Vector3 startLocation;
     // Use this for initialization
     void Start ()
     {
-        
+        startLocation = transform.position;
     }
 	
 	// Update is called once per frame
@@ -79,6 +79,7 @@ public class Autodoor : MonoBehaviour
         if (time2 <0)
         {
             move2 = false;
+            //transform.Translate(startLocation);
         }
     }
     public void Reset()
@@ -88,6 +89,7 @@ public class Autodoor : MonoBehaviour
     public void Reset2()
     {
         time2 = resetTime;
+        //transform.Translate(startLocation);
     }
 
 }
