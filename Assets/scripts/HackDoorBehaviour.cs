@@ -7,7 +7,7 @@ public class HackDoorBehaviour : MonoBehaviour
     public bool isOpen = false;
     public GameObject doorLeft;
     public GameObject doorRight;
-    public float openDistance = -3.5f;
+    public float openDistance = -2f;
 
     public Vector3 openPositionLeft;
     public Vector3 closePositionLeft;
