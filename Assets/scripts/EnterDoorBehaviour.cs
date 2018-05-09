@@ -19,7 +19,7 @@ public class EnterDoorBehaviour : MonoBehaviour
     
     public float distance;
     public float minDistance = 2f;
-    float currentPosition;
+    public float currentPosition;
 
     void Start()
     {
@@ -32,26 +32,36 @@ public class EnterDoorBehaviour : MonoBehaviour
 
     void Update()
     {
-        currentPosition = (Time.time - 0.1f) / 5;
+        //currentPosition = (Time.time - 0.1f) / 3;
         distance = Vector3.Distance(transformDoor.position, player.position);
 
         if (distance < minDistance)
         {
-            isOpen = true;
+            currentPosition += Time.deltaTime;
             //doorLeft.transform.position = openPositionLeft;
             //doorRight.transform.position = openPositionRight;
-            doorLeft.transform.position = Vector3.Slerp(closePositionLeft, openPositionLeft, currentPosition);
-            doorRight.transform.position = Vector3.Slerp(closePositionRight, openPositionRight, currentPosition);
-            //toimii kerran
+            doorLeft.transform.position = Vector3.Lerp(closePositionLeft, openPositionLeft, currentPosition);
+            doorRight.transform.position = Vector3.Lerp(closePositionRight, openPositionRight, currentPosition);
+
+            if (doorLeft.transform.position == openPositionLeft && doorRight.transform.position == openPositionRight)
+            {
+                isOpen = true;
+            }
         }
 
-        if (distance > minDistance)
+        if (isOpen == true && distance > minDistance && currentPosition >= 0)
         {
             isOpen = false;
-            doorLeft.transform.position = closePositionLeft;
-            doorRight.transform.position = closePositionRight;
-            //doorLeft.transform.position = Vector3.Slerp(openPositionLeft, closePositionLeft, currentPosition);
-            //doorRight.transform.position = Vector3.Slerp(openPositionRight, closePositionRight, currentPosition);
+            currentPosition = 0f;
+            //doorLeft.transform.position = closePositionLeft;
+            //doorRight.transform.position = closePositionRight;
+            if (isOpen == false && currentPosition == 0)
+            {
+                //currentPosition ei nouse enää nollasta...
+                currentPosition += Time.deltaTime;
+                doorLeft.transform.position = Vector3.Lerp(openPositionLeft, closePositionLeft, currentPosition);
+                doorRight.transform.position = Vector3.Lerp(openPositionRight, closePositionRight, currentPosition);
+            }
         }
     }
     
