@@ -37,9 +37,9 @@ public class EnterDoorBehaviour : MonoBehaviour
 
         if (distance < minDistance)
         {
-            currentPosition += Time.deltaTime;
             //doorLeft.transform.position = openPositionLeft;
             //doorRight.transform.position = openPositionRight;
+            currentPosition += Time.deltaTime;
             doorLeft.transform.position = Vector3.Lerp(closePositionLeft, openPositionLeft, currentPosition);
             doorRight.transform.position = Vector3.Lerp(closePositionRight, openPositionRight, currentPosition);
 
@@ -51,10 +51,10 @@ public class EnterDoorBehaviour : MonoBehaviour
 
         if (isOpen == true && distance > minDistance && currentPosition >= 0)
         {
-            isOpen = false;
-            currentPosition = 0f;
             //doorLeft.transform.position = closePositionLeft;
             //doorRight.transform.position = closePositionRight;
+            isOpen = false;
+            currentPosition = 0f;
             if (isOpen == false && currentPosition == 0)
             {
                 //currentPosition ei nouse enää nollasta...
