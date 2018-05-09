@@ -307,6 +307,7 @@ public class PlayerMovement : MonoBehaviour {
         {
            // winText.SetActive(true);
             loot.SetActive(false);
+            looted.GetComponent<Image>().enabled = true;
             gotit = true;
             Gamecontroller.instance.AddLoot();
             Gamecontroller.instance.AddScore();
