@@ -20,6 +20,7 @@ public class CameraFOV : MonoBehaviour
     
     public static CameraFOV cfov;
     public Gamecontroller gamecontrolscript;
+    
 
     void Start()
     {
@@ -33,7 +34,9 @@ public class CameraFOV : MonoBehaviour
         {
             //transform.Rotate(0, 30 * Time.deltaTime, 0);
 
-            transform.rotation = Quaternion.Euler(cameraVerticalAngle, cameraAngle + maxRotation * Mathf.Sin(Time.time * speed), 0f);
+            
+                transform.rotation = Quaternion.Euler(cameraVerticalAngle, cameraAngle + maxRotation * Mathf.Sin(Time.time * speed), 0f);
+            
 
             RaycastHit hit;
             RaycastHit hit2;
