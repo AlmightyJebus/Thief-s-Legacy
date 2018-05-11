@@ -16,11 +16,16 @@ public class Autodoor : MonoBehaviour
     public int right = 1;
     public bool timesUp = false;
     public Collider exit;
-    public Vector3 startLocation;
+    public Vector3 aloitus;
+    public bool startpos = false;
+    public Transform door1;
+    public Transform door2;
+    
     // Use this for initialization
     void Start ()
     {
-        startLocation = transform.position;
+        aloitus = new Vector3(0.474f,1,0.1f);
+        //transform.position += aloitus;
     }
 	
 	// Update is called once per frame
@@ -38,6 +43,11 @@ public class Autodoor : MonoBehaviour
         {
             time = 1;
         }
+        if (startpos)
+        {
+            Startpos();
+        }
+        
         
 
     }
@@ -51,19 +61,21 @@ public class Autodoor : MonoBehaviour
    
     public void Open()
     {
-        Reset2();
+        
         time -= Time.deltaTime;
 
             if (time>0)
         {
-            transform.Translate(left * speed * Time.deltaTime, 0, 0);
+            door1.transform.Translate(left * speed * Time.deltaTime, 0, 0);
+            door2.transform.Translate(left * speed * Time.deltaTime, 0, 0);
 
-            
+
         }
             if (time<0)
         {
             move = false;
             move2 = true;
+            Reset2();
         }
             
         
@@ -74,12 +86,17 @@ public class Autodoor : MonoBehaviour
         time2 -= Time.deltaTime;
         if (time2 > 0)
         {
-            transform.Translate(right * closingSpeed * Time.deltaTime, 0, 0);
+            door1.transform.Translate(right * closingSpeed * Time.deltaTime, 0, 0);
+            door2.transform.Translate(right * closingSpeed * Time.deltaTime, 0, 0);
         }
         if (time2 <0)
         {
             move2 = false;
-            //transform.Translate(startLocation);
+           
+            //startpos = true;
+            
+           
+
         }
     }
     public void Reset()
@@ -89,7 +106,14 @@ public class Autodoor : MonoBehaviour
     public void Reset2()
     {
         time2 = resetTime;
-        //transform.Translate(startLocation);
+        startpos = true;
+       
     }
-
+    public void Startpos()
+    {
+        //door1.transform.Translate(aloitus);
+        
+        startpos = false;
+        
+    }
 }
