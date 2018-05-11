@@ -1,1 +1,0 @@
-            if (hit2.collider.tag != "Player")
