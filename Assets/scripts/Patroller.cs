@@ -39,6 +39,7 @@ public class Patroller : MonoBehaviour
 
     public NavMeshAgent agent;
     EnemyFOV enemyScript;
+    public float guardSpeed = 3f;
 
     public Transform target;
    public GameObject resetpos;
@@ -224,7 +225,7 @@ public class Patroller : MonoBehaviour
         }
         questionText.SetActive(false);
         
-        GetComponent<NavMeshAgent>().speed = 3f;
+        GetComponent<NavMeshAgent>().speed = guardSpeed;
         start = true;
         disable = false;
     }
@@ -235,7 +236,7 @@ public class Patroller : MonoBehaviour
     }
     public void Move()
     {
-        GetComponent<NavMeshAgent>().speed = 3f;
+        GetComponent<NavMeshAgent>().speed = guardSpeed;
     }
 
 

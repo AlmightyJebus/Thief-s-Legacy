@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
     public Gamecontroller Gamecontrolscript;
     //public Transform other;
     //public float enemydist;
+    public float staminaValue = 5;
 
     void Awake()
     {
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour {
         picked3.GetComponent<Image>().enabled = false;
         picked4.GetComponent<Image>().enabled = false;
         looted.GetComponent<Image>().enabled = false;
+        stamina = staminaValue;
 
     }
 
@@ -141,26 +143,28 @@ public class PlayerMovement : MonoBehaviour {
             if (reduceStamina)
             {
                 stamina -= 1 * Time.deltaTime;
-                staminaBar.fillAmount -= 0.2f * Time.deltaTime;
+                staminaBar.fillAmount -= 1/staminaValue * Time.deltaTime;
+                Debug.Log(staminaBar.fillAmount);
             }
 
             if (increaseStamina)
             {
-                if (stamina <= 10)
+                if (stamina <= staminaValue)
                 {
                     stamina += 0.5f * Time.deltaTime;
-                    staminaBar.fillAmount += 0.5f/10.5f * Time.deltaTime;
+                    staminaBar.fillAmount += 0.5f/staminaValue * Time.deltaTime;
+                    
 
-                    if (stamina >= 10)
+                    if (stamina >= staminaValue)
                     {
-                        stamina = 10f;
+                        stamina = staminaValue;
                         staminaBar.fillAmount = 1;
                         Debug.Log("FULL STAMINA");
                         //staminaText.SetActive(false);
                     }
                     
-                }
-            }
+                } 
+            } 
 
             if (stamina < 0)
             {
