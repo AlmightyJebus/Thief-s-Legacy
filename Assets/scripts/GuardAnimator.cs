@@ -27,6 +27,9 @@ public class GuardAnimator : MonoBehaviour
             D = false;
             W = false;
             animGuard.SetBool("A", true);
+            animGuard.SetBool("S", false);
+            animGuard.SetBool("D", false);
+            animGuard.SetBool("W", false);
         }
 
         //GuardWalkS
@@ -36,7 +39,10 @@ public class GuardAnimator : MonoBehaviour
             S = true;
             D = false;
             W = false;
+            animGuard.SetBool("A", false);
             animGuard.SetBool("S", true);
+            animGuard.SetBool("D", false);
+            animGuard.SetBool("W", false);
         }
 
         //GuardWalkD
@@ -46,7 +52,10 @@ public class GuardAnimator : MonoBehaviour
             S = false;
             D = true;
             W = false;
+            animGuard.SetBool("A", false);
+            animGuard.SetBool("S", false);
             animGuard.SetBool("D", true);
+            animGuard.SetBool("W", false);
         }
 
         //GuardWalkW
@@ -56,6 +65,9 @@ public class GuardAnimator : MonoBehaviour
             S = false;
             D = false;
             W = true;
+            animGuard.SetBool("A", false);
+            animGuard.SetBool("S", false);
+            animGuard.SetBool("D", false);
             animGuard.SetBool("W", true);
         }
     }
