@@ -284,6 +284,7 @@ public class Patroller : MonoBehaviour
                 {
                     agent.SetDestination(pos2.position);
                     start = true;
+                    returning = false;
                 }
 
                 if (other.tag == "2" && !returning)
@@ -322,7 +323,7 @@ public class Patroller : MonoBehaviour
                 if (other.tag == "2" && returning)
                 {
                     agent.SetDestination(pos1.position);
-                    returning = false;
+                    //returning = false;
                 }
             }
             //enemy patrol route 3
