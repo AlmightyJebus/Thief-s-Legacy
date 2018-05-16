@@ -18,7 +18,7 @@ public class EnterDoorBehaviour : MonoBehaviour
     public Transform player;
     
     public float distance;
-    public float minDistance = 2f;
+    public float minDistance = 3f;
     public float currentPosition;
 
     void Start()
@@ -49,7 +49,7 @@ public class EnterDoorBehaviour : MonoBehaviour
             }
         }
 
-        if (isOpen == true && distance > minDistance && currentPosition >= 0)
+        /*if (isOpen == true && distance > minDistance && currentPosition >= 0)
         {
             //doorLeft.transform.position = closePositionLeft;
             //doorRight.transform.position = closePositionRight;
@@ -62,7 +62,7 @@ public class EnterDoorBehaviour : MonoBehaviour
                 doorLeft.transform.position = Vector3.Lerp(openPositionLeft, closePositionLeft, currentPosition);
                 doorRight.transform.position = Vector3.Lerp(openPositionRight, closePositionRight, currentPosition);
             }
-        }
+        }*/
     }
     
 }
