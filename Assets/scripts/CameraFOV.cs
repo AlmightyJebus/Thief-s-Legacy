@@ -62,7 +62,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + detectionRate;
                 }
 
                 if (hit.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
@@ -77,7 +77,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + detectionRate;
                 }
 
                 if (hit2.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
@@ -92,7 +92,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + detectionRate;
                 }
 
                 if (hit3.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
@@ -107,7 +107,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + detectionRate;
                 }
 
                 if (hit4.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
@@ -122,7 +122,7 @@ public class CameraFOV : MonoBehaviour
                 {
                     isSeen = true;
                     //EnemyFOV.efov.detectionPercent = EnemyFOV.efov.detectionPercent + EnemyFOV.efov.detectionRate;
-                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + 0.1f;
+                    Gamecontroller.instance.criticalPercent = Gamecontroller.instance.criticalPercent + detectionRate;
                 }
 
                 if (hit5.collider.tag != "Player" && !PlayerMovement.pl.isCrouching)
