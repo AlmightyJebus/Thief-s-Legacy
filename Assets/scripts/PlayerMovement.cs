@@ -16,13 +16,13 @@ public class PlayerMovement : MonoBehaviour {
     public float detectionBarConverter;
     public float speed = 2f;
     public float normalHeight = 2f;
-    private float crouchHeight = 1f;
-    private float defaultSpeed = 2f;
-    private float slowdownValue = 1;
+    public float crouchHeight = 1f;
+    public float defaultSpeed = 2f;
+    public float slowdownValue = 1;
     public float normalValue = 1.5f;
     public float sprintSpeed = 4f;
     public float stamina = 10f;
-    private bool gameOn;
+    public bool gameOn;
     public bool reduceStamina = false;
     public bool increaseStamina = false;
     public GameObject winText;
