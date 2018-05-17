@@ -144,7 +144,7 @@ public class Patroller : MonoBehaviour
                     // Only needed if objects don't share 'z' value.
                     dir.z = 0.0f;
 
-                    if (playerDist > 1.25f)
+                    if (playerDist > 1.25f && playerDist < 5)
                         transform.LookAt(target);
 
                     transform.rotation = Quaternion.Slerp(transform.rotation,

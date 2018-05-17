@@ -18,7 +18,9 @@ public class EnemyFOV : MonoBehaviour
     public float detectionPercent = 0.0f;
     public float detectionRate = 0.1f;
     public float timer = 3f;
+    public float noisetime = 1f;
     public bool timerOn = false;
+    public bool noiseTimer = false;
     public bool timesUp = false;
     public static EnemyFOV efov;
     public Gamecontroller Gamecontrolscript;
@@ -56,6 +58,18 @@ public class EnemyFOV : MonoBehaviour
                     //onko muuuttunut GIT
                 }
             }
+            if (noiseTimer)
+            {
+                noisetime -= Time.deltaTime;
+                if (noisetime <=0)
+                {
+                    timesUp = true;
+                    isDetected = false;
+                    noiseTimer = false;
+                    noisetime = 1;
+
+                }
+            }
         }
     }
 
@@ -85,6 +99,7 @@ public class EnemyFOV : MonoBehaviour
                 if (hit.collider.tag == "Player" && !PlayerMovement.pl.isCrouching)
                 {
                     isDetected = true;
+                    
                     timerOn = true;
                 }
             }

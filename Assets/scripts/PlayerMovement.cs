@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     public EnemyFOV enemyFOVscript;
     [HideInInspector]
     public Gamecontroller Gamecontrolscript;
+    
 
 
 

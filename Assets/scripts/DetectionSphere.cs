@@ -6,10 +6,11 @@ public class DetectionSphere : MonoBehaviour {
 
     public bool isHeard = false;
     public float radius = 10f;
+    
 
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -20,7 +21,7 @@ public class DetectionSphere : MonoBehaviour {
             myCollider.radius = 2.5f; 
         }
 
-        if (isHeard == true)
+        if (isHeard == true && PlayerMovement.pl.isMoving)
         {
             EnemyFOV.efov.isDetected = true;
         }
@@ -31,7 +32,10 @@ public class DetectionSphere : MonoBehaviour {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
             isHeard = true;
-            EnemyFOV.efov.timerOn = true;
+
+            
+            EnemyFOV.efov.noiseTimer = true;
+            
         }
 
         if (col.CompareTag("Player") && !PlayerMovement.pl.isSprinting)
@@ -45,7 +49,7 @@ public class DetectionSphere : MonoBehaviour {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
             isHeard = true;
-            EnemyFOV.efov.timerOn = true;
+            EnemyFOV.efov.noiseTimer = true;
         }
 
         if (col.CompareTag("Player"))
