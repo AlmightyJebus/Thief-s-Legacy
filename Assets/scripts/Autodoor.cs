@@ -36,40 +36,44 @@ public class Autodoor : MonoBehaviour
 
     void Update()
     {
-        if (open)
+        if (!PlayerMovement.pl.pause)
         {
-            opening = true;
-        }
-        if (opening)
-        {
-            door1.transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
-            door2.transform.Translate(left * speed * Time.deltaTime, 0, 0);
-        }
-        if (closing)
-        {
-            door1.transform.Translate(1 * closingSpeed * Time.deltaTime, 0, 0);
-            door2.transform.Translate(right * closingSpeed * Time.deltaTime, 0, 0);
-            //start = false;
+            if (open)
+            {
+                opening = true;
+            }
+            if (opening)
+            {
+                door1.transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
+                door2.transform.Translate(left * speed * Time.deltaTime, 0, 0);
+            }
+            if (closing)
+            {
+                door1.transform.Translate(1 * closingSpeed * Time.deltaTime, 0, 0);
+                door2.transform.Translate(right * closingSpeed * Time.deltaTime, 0, 0);
+                //start = false;
 
 
-        }
-        //jos ovi on jo auki
-        if (door1.transform.localPosition.x >= maxPositionX && opening)
-        {
-            Debug.Log(door1.transform.localPosition.x);
-            opening = false;
-            closing = true;
-            open = false;
+            }
+            //jos ovi on jo auki
+            if (door1.transform.localPosition.x >= maxPositionX && opening)
+            {
+                Debug.Log(door1.transform.localPosition.x);
+                opening = false;
+                closing = true;
+                open = false;
 
-        }
-        //jos ovi on jo kiinni
-        if (door1.transform.localPosition.x <= startX && closing)
-        {
+            }
+            //jos ovi on jo kiinni
+            if (door1.transform.localPosition.x <= startX && closing)
+            {
 
-            Debug.Log(door1.transform.localPosition.x);
-            opening = false;
-            closing = false;
-            // start = true;
+                Debug.Log(door1.transform.localPosition.x);
+                opening = false;
+                closing = false;
+                // start = true;
+            }
+
         }
 
 

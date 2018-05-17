@@ -99,17 +99,20 @@ public class Patroller : MonoBehaviour
 
 
         if (unpause)
-        {
-            Continue();
-            unpause = false;
-            Move();
+         {
+             Continue();
+             unpause = false;
+             Move();
 
-        }
-        if (PlayerMovement.pl.pause)
-        {
-            Stop();
-        }
-
+         }
+         if (PlayerMovement.pl.pause)
+         {
+             Stop();
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                unpause = true;
+            }
+         } 
 
 
         if (!PlayerMovement.pl.pause)
@@ -158,7 +161,7 @@ public class Patroller : MonoBehaviour
                 //rigidbody.velocity = Vector3.zero;
             }
 
-
+        }
 
 
 
@@ -181,36 +184,9 @@ public class Patroller : MonoBehaviour
                 Continue();
 
             }
-        }
-            
-            
-
-            /*if (start)
-            {
-                //questionText.SetActive(false);
-                agent.SetDestination(pos1.position);
-                GetComponent<NavMeshAgent>().speed = 3f;
-            }
-
-            if (PlayerMovement.pl.isStolen)
-            {
-                GetComponent<NavMeshAgent>().speed = 8f;
-                agent = GetComponent<NavMeshAgent>();
-                alertText.SetActive(true);
-            }
-
-
-            /*if (enemyScript.isDetected == true && start == false)
-            {
-
-                warningText.SetActive(true);
-                disable = true;
-            }
-            if (enemyScript.isDetected == false && start == true)
-            {
-                warningText.SetActive(false);
-            } */
-        }
+        }      
+                
+        
 
     
 
