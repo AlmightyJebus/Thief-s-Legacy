@@ -176,6 +176,8 @@ public class Patroller : MonoBehaviour
             if (!enemyScript.isCautious && !start)
             {
 
+                warningText.SetActive(false);
+                questionText.SetActive(false);
                 Continue();
 
             }
