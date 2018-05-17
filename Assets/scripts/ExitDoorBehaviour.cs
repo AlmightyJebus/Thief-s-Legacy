@@ -7,6 +7,7 @@ public class ExitDoorBehaviour : MonoBehaviour
     public bool isOpen = false;
     public GameObject doorLeft;
     public GameObject doorRight;
+    public GameObject textForExitDoor;
     public float openDistance = -1f;
 
     public Vector3 openPositionLeft;
@@ -43,6 +44,16 @@ public class ExitDoorBehaviour : MonoBehaviour
         {
             doorLeft.transform.position = closePositionLeft;
             doorRight.transform.position = closePositionRight;
+        }
+
+        if (distance < minDistance && PlayerMovement.pl.gotit == false)
+        {
+            textForExitDoor.SetActive(true);
+        }
+
+        if (distance > minDistance && PlayerMovement.pl.gotit == false)
+        {
+            textForExitDoor.SetActive(false);
         }
     }
 }
