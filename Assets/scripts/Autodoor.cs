@@ -5,115 +5,93 @@ using UnityEngine;
 public class Autodoor : MonoBehaviour
 {
 
-    public bool move = false;
-    public bool move2 = false;
-    public float speed = 1;
-    public float closingSpeed = 1f;
-    public float time = 1;
-    private float time2 = 1.85f;
-    public float resetTime = 1.85f;
+
+
+
+
+
     public int left = -1;
     public int right = 1;
-    public bool timesUp = false;
-    public Collider exit;
-    public Vector3 aloitus;
-    public bool startpos = false;
+    public bool opening;
+    public bool closing;
+    public bool open;
+    public float speed = 2;
+    public float closingSpeed = 1;
+
+
     public Transform door1;
     public Transform door2;
-    
-    // Use this for initialization
-    void Start ()
+
+    //public bool start;
+    public float startX;
+    public float maxPositionX = 1.5f;
+
+
+    void Start()
     {
-        aloitus = new Vector3(0.474f,1,0.1f);
-        //transform.position += aloitus;
+
+        startX = door1.transform.localPosition.x;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+
+    void Update()
     {
-        if (move)
+        if (open)
         {
-            Open();
+            opening = true;
         }
-        if (move2)
+        if (opening)
         {
-            Close();
+            door1.transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
+            door2.transform.Translate(left * speed * Time.deltaTime, 0, 0);
         }
-        if (timesUp)
+        if (closing)
         {
-            time = 1;
+            door1.transform.Translate(1 * closingSpeed * Time.deltaTime, 0, 0);
+            door2.transform.Translate(right * closingSpeed * Time.deltaTime, 0, 0);
+            //start = false;
+
+
         }
-        if (startpos)
+        //jos ovi on jo auki
+        if (door1.transform.localPosition.x >= maxPositionX && opening)
         {
-            Startpos();
+            Debug.Log(door1.transform.localPosition.x);
+            opening = false;
+            closing = true;
+            open = false;
+
         }
-        
-        
+        //jos ovi on jo kiinni
+        if (door1.transform.localPosition.x <= startX && closing)
+        {
+
+            Debug.Log(door1.transform.localPosition.x);
+            opening = false;
+            closing = false;
+            // start = true;
+        }
+
+
+
 
     }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
-            {
-            move = true;
+        {
+            open = true;
+            opening = true;
         }
     }
-   
-    public void Open()
-    {
-        
-        time -= Time.deltaTime;
-
-            if (time>0)
-        {
-            door1.transform.Translate(left * speed * Time.deltaTime, 0, 0);
-            door2.transform.Translate(left * speed * Time.deltaTime, 0, 0);
 
 
-        }
-            if (time<0)
-        {
-            move = false;
-            move2 = true;
-            Reset2();
-        }
-            
-        
-    }
-    public void Close()
-    {
-        Reset();
-        time2 -= Time.deltaTime;
-        if (time2 > 0)
-        {
-            door1.transform.Translate(right * closingSpeed * Time.deltaTime, 0, 0);
-            door2.transform.Translate(right * closingSpeed * Time.deltaTime, 0, 0);
-        }
-        if (time2 <0)
-        {
-            move2 = false;
-           
-            //startpos = true;
-            
-           
+    // tämä ovikansioon, kansioon lisätään box collider arvoilla: size: 3,4,2, position: z:0.34 (is trigger)
 
-        }
-    }
-    public void Reset()
-    {
-        time = 1;
-    }
-    public void Reset2()
-    {
-        time2 = resetTime;
-        startpos = true;
-       
-    }
-    public void Startpos()
-    {
-        //door1.transform.Translate(aloitus);
-        
-        startpos = false;
-        
-    }
+
 }
+
+
+
+
+

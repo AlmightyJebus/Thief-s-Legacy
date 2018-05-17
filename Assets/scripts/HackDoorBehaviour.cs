@@ -7,6 +7,7 @@ public class HackDoorBehaviour : MonoBehaviour
     public bool isOpen = false;
     public GameObject doorLeft;
     public GameObject doorRight;
+    public GameObject doorCollider;
     public float openDistance = -2f;
 
     public Vector3 openPositionLeft;
@@ -39,6 +40,8 @@ public class HackDoorBehaviour : MonoBehaviour
         {
             doorLeft.transform.position = openPositionLeft;
             doorRight.transform.position = openPositionRight;
+            Destroy(doorCollider);
+
         }
     }
 }
