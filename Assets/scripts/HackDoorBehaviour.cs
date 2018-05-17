@@ -9,6 +9,7 @@ public class HackDoorBehaviour : MonoBehaviour
     public GameObject doorRight;
     public GameObject doorCollider;
     public float openDistance = -2f;
+    public float currentPosition;
 
     public Vector3 openPositionLeft;
     public Vector3 closePositionLeft;
@@ -21,10 +22,10 @@ public class HackDoorBehaviour : MonoBehaviour
     {
         hackDoorBeh = this;
 
-        openPositionLeft = doorLeft.transform.localPosition + new Vector3(0.0f, 0.0f, openDistance);
+        openPositionLeft = doorLeft.transform.localPosition - new Vector3(0.0f, 0.0f, openDistance);
         closePositionLeft = doorLeft.transform.localPosition;
 
-        openPositionRight = doorRight.transform.localPosition - new Vector3(0.0f, 0.0f, openDistance);
+        openPositionRight = doorRight.transform.localPosition + new Vector3(0.0f, 0.0f, openDistance);
         closePositionRight = doorRight.transform.localPosition;
     }
 
@@ -38,8 +39,9 @@ public class HackDoorBehaviour : MonoBehaviour
 
         if (isOpen == true)
         {
-            doorLeft.transform.position = openPositionLeft;
-            doorRight.transform.position = openPositionRight;
+            currentPosition += Time.deltaTime;
+            doorLeft.transform.position = Vector3.Lerp(closePositionLeft, openPositionLeft, currentPosition);
+            doorRight.transform.position = Vector3.Lerp(closePositionRight, openPositionRight, currentPosition);
             Destroy(doorCollider);
 
         }
