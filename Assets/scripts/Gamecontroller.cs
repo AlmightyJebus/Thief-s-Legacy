@@ -13,9 +13,9 @@ public class Gamecontroller : MonoBehaviour
     public int items = 0;
     public Text scoreText;
     public GameObject scoreTextDisplay;
-    //public GameObject timeTextDisplay;
+    public GameObject timeTextDisplay;
     public Text itemText;
-   // public Text timeText;
+    public Text timeText;
     public GameObject itemTextDisplay;
     public GameObject gameOverText;
     public GameObject winText;
@@ -74,8 +74,8 @@ public class Gamecontroller : MonoBehaviour
         }
         scoreTextDisplay.SetActive(true);
         scoreText.text = "SCORE: " + score.ToString();
-        //timeTextDisplay.SetActive(true);
-        //timeText.text = "TIME: " + completionTime.ToString();
+        timeTextDisplay.SetActive(true);
+        timeText.text = "TIME: " + completionTime.ToString();
 
 
         timerOn = false;
@@ -162,8 +162,8 @@ public class Gamecontroller : MonoBehaviour
     }
     public void ShowItems()
     {
-       // itemTextDisplay.SetActive(true);
-       // itemText.text = "SCORE: " + score.ToString();
+       itemTextDisplay.SetActive(true);
+       itemText.text = "SCORE: " + score.ToString();
     }
     public void SuccessTime()
     {
