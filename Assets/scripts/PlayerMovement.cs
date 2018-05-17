@@ -116,6 +116,10 @@ public class PlayerMovement : MonoBehaviour
         // PELI ALKAA
         if (!pause)
         {
+            if (gotit && isCrouching)
+            {
+                speed = 0;
+            }
             //stamina checks
             if (increaseStamina && stamina <= staminaValue)
             {
@@ -175,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         //animation change in the future
                         crouchText.SetActive(true);
-                        speed = slowdownValue;
+                        speed = 0;
 
                     }
 
