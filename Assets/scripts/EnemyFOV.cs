@@ -147,7 +147,7 @@ public class EnemyFOV : MonoBehaviour
 
             if (PlayerMovement.pl.isCrouching)
             {
-                isCautious = false;
+                //isCautious = false;
                 isDetected = false;
             }
 

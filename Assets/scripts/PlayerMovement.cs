@@ -214,10 +214,12 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 isSprinting = false;
+                isMoving = false;
                 sprintText.SetActive(false);
                 speed = defaultSpeed;
                 reduceStamina = false;
                 increaseStamina = true;
+                
 
             }
             //moving
