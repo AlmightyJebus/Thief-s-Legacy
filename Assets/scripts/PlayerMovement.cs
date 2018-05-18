@@ -277,46 +277,51 @@ public class PlayerMovement : MonoBehaviour
 
             }
             //moving
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-            {
-                isMoving = true;
-                transform.position += Vector3.left * speed * Time.deltaTime;
-            }
 
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            if (!HackingMiniGameDoor.hackingDoor.isHacking)
             {
-                isMoving = true;
-                transform.position += Vector3.right * speed * Time.deltaTime;
-            }
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                {
+                    isMoving = true;
+                    transform.position += Vector3.left * speed * Time.deltaTime;
+                }
 
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-            {
-                isMoving = true;
-                transform.position += Vector3.forward * speed * Time.deltaTime;
-            }
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                {
+                    isMoving = true;
+                    transform.position += Vector3.right * speed * Time.deltaTime;
+                }
 
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-            {
-                isMoving = true;
-                transform.position += Vector3.back * speed * Time.deltaTime;
-            }
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                {
+                    isMoving = true;
+                    transform.position += Vector3.forward * speed * Time.deltaTime;
+                }
 
-            if (!Input.anyKey && Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
-            {
-                isMoving = false;
+                if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                {
+                    isMoving = true;
+                    transform.position += Vector3.back * speed * Time.deltaTime;
+                }
+
+                if (!Input.anyKey && Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+                {
+                    isMoving = false;
+                }
+                if (!Input.anyKey && Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+                {
+                    isMoving = false;
+                }
+                if (!Input.anyKey && Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
+                {
+                    isMoving = false;
+                }
+                if (!Input.anyKey && Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
+                {
+                    isMoving = false;
+                }
             }
-            if (!Input.anyKey && Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
-            {
-                isMoving = false;
-            }
-            if (!Input.anyKey && Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
-            {
-                isMoving = false;
-            }
-            if (!Input.anyKey && Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
-            {
-                isMoving = false;
-            }
+            
 
         }
 
