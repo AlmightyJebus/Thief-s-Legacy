@@ -104,10 +104,9 @@ public class PlayerAnimator : MonoBehaviour
                 anim.SetBool("S", false);
             }
 
-            if (PlayerMovement.pl.isCrouching == true && PlayerMovement.pl.atTheWall == true)
+            if (PlayerMovement.pl.isCrouching && PlayerMovement.pl.atTheWall)
             {
                 anim.SetBool("Crouch", true);
-
             }
 
             if (PlayerMovement.pl.isCrouching == false)
