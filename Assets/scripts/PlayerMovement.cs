@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float detectionBarConverter;
     [HideInInspector]
     public float speed = 2f;
+    public float diagonalSlowdownValue = 2f;
 
     public float defaultSpeed = 2f;
     [HideInInspector]
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isStolen = false;
     public bool gotit = false;
 
-    public GameObject winText, loot, pickable1, pickable2, pickable3, pickable4, crouchText, sprintText;
+    public GameObject winText, loot, pickable1, pickable2, pickable3, pickable4;
     public GameObject pauseText, losescreen, winscreen, pausemenu;
     public Image picked1, picked2, picked3, picked4, looted, staminaBar, criticalMeter;
 
@@ -53,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     public EnemyFOV enemyFOVscript;
     [HideInInspector]
     public Gamecontroller Gamecontrolscript;
-    
+
 
 
 
@@ -78,6 +79,37 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Clear");
     }
 
+
+    void FixedUpdate()
+    {
+        //Speed normalizers
+        if (!pause)
+        {
+            //Diagonal speed normalizer
+            if (!isCrouching && !isSprinting && Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.5f && Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.5f)
+            {
+                speed = defaultSpeed / diagonalSlowdownValue;
+            }
+            else if (isSprinting && Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.5f && Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.5f)
+            {
+                speed = sprintSpeed / diagonalSlowdownValue;
+            }
+            else if (isCrouching)
+            {
+                speed = 0;
+            }
+            else if (isSprinting)
+            {
+                speed = sprintSpeed;
+            }
+
+            else
+            {
+                speed = defaultSpeed;
+            }
+        }
+
+    }
     void Update()
     {
 
@@ -86,6 +118,11 @@ public class PlayerMovement : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+
+
+
+
+
 
 
         //PAUSE
@@ -97,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("PAUSE");
                 pause = true;
-                Patroller.patr.disable = true;
+                //Patroller.patr.disable = true;
 
                 pausemenu.SetActive(true);
 
@@ -107,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
                 pause = false;
                 Debug.Log("UNPAUSE");
 
-                Patroller.patr.unpause = true;
+                //Patroller.patr.unpause = true;
 
                 pausemenu.SetActive(false);
             }
@@ -151,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
                     stamina = 0;
                     Debug.Log("Out of stamina");
                     speed = defaultSpeed;
-                    sprintText.SetActive(false);
+                    //sprintText.SetActive(false);
 
 
                 }
@@ -178,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
                     if (isCrouching)
                     {
                         //animation change in the future
-                        crouchText.SetActive(true);
+                        //crouchText.SetActive(true);
                         speed = 0;
 
                     }
@@ -186,8 +223,8 @@ public class PlayerMovement : MonoBehaviour
                     if (isCrouching == false)
                     {
                         //animation change in the future
-                        crouchText.SetActive(false);
-                        speed = defaultSpeed;
+                        //crouchText.SetActive(false);
+                        //speed = defaultSpeed;
 
                     }
                 }
@@ -198,8 +235,8 @@ public class PlayerMovement : MonoBehaviour
                     if (isCrouching)
                     {
                         isCrouching = false;
-                        crouchText.SetActive(false);
-                        speed = defaultSpeed;
+                        //crouchText.SetActive(false);
+                        //speed = defaultSpeed;
 
                     }
                 }
@@ -209,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 isSprinting = true;
                 isMoving = true;
-                sprintText.SetActive(true);
+                //sprintText.SetActive(true);
                 speed = sprintSpeed;
                 reduceStamina = true;
 
@@ -220,11 +257,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 isSprinting = false;
                 isMoving = false;
-                sprintText.SetActive(false);
+                //sprintText.SetActive(false);
                 speed = defaultSpeed;
                 reduceStamina = false;
                 increaseStamina = true;
-                
+
 
             }
             //moving
