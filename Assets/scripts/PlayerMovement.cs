@@ -107,52 +107,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 speed = defaultSpeed;
             }
-        }
-
-    }
-    void Update()
-    {
-
-        //MAIN MENU
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene(0);
-        }
 
 
+            // MUU MÖNJÄ!!!
 
-
-
-
-
-        //PAUSE
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            pause = !pause;
-
-            if (pause)
-            {
-                Debug.Log("PAUSE");
-                pause = true;
-                //Patroller.patr.disable = true;
-
-                pausemenu.SetActive(true);
-
-            }
-            else if (!pause)
-            {
-                pause = false;
-                Debug.Log("UNPAUSE");
-
-                //Patroller.patr.unpause = true;
-
-                pausemenu.SetActive(false);
-            }
-        }
-
-        // PELI ALKAA
-        if (!pause)
-        {
             if (gotit && isCrouching)
             {
                 speed = 0;
@@ -169,7 +127,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     increaseStamina = false;
                     stamina = staminaValue;
-
                 }
 
             }
@@ -194,15 +151,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            //critical meter kasvaa jos..
-            criticalMeter.fillAmount = Gamecontroller.instance.criticalPercent / detectionBarConverter;
-            detectionValue = Gamecontroller.instance.criticalPercent;
-
-            //check if lose
-            if (criticalMeter.fillAmount == 1)
-            {
-                Lose();
-            }
 
             //crouching
             if (Input.GetKeyDown(KeyCode.C))
@@ -241,6 +189,8 @@ public class PlayerMovement : MonoBehaviour
                     }
                 }
             }
+
+
             // sprinting
             if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && !isCrouching)
             {
@@ -308,7 +258,69 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+
+
+
+    
+
     }
+    void Update()
+    {
+
+        //MAIN MENU
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+
+
+
+
+
+
+
+        //PAUSE
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            pause = !pause;
+
+            if (pause)
+            {
+                Debug.Log("PAUSE");
+                pause = true;
+                //Patroller.patr.disable = true;
+
+                pausemenu.SetActive(true);
+
+            }
+            else if (!pause)
+            {
+                pause = false;
+                Debug.Log("UNPAUSE");
+
+                //Patroller.patr.unpause = true;
+
+                pausemenu.SetActive(false);
+            }
+        }
+
+        // PELI ALKAA
+        if (!pause)
+        {
+
+            //critical meter kasvaa jos..
+            criticalMeter.fillAmount = Gamecontroller.instance.criticalPercent / detectionBarConverter;
+            detectionValue = Gamecontroller.instance.criticalPercent;
+
+            //check if lose
+            if (criticalMeter.fillAmount == 1)
+            {
+                Lose();
+            }
+        }
+    }
+
+    
 
     void OnTriggerStay(Collider other)
     {
