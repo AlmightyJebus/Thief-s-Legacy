@@ -316,6 +316,9 @@ public class PlayerMovement : MonoBehaviour
         {
             atTheWall = true;
         }
+    }
+    void OnTriggerEnter(Collider other)
+    {
 
         if (other.gameObject.CompareTag("Loot") && HackingMiniGame.hacking1.isSolved)
         {
@@ -372,6 +375,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+
 
     void OnTriggerExit(Collider other)
     {
