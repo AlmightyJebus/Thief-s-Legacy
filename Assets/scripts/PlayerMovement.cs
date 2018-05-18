@@ -108,6 +108,105 @@ public class PlayerMovement : MonoBehaviour
                 speed = defaultSpeed;
             }
 
+            
+
+            //crouching
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                if (atTheWall)
+                {
+                    //toggle crouching
+                    isCrouching = !isCrouching;
+
+                    if (isCrouching)
+                    {
+                        //animation change in the future
+                        //crouchText.SetActive(true);
+                        speed = 0;
+
+                    }
+
+                    if (isCrouching == false)
+                    {
+                        //animation change in the future
+                        //crouchText.SetActive(false);
+                        //speed = defaultSpeed;
+
+                    }
+                }
+
+                //if not at the wall you can quit crouching
+                if (!atTheWall)
+                {
+                    if (isCrouching)
+                    {
+                        isCrouching = false;
+                        //crouchText.SetActive(false);
+                        //speed = defaultSpeed;
+
+                    }
+                }
+            }
+
+
+        }
+
+
+
+    }
+    void Update()
+    {
+
+        //MAIN MENU
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+
+
+
+
+
+
+
+        //PAUSE
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            pause = !pause;
+
+            if (pause)
+            {
+                Debug.Log("PAUSE");
+                pause = true;
+                //Patroller.patr.disable = true;
+
+                pausemenu.SetActive(true);
+
+            }
+            else if (!pause)
+            {
+                pause = false;
+                Debug.Log("UNPAUSE");
+
+                //Patroller.patr.unpause = true;
+
+                pausemenu.SetActive(false);
+            }
+        }
+
+        // PELI ALKAA
+        if (!pause)
+        {
+
+            //critical meter kasvaa jos..
+            criticalMeter.fillAmount = Gamecontroller.instance.criticalPercent / detectionBarConverter;
+            detectionValue = Gamecontroller.instance.criticalPercent;
+
+            //check if lose
+            if (criticalMeter.fillAmount == 1)
+            {
+                Lose();
+            }
 
             // MUU MÖNJÄ!!!
 
@@ -152,44 +251,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
 
-            //crouching
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                if (atTheWall)
-                {
-                    //toggle crouching
-                    isCrouching = !isCrouching;
-
-                    if (isCrouching)
-                    {
-                        //animation change in the future
-                        //crouchText.SetActive(true);
-                        speed = 0;
-
-                    }
-
-                    if (isCrouching == false)
-                    {
-                        //animation change in the future
-                        //crouchText.SetActive(false);
-                        //speed = defaultSpeed;
-
-                    }
-                }
-
-                //if not at the wall you can quit crouching
-                if (!atTheWall)
-                {
-                    if (isCrouching)
-                    {
-                        isCrouching = false;
-                        //crouchText.SetActive(false);
-                        //speed = defaultSpeed;
-
-                    }
-                }
-            }
-
+           
 
             // sprinting
             if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && !isCrouching)
@@ -261,64 +323,8 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    
 
-    }
-    void Update()
-    {
-
-        //MAIN MENU
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene(0);
-        }
-
-
-
-
-
-
-
-        //PAUSE
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            pause = !pause;
-
-            if (pause)
-            {
-                Debug.Log("PAUSE");
-                pause = true;
-                //Patroller.patr.disable = true;
-
-                pausemenu.SetActive(true);
-
-            }
-            else if (!pause)
-            {
-                pause = false;
-                Debug.Log("UNPAUSE");
-
-                //Patroller.patr.unpause = true;
-
-                pausemenu.SetActive(false);
-            }
-        }
-
-        // PELI ALKAA
-        if (!pause)
-        {
-
-            //critical meter kasvaa jos..
-            criticalMeter.fillAmount = Gamecontroller.instance.criticalPercent / detectionBarConverter;
-            detectionValue = Gamecontroller.instance.criticalPercent;
-
-            //check if lose
-            if (criticalMeter.fillAmount == 1)
-            {
-                Lose();
-            }
-        }
-    }
+}
 
     
 
