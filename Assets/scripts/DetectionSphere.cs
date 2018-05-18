@@ -6,7 +6,7 @@ public class DetectionSphere : MonoBehaviour {
 
     public bool isHeard = false;
     public float radius = 10f;
-    
+    public GameObject hearingText;
 
     void Start()
     {
@@ -32,8 +32,7 @@ public class DetectionSphere : MonoBehaviour {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
             isHeard = true;
-
-            
+            //hearingText.SetActive(true);
             EnemyFOV.efov.noiseTimer = true;
             
         }
@@ -41,6 +40,7 @@ public class DetectionSphere : MonoBehaviour {
         if (col.CompareTag("Player") && !PlayerMovement.pl.isSprinting)
         {
             isHeard = false;
+            //hearingText.SetActive(false);
         }
     }
 
@@ -49,12 +49,14 @@ public class DetectionSphere : MonoBehaviour {
         if (col.CompareTag("Player") && PlayerMovement.pl.isSprinting && PlayerMovement.pl.isMoving)
         {
             isHeard = true;
+            //hearingText.SetActive(true);
             EnemyFOV.efov.noiseTimer = true;
         }
 
         if (col.CompareTag("Player"))
         {
             isHeard = false;
+            //hearingText.SetActive(false);
         }
     }
 }
