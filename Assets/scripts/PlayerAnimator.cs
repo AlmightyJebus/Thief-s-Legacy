@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimator : MonoBehaviour {
+public class PlayerAnimator : MonoBehaviour
+{
 
     public Animator anim;
     public static PlayerAnimator animator;
     public PlayerMovement playerscript;
 
-	void Start ()
+    void Start()
     {
         animator = this;
         anim = GetComponent<Animator>();
-	}
-	
-	void Update ()
+    }
+
+    void Update()
     {
-       
+
         if (PlayerMovement.pl.pause)
         {
             anim.SetBool("A", false);
@@ -103,9 +104,10 @@ public class PlayerAnimator : MonoBehaviour {
                 anim.SetBool("S", false);
             }
 
-            if (PlayerMovement.pl.isCrouching == true)
+            if (PlayerMovement.pl.isCrouching == true && PlayerMovement.pl.atTheWall == true)
             {
                 anim.SetBool("Crouch", true);
+
             }
 
             if (PlayerMovement.pl.isCrouching == false)
@@ -113,10 +115,5 @@ public class PlayerAnimator : MonoBehaviour {
                 anim.SetBool("Crouch", false);
             }
         }
-
-            
-        }
-        
-
-    
+    }
 }
