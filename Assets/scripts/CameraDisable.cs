@@ -9,6 +9,7 @@ public class CameraDisable : MonoBehaviour
     public bool isDisabled = false;
     public static CameraDisable disable;
     public GameObject disableText;
+    public GameObject light;
     public Transform transformCamera;
     public Transform player;
     public float distanceFromCamera;
@@ -41,6 +42,7 @@ public class CameraDisable : MonoBehaviour
         {
             disableTime = disableTime - Time.deltaTime;
             disableText.SetActive(false);
+            light.SetActive(false);
         }
 
         if (disableTime <= 0)
@@ -49,6 +51,7 @@ public class CameraDisable : MonoBehaviour
             disableTime = defaultDisableTime;
             canBeDisabled = true;
             GetComponent<CameraFOV>().enabled = true;
+            light.SetActive(true);
         }
 
         if (canBeDisabled == true && Input.GetKey(KeyCode.E))
