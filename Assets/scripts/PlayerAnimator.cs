@@ -23,6 +23,7 @@ public class PlayerAnimator : MonoBehaviour {
             anim.SetBool("W", false);
             anim.SetBool("S", false);
             anim.SetBool("D", false);
+            anim.SetBool("Crouch", false);
         }
         if (!PlayerMovement.pl.pause)
         {
@@ -100,6 +101,16 @@ public class PlayerAnimator : MonoBehaviour {
             {
                 anim.SetBool("W", false);
                 anim.SetBool("S", false);
+            }
+
+            if (PlayerMovement.pl.isCrouching == true)
+            {
+                anim.SetBool("Crouch", true);
+            }
+
+            if (PlayerMovement.pl.isCrouching == false)
+            {
+                anim.SetBool("Crouch", false);
             }
         }
 
