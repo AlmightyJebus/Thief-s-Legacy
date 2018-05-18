@@ -40,6 +40,8 @@ public class Patroller : MonoBehaviour
     public NavMeshAgent agent;
     EnemyFOV enemyScript;
     public float guardSpeed = 3f;
+    public float enemyMinDistance=1.25f;
+    public float enemyMaxDistance=5;
 
     public Transform target;
    public GameObject resetpos;
@@ -147,7 +149,8 @@ public class Patroller : MonoBehaviour
                     // Only needed if objects don't share 'z' value.
                     dir.z = 0.0f;
 
-                    if (playerDist > 1.25f && playerDist < 5)
+                    //chase distance check
+                    if (playerDist > enemyMinDistance && playerDist < enemyMaxDistance)
                         transform.LookAt(target);
 
                     transform.rotation = Quaternion.Slerp(transform.rotation,
