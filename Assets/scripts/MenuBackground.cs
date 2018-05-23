@@ -9,7 +9,6 @@ public class MenuBackground : MonoBehaviour
     public GameObject withTreasureRed;
     public GameObject withTreasureGreen;
     public GameObject withoutTreasure;
-    public bool isStolen = false;
     public bool one, two, three;
     public float firstTimer;
     public float secondTimer;
@@ -84,8 +83,7 @@ public class MenuBackground : MonoBehaviour
         one = false;
         firstTimer = 40f;
         secondTimer = secondTimer - Time.deltaTime;
-
-        //TOIMII TÄNNE ASTI!!!
+        
         if (secondTimer < 40f && secondTimer > 25f)
         {
             withTreasureRed.SetActive(true);
@@ -153,36 +151,4 @@ public class MenuBackground : MonoBehaviour
             one = true;
         }
     }
-        
-        /*
-		if (isStolen == false)
-        {
-            background.SetActive(false);
-            withTreasureBlue.SetActive(true);
-            withoutTreasure.SetActive(false);
-        }
-
-        if (isStolen == true)
-        {
-            withTreasureBlue.SetActive(false);
-            background.SetActive(true);
-        }
-
-        if (backgroundTimerVisible <= 5)
-        {
-            isStolen = true;
-            backgroundTimerNotVisible = backgroundTimerNotVisible - Time.deltaTime;
-        }
-
-        if (backgroundTimerNotVisible <= 5)
-        {
-            background.SetActive(false);
-            withoutTreasure.SetActive(true);
-        }
-
-        if (backgroundTimerVisible <= 0)
-        {
-
-        }
-        */
 }
