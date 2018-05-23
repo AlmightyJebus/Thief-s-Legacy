@@ -22,7 +22,7 @@ public class Sorter : MonoBehaviour
 	void Update ()
     {
         temp.sortingOrder = (int)thisObject.transform.position.x * -1 + offset;
-        Debug.Log(temp.sortingOrder);
+       // Debug.Log(temp.sortingOrder);
 	}
 }
 //pistä tämä scripti jokaiseen spriteen, transform kohtaan vedä kyseinen sprite inspectorissa.
