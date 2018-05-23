@@ -42,6 +42,8 @@ public class Patroller : MonoBehaviour
     public float guardSpeed = 3f;
     public float enemyMinDistance=1.25f;
     public float enemyMaxDistance=5;
+    public bool hearingRange;
+    public float hearingDistance = 20;
 
     public Transform target;
    public GameObject resetpos;
@@ -49,6 +51,7 @@ public class Patroller : MonoBehaviour
     public bool start = true;
     public bool disable = false;
     public bool unpause = false;
+   
 
     public float dist;
     public float playerDist;
@@ -99,6 +102,15 @@ public class Patroller : MonoBehaviour
 
         //mittaa etäisyyden pelaajaan
         playerDist = Vector3.Distance(target.transform.position, transform.position);
+        if (playerDist >= hearingDistance)
+        {
+            
+            hearingRange = false;
+        }
+        else if (playerDist < hearingDistance)
+        {
+            hearingRange = true;
+        }
 
 
         if (unpause)

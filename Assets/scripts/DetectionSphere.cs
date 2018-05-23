@@ -21,7 +21,7 @@ public class DetectionSphere : MonoBehaviour {
             myCollider.radius = 2.5f; 
         }
 
-        if (isHeard == true && PlayerMovement.pl.isMoving)
+        if (isHeard == true && PlayerMovement.pl.isMoving && Patroller.patr.hearingRange)
         {
             EnemyFOV.efov.isDetected = true;
         }
