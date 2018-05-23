@@ -56,6 +56,7 @@ public class Patroller : MonoBehaviour
     public bool returning = false;
     public int route=1;
     public float rotationSpeed = 0;
+    //float lockPos = 0;
 
 
 
@@ -129,7 +130,7 @@ public class Patroller : MonoBehaviour
             {
                 Debug.Log("resetpositionia ei löydy");
             }
-
+     
 
 
 
