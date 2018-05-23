@@ -43,7 +43,7 @@ public class Patroller : MonoBehaviour
     public float enemyMinDistance=1.25f;
     public float enemyMaxDistance=5;
     public bool hearingRange;
-    public float hearingDistance = 20;
+    public float hearingDistance = 10;
 
     public Transform target;
    public GameObject resetpos;
