@@ -170,7 +170,7 @@ public class Patroller : MonoBehaviour
 
 
             //enemy searching
-            if (enemyScript.isCautious == true && enemyScript.isDetected == false)
+            if (enemyScript.isCautious == true && enemyScript.isDetected == false && playerDist <enemyMaxDistance)
             {
                 transform.Rotate(0, 50 * Time.deltaTime, 0);
                 GetComponent<NavMeshAgent>().speed = 0f;
