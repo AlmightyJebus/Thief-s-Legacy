@@ -41,7 +41,7 @@ public class Patroller : MonoBehaviour
     EnemyFOV enemyScript;
     public float guardSpeed = 3f;
     public float enemyMinDistance=1.25f;
-    public float enemyMaxDistance=5;
+    public float enemyMaxDistance=15;
     public bool hearingRange;
     public float hearingDistance = 10;
 
@@ -60,6 +60,7 @@ public class Patroller : MonoBehaviour
     public int route=1;
     public float rotationSpeed = 0;
     //float lockPos = 0;
+    public bool forceContinue = false;
 
 
 
@@ -98,8 +99,12 @@ public class Patroller : MonoBehaviour
 
     void Update()
     {
+        
 
-
+        if (forceContinue)
+        {
+            Continue();
+        }
         //mittaa etäisyyden pelaajaan
         playerDist = Vector3.Distance(target.transform.position, transform.position);
         if (playerDist >= hearingDistance)
@@ -133,6 +138,10 @@ public class Patroller : MonoBehaviour
         if (!PlayerMovement.pl.pause)
         {
 
+            if (dist <2 && !EnemyFOV.efov.isDetected&& !EnemyFOV.efov.isCautious)
+            {
+                disable = false;
+            }
 
             if (resetpos)
             {
@@ -147,7 +156,7 @@ public class Patroller : MonoBehaviour
 
 
             //enemy chase
-            if (enemyScript.isDetected == true)
+            if (enemyScript.isDetected == true && playerDist < enemyMaxDistance)
             {
                 warningText.SetActive(true);
                 disable = true;
@@ -182,8 +191,8 @@ public class Patroller : MonoBehaviour
 
 
             //enemy searching
-            if (enemyScript.isCautious == true && enemyScript.isDetected == false && playerDist <enemyMaxDistance)
-            {
+            if (enemyScript.isCautious == true && enemyScript.isDetected == false && playerDist < enemyMaxDistance)
+        {
                 transform.Rotate(0, 50 * Time.deltaTime, 0);
                 GetComponent<NavMeshAgent>().speed = 0f;
                 questionText.SetActive(true);
@@ -211,11 +220,13 @@ public class Patroller : MonoBehaviour
         if (dist < 1)
         {
             agent.SetDestination(pos2.position);
+            forceContinue = false;
         }
 
         else if (dist >=1)
         {
             agent.SetDestination(pos1.position);
+            forceContinue = false;
         }
         questionText.SetActive(false);
         
@@ -410,6 +421,7 @@ public class Patroller : MonoBehaviour
 
         }
         }
+   
 
 
 
